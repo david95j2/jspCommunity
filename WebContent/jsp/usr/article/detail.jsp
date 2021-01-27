@@ -18,6 +18,8 @@
 	제목 : ${article.title}
 	<hr />
 	${article.body}
+	<script type="text/x-template">${article.body}</script>
+  <div class="toast-ui-viewer"></div>
 </div>
 
 <hr />
