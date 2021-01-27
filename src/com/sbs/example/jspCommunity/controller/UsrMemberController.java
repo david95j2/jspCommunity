@@ -93,15 +93,7 @@ public class UsrMemberController {
 	}
 
 	public String doLogout(HttpServletRequest req, HttpServletResponse resp) {
-
 		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginedMemberId") == null) {
-			req.setAttribute("alertMsg", "이미 로그아웃 상태입니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
-		}
-
 		session.removeAttribute("loginedMemberId");
 
 		req.setAttribute("alertMsg", "로그아웃 되었습니다.");
