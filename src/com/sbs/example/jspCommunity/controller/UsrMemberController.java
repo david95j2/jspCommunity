@@ -48,9 +48,9 @@ public class UsrMemberController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-
+		
 		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
+		String loginPw = req.getParameter("loginPwReal");
 		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		String email = req.getParameter("email");
@@ -111,7 +111,7 @@ public class UsrMemberController {
 		}
 
 		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
+		String loginPw = req.getParameter("loginPwReal");
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
