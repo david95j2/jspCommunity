@@ -6,6 +6,14 @@
 
 <h1>${pageTitle}</h1>
 
+<div>
+	<a href="write?boardId=${param.boardId}">게시물 작성</a>
+</div>
+
+<div>
+	총 게시물 수 : ${totalCount}
+</div>
+
 <c:forEach var="member" items="${members}">
 	<div>
 		번호 : ${member.id}

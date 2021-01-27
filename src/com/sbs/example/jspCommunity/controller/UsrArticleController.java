@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
@@ -26,8 +25,10 @@ public class UsrArticleController {
 		Board board = articleService.getBoardById(boardId);
 		req.setAttribute("board", board);
 
+		int totalCount = articleService.getArticlesCountByBoardId(boardId);
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
 
+		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("articles", articles);
 
 		return "usr/article/list";
