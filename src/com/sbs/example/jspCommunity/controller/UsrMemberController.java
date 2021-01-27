@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.MemberService;
-import com.sbs.example.util.Util;
 
 public class UsrMemberController {
 	private MemberService memberService;
@@ -48,7 +48,7 @@ public class UsrMemberController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-		
+
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 		String name = req.getParameter("name");
@@ -139,8 +139,6 @@ public class UsrMemberController {
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
-		Map<String, Object> rs = new HashMap<>();
-
 		String resultCode = null;
 		String msg = null;
 
@@ -152,12 +150,8 @@ public class UsrMemberController {
 			msg = "사용가능한 로그인아이디 입니다.";
 		}
 
-		rs.put("resultCode", resultCode);
-		rs.put("msg", msg);
-		rs.put("loginId", loginId);
-
-		req.setAttribute("data", Util.getJsonText(rs));
-		return "common/pure";
+		req.setAttribute("data", new ResultData(resultCode, msg, "loginId", loginId));
+		return "common/json";
 	}
 
 	public String showFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
@@ -184,7 +178,7 @@ public class UsrMemberController {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 
-		Member member = memberService.getMemberByNameAndEmail(name,email);
+		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		if (member == null) {
 			req.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
@@ -228,25 +222,22 @@ public class UsrMemberController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-		
-		if (member.getEmail().equals(email)== false ) {
-			req.setAttribute("alertMsg", "회원의 이메일 주소를 정확히 입력해주세요.");
+
+		if (member.getEmail().equals(email) == false) {
+			req.setAttribute("alertMsg", "회원이 이메일주소를 정확히 입력해주세요.");
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
 		
-		Map<String,Object> sendTempLoginPwToEmailRs= memberService.sendTempLoginPwToEmail(member);
+		ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
 		
-		String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
-		String resultMsg = (String) sendTempLoginPwToEmailRs.get("msg");
-		
-		if (resultCode.startsWith("F-")) {
-			req.setAttribute("alertMsg", resultMsg);
+		if ( sendTempLoginPwToEmailRs.isFail() ) {
+			req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-		
-		req.setAttribute("alertMsg", resultMsg);
+
+		req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 		req.setAttribute("replaceUrl", "../member/login");
 		return "common/redirect";
 	}
