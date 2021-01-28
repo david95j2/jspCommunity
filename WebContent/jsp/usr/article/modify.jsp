@@ -9,7 +9,7 @@
 <div>
 	<form action="doModify" method="POST">
 		<input type="hidden" name="id" value="${article.id}" />
-		
+		<input type="hidden" name="body"value="${article.body}" />
 		<hr />
 		<div>
 			<div>제목</div>
@@ -24,7 +24,8 @@
 		<div>
 			<div>내용</div>
 			<div>
-				<textarea placeholder="내용을 입력해주세요." name="body" maxlength="5000">${article.body}</textarea>
+				<script type="text/x-template"></script>
+ 				<div class="toast-ui-editor"></div>
 			</div>
 		</div>
 		<hr />

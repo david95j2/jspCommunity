@@ -30,8 +30,8 @@
 <!-- 토스트 UI 끝 -->
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/common.css" />
-<script src="${pageContext.request.contextPath}/static/common.js" defer></script>
+	href="${pageContext.request.contextPath}/static/common2.css" />
+<script src="${pageContext.request.contextPath}/static/common2.js" defer></script>
 
 </head>
 <body>
