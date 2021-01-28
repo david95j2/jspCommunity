@@ -4,7 +4,7 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../../part/head.jspf"%>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <h1>${pageTitle}</h1>
 
@@ -28,7 +28,7 @@
 					alert(data.msg);
 				}
 			
-				if ( data.success) {
+				if ( data.success ) {
 					DoJoinForm__checkedLoginId = data.body.loginId;
 				}
 			},

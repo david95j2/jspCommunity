@@ -61,7 +61,7 @@ public class MemberService {
 
 		setTempPassword(actor, tempPassword);
 
-		String resultMsg = String.format("고객님의 임시 패스워드가 %s (으)로 발송되었습니다.", actor.getEmail());
+		String resultMsg = String.format("고객님의 새 임시 패스워드가 %s (으)로 발송되었습니다.", actor.getEmail());
 		return new ResultData("S-1", resultMsg, "email", actor.getEmail());
 	}
 
@@ -72,7 +72,7 @@ public class MemberService {
 		modify(modifyParam);
 	}
 
-	private void modify(Map<String, Object> param) {
+	public void modify(Map<String, Object> param) {
 		memberDao.modify(param);
 	}
 
