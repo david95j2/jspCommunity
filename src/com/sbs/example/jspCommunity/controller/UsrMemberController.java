@@ -128,7 +128,7 @@ public class UsrMemberController {
 		}
 
 		session.setAttribute("loginedMemberId", member.getId());
-
+		
 		req.setAttribute("alertMsg", String.format("%s님 환영합니다.", member.getNickname()));
 		req.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
@@ -269,7 +269,12 @@ public class UsrMemberController {
 		modifyParam.put("id", loginedMemberId);
 
 		memberService.modify(modifyParam);
-
+		
+		if (loginPw != null) {
+			String value = Container.attrService.getValue("member__" + loginedMemberId + "__extra__isUsingTempPassword");
+			Container.attrService.remove("member__" + value + "__extra__isUsingTempPassword");
+		}
+		
 		req.setAttribute("alertMsg", "회원정보가 수정되었습니다.");
 		req.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";

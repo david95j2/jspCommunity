@@ -8,7 +8,8 @@
 
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
@@ -31,35 +32,79 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/common2.css" />
-<script src="${pageContext.request.contextPath}/static/common2.js" defer></script>
+<script src="${pageContext.request.contextPath}/static/common.js" defer></script>
 
 </head>
 <body>
-
-	<header class="top-bar con-min-width">
-		<div class="con">
-			<c:if test="${isLogined}">
-				<div>로그인된 회원의 닉네임 : ${loginedMember.nickname}</div>
-			</c:if>
-
-			<div>
-				<a href="../home/main">메인</a>
-				<a href="../article/list?boardId=1">공지사항 게시물 리스트</a>
-
-				<c:if test="${isLogined}">
-					<a href="../article/write?boardId=1">공지사항 글쓰기</a>
-					<a href="../member/modify">회원정보수정</a>
-					<a href="../member/doLogout">로그아웃</a>
-				</c:if>
-
-				<c:if test="${isLogined == false}">
-					<a href="../member/login">로그인</a>
-					<a href="../member/join">회원가입</a>
-					<a href="../member/findLoginId">로그인아이디 찾기</a>
-					<a href="../member/findLoginPw">로그인비번 찾기</a>
-				</c:if>
+	
+	<c:if test="${waringPw}">
+		<div class="pwWaringBox">
+			<div class="pwWaringBox-context">
+				<span>현재 임시비밀번호를 사용중입니다. 비밀번호를 변경해주세요</span>
 			</div>
 		</div>
+	</c:if>
+	
+	<header>
+	<!-- Header Start -->
+	<div class="header-area">
+		<div class="main-header header-sticky">
+			<div class="container-fluid">
+				<div class="menu-wrapper">
+					<!-- Logo -->
+					<div class="logo">
+						<a href="../home/main">
+						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSMncB%2FbtqUL9pa2xz%2FoLGOTPSKDbOhxhU8P2whjk%2Fimg.png" id="img1">
+						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbHZM6I%2FbtqULCkQvuk%2FOBx0Os6BdgN4GMkyHfXgdk%2Fimg.png" id="img2">
+						</a>
+					</div>
+					<!-- Main-menu -->
+					<div class="main-menu d-none d-lg-block">
+						<nav>
+						<ul id="navigation" class="test">
+							<li><a href="../home/main">Home</a></li>
+							<li><a href="#">about</a></li>
+							<li class="hot"><a href="#">Article</a>
+							<ul class="submenu">
+								<li><a href="../article/list?boardId=1">Notice</a></li>
+								<li><a href="../article/list?boardId=2">Free</a></li>
+							</ul>
+							</li>
+							<li><a href="#">Blog</a>
+							<ul class="submenu">
+								<li><a href="https://www.tistory.com/">Tistory</a></li>
+								<li><a href="https://github.com/">Github</a></li>
+							</ul>
+							</li>
+						</ul>
+						</nav>
+						<span class="toggle"><i class="fas fa-bars"></i></span>
+					</div>
+					<!-- Header Right -->
+					<div class="header-right">
+						<ul>
+							<li>
+							<div class="nav-search search-switch">
+								<a href=""><i class="fas fa-search"></i></a>
+								<span class="flaticon-search"></span>
+							</div>
+							</li>
+							<li><a href="../member/login"><i class="far fa-user"></i><span class="flaticon-user"></span></a></li>
+							<!--<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="flaticon-shopping-cart"></span></a> </li>-->
+						</ul>
+					</div>
+				</div>
+				<!-- Mobile Menu -->
+				<div class="col-12">
+					<div class="mobile_menu d-block d-lg-none">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header End -->
 	</header>
-
+	
+	
 	<main>
+		<div class="con">

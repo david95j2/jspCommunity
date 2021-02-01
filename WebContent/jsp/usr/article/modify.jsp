@@ -25,7 +25,7 @@
 			<div>내용</div>
 			<div>
 				<script type="text/x-template"></script>
- 				<div class="toast-ui-editor"></div>
+ 				<div class="toast-ui-editor">${article.body}</div>
 			</div>
 		</div>
 		<hr />

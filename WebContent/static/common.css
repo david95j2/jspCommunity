@@ -463,6 +463,7 @@ main {margin-top:200px;}
 .pwWaringBox {width:100%; background:red;}
 .pwWaringBox > .pwWaringBox-context {text-align:center;}
 
+
 /* 게시물 리스트- PC 시작*/
 .article-list-box > .con > table {
   margin-top: 10px;

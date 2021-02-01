@@ -16,7 +16,12 @@ public class ArticleService {
 	}
 
 	public Article getForPrintArticleById(int id) {
-		return articleDao.getForPrintArticleById(id);
+		int result = articleDao.updateReadCount(id);
+		if(result==1) {
+			return articleDao.getForPrintArticleById(id);
+		} else {
+			return null;
+		}
 	}
 
 	public Board getBoardById(int id) {

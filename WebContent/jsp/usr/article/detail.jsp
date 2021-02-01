@@ -16,6 +16,8 @@
 	작성자 : ${article.extra__writer}
 	<br />
 	제목 : ${article.title}
+	<br />
+	조회수 : ${article.hitsCount}
 	<hr />
 	<script type="text/x-template">${article.body}</script>
   <div class="toast-ui-viewer"></div>

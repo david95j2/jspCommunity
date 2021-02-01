@@ -60,7 +60,7 @@
 			<div>로그인 비번</div>
 			<div>
 				<input name="loginPw" type="password" maxlength="50"
-					placeholder="로그인 비밀버호를 입력해주세요." />
+					placeholder="로그인 비밀번호를 입력해주세요." />
 			</div>
 		</div>
 		
@@ -74,5 +74,13 @@
 			</div>
 		</div>
 	</form>
+	<br>
+	<div class="body-menu">
+		<c:if test="${isLogined == false}">
+			<a href="../member/join"><button>회원가입</button></a>
+			<a href="../member/findLoginId"><button>로그인 아이디 찾기</button></a>
+			<a href="../member/findLoginPw"><button>로그인비번 찾기</button></a>
+		</c:if>
+	</div>
 </div>
 <%@ include file="../../part/foot.jspf"%>
