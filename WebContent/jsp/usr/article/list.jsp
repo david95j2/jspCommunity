@@ -23,16 +23,20 @@
       <div class="con">
         <table>
           <colgroup>
-            <col width="100">
-            <col width="200">
-            <col width="150">
+            <col width="10%">
+            <col width="56%">
+            <col width="10%">
+            <col width="10%">
+            <col width="7%">
+            <col width="7%">
           </colgroup>
           <thead>
             <tr>
               <th>번호</th>
-              <th>날짜</th>
-              <th>작성자</th>
               <th>제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
             </tr>
           </thead>
           <tbody>
@@ -42,12 +46,16 @@
                 <span class="article-list-box__id">${article.id}</span>
               </td>
               <td>
-                <sapn class="article-list-box__reg-date">${article.regDate}</sapn>
+              	<a href="detail?id=${article.id}" class="article-list-box__title hover-link article-list-box__title--pc">${article.title}</a>
               </td>
               <td>
                 <sapn class="article-list-box__writer">${article.extra__writer}</sapn>
               </td>
-              <td><a href="detail?id=${article.id}" class="article-list-box__title hover-link article-list-box__title--pc">${article.title}</a>
+              <td>
+                <sapn class="article-list-box__reg-date">${article.regDate}</sapn>
+              </td>
+              <td>
+              	<sapn class="article-list-box__hit">${article.hitsCount}</sapn>
               </td>
               <td class="visible-md-down">
                 <div class="flex">
@@ -88,7 +96,7 @@
 				<c:set var="aClass" value="${page == i ? 'red' : ''}" />
 				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 				<li>
-					<a class="${aClass} flex flex-ai-c" href=${aUrl}>${i}</a>
+					<a class="${aClass} flex flex-ai-c hov-red" href=${aUrl}>${i}</a>
 				</li>
 			</c:forEach>		
 			<li>

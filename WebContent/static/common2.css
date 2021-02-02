@@ -23,6 +23,34 @@ a {
   text-decoration:none;
 }
 
+:root {
+  --site-width:1200px;
+}
+
+@media ( min-width: 801px ) {
+  .visible-md-down {
+    display:none !important;
+  }
+}
+
+@media ( max-width: 800px ) {
+  .visible-md-up {
+    display:none !important;
+  }
+}
+
+.con {
+  max-width:var(--site-width);
+}
+
+.con-min-width {
+  min-width:320px;
+}
+
+.flex {display:flex;}
+
+.hov-red:hover {color:red;}
+
 header {
 	position:fixed;
 	top:0;
@@ -447,7 +475,6 @@ header .roll .header-area {
 }
 
 main {margin-top:200px;}
-.con {margin-left:auto; margin-right:auto; max-width:1300px;}
 
 .list-title:hover {color:red;}
 
@@ -463,6 +490,8 @@ main {margin-top:200px;}
 .pwWaringBox {width:100%; background:red;}
 .pwWaringBox > .pwWaringBox-context {text-align:center;}
 
+.con {margin:0 auto 0 auto;}
+
 /* 게시물 리스트- PC 시작*/
 .article-list-box > .con > table {
   margin-top: 10px;
@@ -473,12 +502,13 @@ main {margin-top:200px;}
 }
 
 .article-list-box > .con > table > thead > tr > th {
-  text-align: left;
+  text-align: center;
 }
 
 .article-list-box > .con > table th,
 .article-list-box > .con > table td {
   padding: 20px 0;
+  text-align: center;
 }
 
 .article-list-box > .con > table tr {
@@ -489,6 +519,8 @@ main {margin-top:200px;}
   display: block;
 }
 
+.article-list-box__title:hover {color:red; text-decoration:underline;}
+
 .article-list-box__title--pc{
   white-space: nowrap;
   overflow: hidden;
@@ -497,7 +529,16 @@ main {margin-top:200px;}
 /* 게시물 리스트- PC 끝*/
 
 /* 게시물 리스트- MOBILE시작*/
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+	.article-list-box > .con > table > thead > tr > th {
+	  text-align: left;
+	}
+	
+	.article-list-box > .con > table th,
+	.article-list-box > .con > table td {
+	  text-align: left;
+	}
+	
   .article-list-box > .con > table > thead,
   .article-list-box > .con > table > tbody > tr > td:not(.visible-md-down) {
     display: none;
@@ -519,7 +560,13 @@ main {margin-top:200px;}
   }
   
   .article-list-box__title--mobile {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
     margin-left:5px;
+  }
+  .article-list-box__writer--mobile {
+  	margin-top:3px;
   }
   
   .article-list-box>.con>table>tbody>tr>td.visible-md-down>.flex:nth-child(2){
