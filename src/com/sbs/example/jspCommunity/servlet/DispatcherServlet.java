@@ -91,7 +91,23 @@ public abstract class DispatcherServlet extends HttpServlet {
 		req.setAttribute("isLogined", isLogined);
 		req.setAttribute("loginedMemberId", loginedMemberId);
 		req.setAttribute("loginedMember", loginedMember);
-
+		
+		// http://localhost:8083/jspCommunity/usr/member/login?dummy 에서
+		// jspCommunity/usr/member/login 이 requestUri 로 반환
+		String currentUrl = req.getRequestURI();
+		
+		
+		// getQueryString 은 ? 를 반환
+		if (req.getQueryString() != null) {
+			currentUrl += "?" + req.getQueryString();
+		}
+		
+		// requestUri 뒤에 변수까지인지 변수 이전까지인지 확인하기 위해 encoded 필요
+		String encodedCurrentUrl = Util.getUrlEncoded(currentUrl);
+		
+		req.setAttribute("currentUrl", currentUrl);
+		req.setAttribute("encodedCurrentUrl",encodedCurrentUrl);
+		
 		// 데이터 추가 인터셉터 끝
 
 		// 로그인 필요 필터링 인터셉터 시작
@@ -109,7 +125,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		if (needToLoginActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined") == false) {
 				req.setAttribute("alertMsg", "로그인 후 이용해주세요.");
-				req.setAttribute("replaceUrl", "../member/login");
+				req.setAttribute("replaceUrl", "../member/login?afterLoginUrl="+ encodedCurrentUrl);
 
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/common/redirect.jsp");
 				rd.forward(req, resp);

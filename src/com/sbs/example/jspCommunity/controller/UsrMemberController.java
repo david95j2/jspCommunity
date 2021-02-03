@@ -124,10 +124,24 @@ public class UsrMemberController extends Controller{
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return msgAndBack(req,"비밀번호가 일치하지 않습니다.");
 		}
-
+		
 		session.setAttribute("loginedMemberId", member.getId());
 		
-		return msgAndReplace(req,String.format("%s님 환영합니다.", member.getNickname()),"../home/main");
+		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(member.getId());
+		
+		String alertMsg = String.format("%s님 환영합니다.", member.getNickname());
+		String replaceUrl = "../home/main";
+		
+		if ( Util.isEmpty(req.getParameter("afterLoginUrl")) == false ) {
+			replaceUrl = req.getParameter("afterLoginUrl");
+		}
+
+		if (isUsingTempPassword) {
+			alertMsg = String.format("%s님은 현재 임시 비밀번호를 사용중입니다. 변경 후 이용해주세요.", member.getNickname());
+			replaceUrl = "../member/modify";
+		}
+		
+		return msgAndReplace(req,alertMsg,replaceUrl);
 	}
 
 	public String getLoginIdDup(HttpServletRequest req, HttpServletResponse resp) {
@@ -262,7 +276,6 @@ public class UsrMemberController extends Controller{
 			String value = Container.attrService.getValue("member__" + loginedMemberId + "__extra__isUsingTempPassword");
 			Container.attrService.remove("member__" + value + "__extra__isUsingTempPassword");
 		}
-		
 		
 		return msgAndReplace(req, "회원정보가 수정되었습니다.", "../home/main");
 	}
