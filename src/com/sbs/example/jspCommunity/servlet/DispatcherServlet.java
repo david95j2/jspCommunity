@@ -60,9 +60,22 @@ public abstract class DispatcherServlet extends HttpServlet {
 			resp.getWriter().append("올바른 요청이 아닙니다.");
 			return null;
 		}
-
-		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
-
+		
+		// 톰캣안에서 spring.profiles.active 변수를 받아옴 cf). 정해진 변수 이름 아님!
+		String profilesActive = System.getProperty("spring.profiles.active");
+		
+		boolean isProductionMode = false;
+		
+		// production 변수가 톰캣안에 있을 시 개발모드로 설정하겠다.
+		if (profilesActive != null && profilesActive.equals("production")) {
+			isProductionMode = true;
+		}
+		
+		if (isProductionMode) {
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunity");
+		} else {
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
+		}
 		String controllerTypeName = requestUriBits[2];
 		String controllerName = requestUriBits[3];
 		String actionMethodName = requestUriBits[4];

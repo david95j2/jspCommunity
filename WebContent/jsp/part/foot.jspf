@@ -2,6 +2,18 @@
 	pageEncoding="UTF-8"%>
 		</div>
 	</main>
-	
+	<footer class="bottom-bar con-min-width">
+		<div class="con flex flex-jc-c height-100p">
+			<a href="../home/main" class="logo flex flex-ai-c flex-dir-c">
+				<span>상호명: CHILLAX Interactive, Inc.</span>
+				<br>
+				<span>대표자: Ju young, developer</span>
+				<br>
+				<span>주소: 대한민국 대전광역시 유성구</span>
+				<br>
+				<span>010-1234-1234</span>
+			</a>
+		</div>
+	</footer>
 </body>
 </html>

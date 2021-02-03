@@ -6,9 +6,16 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous"></script>
 
-<h1>${pageTitle}</h1>
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span>
+			<i class="fas fa-sign-in-alt"></i>
+		</span>
+		<span>${pageTitle}</span>
+	</h1>
+</div>
 
-<div>
+<div class="login-form-box form-box padding-0-10 con-min-width">
 	<script>
 	let DoLoginForm__submited = false;
 	function DoLoginForm__submit(form) {
@@ -43,45 +50,53 @@
 		DoLoginForm__submited = true;
 	}
 	</script>
-	<form action="doLogin" method="POST" onsubmit="DoLoginForm__submit(this); return false;">
+	<form class="con" action="doLogin" method="POST"
+		onsubmit="DoLoginForm__submit(this); return false;">
 		<input type="hidden" name="loginPwReal" />
-		<input type="hidden" name="afterLoginUrl" value="${param.afterLoginUrl}"/>
-		<hr />
-		<div>
-			<div>로그인 아이디</div>
-			<div>
-				<input name="loginId" type="text" maxlength="50"
-					placeholder="로그인 아이디를 입력해주세요." />
-			</div>
-		</div>
-
-		<hr />
-
-		<div>
-			<div>로그인 비번</div>
-			<div>
-				<input name="loginPw" type="password" maxlength="50"
-					placeholder="로그인 비밀번호를 입력해주세요." />
-			</div>
-		</div>
-		
-		<hr />
-
-		<div>
-			<div>로그인</div>
-			<div>
-				<input type="submit" value="로그인" />
-				<button type="button" onclick="history.back();">뒤로가기</button>
-			</div>
-		</div>
+		<input type="hidden" name="afterLoginUrl"
+			value="${param.afterLoginUrl}" />
+		<table>
+			<colgroup>
+				<col width="150">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>
+						<span> 로그인아이디 </span>
+					</th>
+					<td>
+						<div>
+							<input name="loginId" type="text" maxlength="50"
+								placeholder="로그인 아이디를 입력해주세요." />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span> 로그인비밀번호 </span>
+					</th>
+					<td>
+						<div>
+							<input name="loginPw" type="password" maxlength="50"
+								placeholder="로그인 비밀버호를 입력해주세요." />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span> 로그인 </span>
+					</th>
+					<td>
+						<div>
+							<div class="btn-wrap">
+								<input type="submit" value="로그인" class="btn btn-success" />
+								<button type="button" onclick="history.back();"
+									class="btn btn-info">뒤로가기</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</form>
-	<br>
-	<div class="body-menu">
-		<c:if test="${isLogined == false}">
-			<a href="../member/join"><button>회원가입</button></a>
-			<a href="../member/findLoginId"><button>로그인 아이디 찾기</button></a>
-			<a href="../member/findLoginPw"><button>로그인비번 찾기</button></a>
-		</c:if>
-	</div>
-</div>
-<%@ include file="../../part/foot.jspf"%>
+</div><%@ include file="../../part/foot.jspf"%>

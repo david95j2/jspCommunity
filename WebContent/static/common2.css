@@ -18,11 +18,92 @@ html {
 }
 /* 폰트적용 끝 */
 
+/* 노말라이즈 시작 */
+body, ul, li, h1, h2, h3 {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
 a {
   color:inherit;
   text-decoration:none;
 }
 
+html,body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* 노말라이즈 끝 */
+
+/* 라이브러리 */
+
+/* 라이브러리 - 일반 시작 */
+
+.padding-0-10 {
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.block {
+  display:block;
+}
+
+.flex {
+  display:flex;
+}
+
+.flex-grow-1 {
+  flex-grow:1;
+}
+
+.flex-ai-c {
+  align-items:center;
+}
+
+.flex-jc-c {
+  justify-content: center;
+}
+
+.flex-dir-c {
+	flex-direction:column;
+}
+
+.height-100p {
+  height:100%;
+}
+
+.hov-red:hover {color:red;}
+/* 라이브러리 - 일반 끝 */
+
+/* 라이브러리 - 디버그 시작 */
+.bd-red {
+  border:2px solid red;
+}
+
+.bd-green {
+  border:2px solid green;
+}
+
+.bd-blue {
+  border:2px solid blue;
+}
+
+.bg-red {
+  background-color:red;
+}
+
+.bg-green {
+  background-color:green;
+}
+
+.bg-blue {
+  background-color:blue;
+}
+/* 라이브러리 - 디버그 끝 */
+
+/* 커스텀 시작 */
 :root {
   --site-width:1200px;
 }
@@ -46,10 +127,6 @@ a {
 .con-min-width {
   min-width:320px;
 }
-
-.flex {display:flex;}
-
-.hov-red:hover {color:red;}
 
 header {
 	position:fixed;
@@ -474,7 +551,7 @@ header .roll .header-area {
 	}
 }
 
-main {margin-top:200px;}
+.body-content {margin-top:200px; min-height:100%;}
 
 .list-title:hover {color:red;}
 
@@ -491,6 +568,28 @@ main {margin-top:200px;}
 .pwWaringBox > .pwWaringBox-context {text-align:center;}
 
 .con {margin:0 auto 0 auto;}
+
+/* 타이틀 시작 */
+.title-bar {
+  margin-top:30px;
+  margin-bottom:20px;
+}
+/* 타이틀 끝 */
+
+/* 하단바 시작 */
+.bottom-bar {
+  border-top:2px solid rgba(0,0,0,.3);
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  color: black;
+  background: white;
+}
+/* 하단바 끝 */
+
+/* 게시물 리스트 박스 시작 */
 
 /* 게시물 리스트- PC 시작*/
 .article-list-box > .con > table {
@@ -605,10 +704,30 @@ main {margin-top:200px;}
   justify-content:center;
   text-align:center;
 }
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+}
+
+.btn-danger {
+  background-color: #dc3540;
+}
+
+.btn-warning {
+  background-color: #ffcc10;
+}
+
+input, button {
+	font-family: inherit;
+}
 /* 버튼 끝*/
 
 /* 버튼랩 시작*/
-@media(min-width: 701px){
+@media(min-width: 801px){
   .btn-wrap{
     display:flex;
   }
@@ -618,7 +737,7 @@ main {margin-top:200px;}
   }
 }
 
-@media(max-width: 700px){
+@media(max-width: 800px){
   .btn {
     display:block;
     width:100%;
@@ -657,7 +776,7 @@ main {margin-top:200px;}
   padding:10px;
 }
 
-@media(max-width:700px){
+@media(max-width:800px){
   .form-box>form>table>tbody>tr,
   .form-box>form>table>tbody>tr>th,
   .form-box>form>table>tbody>tr>td{
