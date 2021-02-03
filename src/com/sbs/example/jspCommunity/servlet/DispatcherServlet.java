@@ -96,7 +96,6 @@ public abstract class DispatcherServlet extends HttpServlet {
 		// jspCommunity/usr/member/login 이 requestUri 로 반환
 		String currentUrl = req.getRequestURI();
 		
-		
 		// getQueryString 은 ? 를 반환
 		if (req.getQueryString() != null) {
 			currentUrl += "?" + req.getQueryString();

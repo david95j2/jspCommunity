@@ -28,7 +28,11 @@ public class MemberService {
 	}
 
 	public int join(Map<String, Object> args) {
-		return memberDao.join(args);
+		int id = memberDao.join(args);
+		
+		setLoginPwModifiedNow(id);
+		
+		return id;
 	}
 
 	public Member getMemberByLoginId(String loginId) {
@@ -80,12 +84,45 @@ public class MemberService {
 		attrService.setValue("member__" + actorId + "__extra__isUsingTempPassword", use, null);
 	}
 	
-	public boolean getIsUsingTempPassword(int actorId) {
+	public boolean isUsingTempPassword(int actorId) {
 		return attrService.getValueAsBoolean("member__" + actorId + "__extra__isUsingTempPassword");
 	}
 
 	public void modify(Map<String, Object> param) {
+		if (param.get("loginPw") != null) {
+			setLoginPwModifiedNow((int)param.get("id"));
+		}
+		
 		memberDao.modify(param);
+	}
+
+	private void setLoginPwModifiedNow(int actorId) {
+		attrService.setValue("member__" + actorId + "__extra__loginPwModifiedDate", Util.getNowDateStr(), null);
+	}
+	
+	public int getOldPasswordDays() {
+		return 90;
+	}
+
+	public boolean isNeedToModifyOldLoginPw(int actorId) {
+		String date = attrService.getValue("member__" + actorId + "__extra__loginPwModifiedDate");
+		
+		if ( Util.isEmpty(date) ) {
+			return false;
+		}
+		
+		// 얼마나 경과했는지 초단위로 알려줌.
+		int pass = Util.getPassedSecondsFrom(date);
+		
+		// 기준일 가지고 와
+		int oldPasswordDays = getOldPasswordDays();
+		
+		// date > 기준(90일) * 60초 * 60분 * 24시간
+		if ( pass > oldPasswordDays * 60 * 60 * 24 ) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

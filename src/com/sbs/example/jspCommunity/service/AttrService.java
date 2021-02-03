@@ -6,11 +6,11 @@ import com.sbs.example.jspCommunity.dto.Attr;
 
 public class AttrService {
 	private AttrDao attrDao;
-	
+
 	public AttrService() {
-		attrDao=Container.attrDao;
+		attrDao = Container.attrDao;
 	}
-	
+
 	public Attr get(String name) {
 		String[] nameBits = name.split("__");
 		String relTypeCode = nameBits[0];
@@ -47,11 +47,11 @@ public class AttrService {
 
 	public String getValue(String relTypeCode, int relId, String typeCode, String type2Code) {
 		String value = attrDao.getValue(relTypeCode, relId, typeCode, type2Code);
-		
-		if ( value == null ) {
+
+		if (value == null) {
 			return "";
 		}
-		
+
 		return value;
 	}
 
