@@ -72,26 +72,37 @@
 					</td>
 				</tr>
 				<tr>
+					<th></th>
+					<td>
+						<a href="../member/findLoginId" class="help-id"><span>아이디를 잊어버리셨나요?</span></a>
+					</td>
+				</tr>
+				<tr>
 					<th>
 						<span> 로그인비밀번호 </span>
 					</th>
 					<td>
 						<div>
 							<input name="loginPw" type="password" maxlength="50"
-								placeholder="로그인 비밀버호를 입력해주세요." />
+								placeholder="로그인 비밀번호를 입력해주세요." />
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<th>
-						<span> 로그인 </span>
-					</th>
+					<th></th>
+					<td>
+						<a href="../member/findLoginPw" class="help-Pw"><span>비밀번호를 잊어버리셨나요?</span></a>
+					</td>
+				</tr>
+				<tr>
+					<th></th>
 					<td>
 						<div>
 							<div class="btn-wrap">
-								<input type="submit" value="로그인" class="btn btn-success" />
+								<input type="submit" value="로그인" class="btn btn-success hov-red" />
+								<a href="../member/join" class="btn btn-info hov-red">회원가입</a>
 								<button type="button" onclick="history.back();"
-									class="btn btn-info">뒤로가기</button>
+									class="btn btn-info hov-red">뒤로가기</button>
 							</div>
 						</div>
 					</td>

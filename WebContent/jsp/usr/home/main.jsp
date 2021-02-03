@@ -10,13 +10,13 @@
 <script src="${pageContext.request.contextPath}/static/usrHomeMain.js" defer></script>
 -->
 
-<section class="title-bar__main-page">
+<section class="title-bar__main-page ft-bm">
 	<h1 class="con">
 		${pageTitle}
 	</h1>
 </section>
 
-<section class="section-main-text">
+<section class="section-main-text ft-bm">
 	<div class="con section-main-text__box">
 		<h4 class="section-main-text__head">이곳은 메인페이지입니다. Have a nice day!!!!!!!!</h4>
 		<c:if test="${isLogined}">
@@ -29,8 +29,7 @@
 			</div>
 			<div class="section-main-text__link">
 				<a href="../article/write?boardId=1">공지사항 글쓰기</a>
-				<a href="../article/write?boardId=2">자유게시판 글쓰기</a>
-				<a href="../member/modify">회원정보수정</a>
+				<a href="../article/write?boardId=2">방명록 글쓰기</a>
 				<a href="../member/doLogout">로그아웃</a>
 			</div>
 		</c:if>

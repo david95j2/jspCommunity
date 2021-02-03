@@ -13,7 +13,50 @@
     font-style: normal;
 }
 
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff")
+      format("woff");
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* font-family: "LotteMartDream", sans-serif; */
+/* font-family: 'BMEULJIRO' */
 html {
+	font-family: "LotteMartDream", sans-serif;
+}
+
+.ft-bm {
 	font-family: 'BMEULJIRO';
 }
 /* 폰트적용 끝 */
@@ -75,6 +118,8 @@ html,body {
 }
 
 .hov-red:hover {color:red;}
+
+.col-black {color:black;}
 /* 라이브러리 - 일반 끝 */
 
 /* 라이브러리 - 디버그 시작 */
@@ -109,13 +154,13 @@ html,body {
 }
 
 @media ( min-width: 801px ) {
-  .visible-md-down {
+  .visible-sm-down {
     display:none !important;
   }
 }
 
 @media ( max-width: 800px ) {
-  .visible-md-up {
+  .visible-sm-up {
     display:none !important;
   }
 }
@@ -460,7 +505,7 @@ li {
 header.roll {
 	/* 스크롤 후 헤더 사이즈(세로) */
 	/* 스크롤 후 헤더 배경색 */
-	background-color:#282828;
+	background-color:#1C1C1C;
 }
 header.roll .header-area .main-header .menu-wrapper .main-menu ul li a {
 	color:white;
@@ -469,6 +514,9 @@ header.roll .header-area .main-header .menu-wrapper .main-menu ul li>ul>li>a {
 	color:black;
 }
 header.roll .header-right>ul>li {
+	color:white;
+}
+header.roll .header-right>ul>li>div>a>i {
 	color:white;
 }
 header.roll .header-right>ul>li>a>i {
@@ -553,9 +601,6 @@ header .roll .header-area {
 
 .body-content {margin-top:200px; min-height:100%;}
 
-.list-title:hover {color:red;}
-
-.title-bar__main-page{font-size:25px;}
 .section-main-text{border:10px solid; height:800px;}
 .section-main-text__box{margin-left:40px;}
 .section-main-text__head{font-size:25px;}
@@ -578,6 +623,7 @@ header .roll .header-area {
 
 /* 하단바 시작 */
 .bottom-bar {
+  margin-top: 10px;
   border-top:2px solid rgba(0,0,0,.3);
   left: 0;
   bottom: 0;
@@ -585,19 +631,63 @@ header .roll .header-area {
   padding: 15px 0;
   text-align: center;
   color: black;
-  background: white;
+  background:#FDFBFB;
 }
 /* 하단바 끝 */
 
+/* 게시물 리스트 페이지박스 시작 */
+.article-list-page-box {
+  margin-top: -38px;
+}
+
+.article-list-page-box > .con > a {
+  padding: 10px;
+  border: 1px solid transparent;
+  margin: 0 5px;
+}
+
+.article-list-page-box__page-btn--no {
+  border-color: #dfdfdf !important;
+}
+
+.article-list-page-box__page-btn--no.color-red {
+  border-color: #afafaf !important;
+}
+
+@media (max-width: 800px) {
+  .article-list-page-box > .con > a {
+    padding: 7px;
+    border: 0 solid transparent;
+    margin: 0;
+  }
+}
+/* 게시물 리스트 페이지박스 끝 */
+
+/* 게시물 버튼박스 시작 */
+.article-btn-box {
+  margin-top: 20px;
+}
+/* 게시물 리스트 버튼박스 끝 */
+
+/* 게시물 리스트 게시물 개수 박스 시작 */
+.article-list-total-count-box {
+  margin-top: 30px;
+}
+/* 게시물 리스트 게시물 개수 박스 끝 */
+
 /* 게시물 리스트 박스 시작 */
 
-/* 게시물 리스트- PC 시작*/
+/* 게시물 리스트 박스 - PC 시작 */
+.article-list-box {
+  margin-top: 30px;
+}
+
 .article-list-box > .con > table {
-  margin-top: 10px;
   border-top: 3px solid black;
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  text-align: center;
 }
 
 .article-list-box > .con > table > thead > tr > th {
@@ -606,8 +696,8 @@ header .roll .header-area {
 
 .article-list-box > .con > table th,
 .article-list-box > .con > table td {
-  padding: 20px 0;
-  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .article-list-box > .con > table tr {
@@ -618,103 +708,106 @@ header .roll .header-area {
   display: block;
 }
 
-.article-list-box__title:hover {color:red; text-decoration:underline;}
-
-.article-list-box__title--pc{
+.article-list-box__title--pc {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* 게시물 리스트- PC 끝*/
+/* 게시물 리스트 박스 - PC 끝 */
 
-/* 게시물 리스트- MOBILE시작*/
+/* 게시물 리스트 박스 - MOBILE 시작 */
 @media (max-width: 800px) {
-	.article-list-box > .con > table > thead > tr > th {
-	  text-align: left;
-	}
-	
-	.article-list-box > .con > table th,
-	.article-list-box > .con > table td {
-	  text-align: left;
-	}
-	
   .article-list-box > .con > table > thead,
-  .article-list-box > .con > table > tbody > tr > td:not(.visible-md-down) {
+  .article-list-box > .con > table > tbody > tr > td:not(.visible-sm-down) {
     display: none;
   }
+
+  .article-list-box > .con > table > tbody > tr {
+    width: 100%;
+  }
+
   .article-list-box > .con > table > colgroup > col {
     width: auto;
   }
+
   .article-list-box > .con > table > colgroup > col:first-child {
-    width: 100% !important;
+    width: 100%;
   }
-  
+
   .article-list-box__id--mobile {
-    background-color:rgba(126, 101, 96);
-    color:white;
-    font-weight:bold;
-    padding:0 7px;
-    border-radius:10px;
-    align-self:flex-start;
+    background-color: #3d94f6;
+    color: white;
+    font-weight: bold;
+    padding: 0 7px;
+    border-radius: 10px;
+    align-self: flex-start;
   }
-  
+
   .article-list-box__title--mobile {
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    margin-left:5px;
+    margin-left: 5px;
   }
-  .article-list-box__writer--mobile {
-  	margin-top:3px;
+
+  .article-list-box
+    > .con
+    > table
+    > tbody
+    > tr
+    > td.visible-sm-down
+    > .flex:nth-child(2) {
+    margin-top: 10px;
+  }
+
+  .article-list-box
+    > .con
+    > table
+    > tbody
+    > tr
+    > td.visible-sm-down
+    > .flex:nth-child(2)
+    > span:nth-child(2) {
+    margin-left: 5px;
+    margin-right: 5px;
   }
   
-  .article-list-box>.con>table>tbody>tr>td.visible-md-down>.flex:nth-child(2){
-    margin-top:10px;
-  }
-  .article-list-box>.con>table>tbody>tr>td.visible-md-down>.flex:nth-child(2)>span:nth-child(2){
-    margin:0 5px;
+  .article-list-page-box {
+  	margin-top: 30px;
   }
 }
 
-/* 게시물 리스트- MOBILE 끝*/
+/* 게시물 리스트 박스 - MOBILE 끝 */
 
-/* 게시물 버튼박스 시작 */
-.article-btn-box > .con{
-  padding-top:10px;
-}
-/* 게시물 버튼박스 끝 */
+/* 게시물 리스트 박스 끝 */
 
 
 /* 버튼 시작 */
 .btn{
+  letter-spacing: 5px;
   font-size:1rem;
-  line-height:1rem;
   padding: 10px 15px 7px 15px;
   display:inline-flex;
-  font-weight:bold;
-  border-radius:10px;
+  font-weight:bolder;
   outline:0;
-  border:0;
+  border:3px solid #3E5939;
   cursor:pointer;
-  background-color:rgba(126, 101, 96);
-  color:white;
-  text-shadow:1px 1px 20px #000000;
+  color: #3E5939;
   text-decoration:none;
   box-sizing:border-box;
   justify-content:center;
   text-align:center;
+  background:white;
+  font-family: "LotteMartDream", sans-serif;
 }
 
 .btn-success {
-  background-color: #28a745;
+  background-color: #ffffff;
 }
 
 .btn-info {
-  background-color: #17a2b8;
+  background-color: #ffffff;
 }
 
 .btn-danger {
-  background-color: #dc3540;
+  background-color: #ffffff;
 }
 
 .btn-warning {
@@ -750,94 +843,109 @@ input, button {
 /* 버튼랩 끝*/
 
 /* 폼박스 시작 */
-.form-box>form{
-  display:block;
-  width:100%;
+.form-box > form {
+  display: block;
+  width: 100%;
 }
 
-.form-box>form>table{
-  border-top:3px solid black;
-  width:100%;
-  border-collapse:collapse;
+.form-box > form > table {
+  border-top: 3px solid black;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.form-box>form>table>tbody>tr>th{
-  text-align:left;
+.form-box > form > table > tbody > tr > th {
+  text-align: left;
 }
-  .form-box>form>table>tbody>tr>th,
-  .form-box>form>table>tbody>tr>td{
-    padding:10px 0;
+
+.form-box > form > table > tbody > tr > th,
+.form-box > form > table > tbody > tr > td {
+  padding: 10px 0;
+}
+
+.form-box > form > table > tbody > tr > td > div {
+  display: flex;
+}
+
+.form-box > form > table > tbody > tr:nth-child(2) > td:hover > a {
+	color:red;
+}
+  
+.form-box > form > table > tbody > tr:nth-child(4) > td:hover > a {
+	color:red;
+}
+
+.form-box > form > table > tbody > tr > td > div > :only-child {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-box > form > table > tbody > tr > td > div > select {
+  padding: 10px;
+}
+
+.form-box > form > table > tbody > tr > td > div > input[type="text"],
+.form-box > form > table > tbody > tr > td > div > input[type="password"],
+.form-box > form > table > tbody > tr > td > div > input[type="tel"],
+.form-box > form > table > tbody > tr > td > div > input[type="email"] {
+  flex: 1 0 0;
+  padding: 10px;
+}
+
+.form-box > form > table > tbody > tr > td > div > input + .btn {
+  margin-left: 10px;
+}
+
+@media (max-width: 800px) {
+  .form-box > form > table > tbody > tr,
+  .form-box > form > table > tbody > tr > th,
+  .form-box > form > table > tbody > tr > td {
+    display: block;
   }
-.form-box>form>table>tbody>tr>td>div>input[type="text"],
-.form-box>form>table>tbody>tr>td>div>input[type="password"]{
-  display:block;
-  width:100%;
-  box-sizing:border-box;
-  padding:10px;
-}
 
-@media(max-width:800px){
-  .form-box>form>table>tbody>tr,
-  .form-box>form>table>tbody>tr>th,
-  .form-box>form>table>tbody>tr>td{
-    display:block;
+  .form-box > form > table > tbody > tr {
+    border-bottom: 1px solid #dfdfdf;
   }
-  .form-box>form>table>tbody>tr{
-    border-bottom:1px solid #dfdfdf;
+
+  .form-box > form > table > tbody > tr > td > div {
+    flex-wrap: wrap;
+  }
+
+  .form-box > form > table > tbody > tr > td > div > input + .btn {
+    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
   }
 }
 /* 폼박스 끝 */
 
-/* 게시물 페이지 버튼 시작 */
-.article-page-menu{
-  margin-top:20px;
-}
-.article-page-menu>ul>li>a{
-  padding:7px;
+
+/* 상세내용박스 시작 */
+.detail-box > .con > table {
+  border-top: 3px solid black;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.article-page-menu>ul>li:not(:first-child):not(:last-child)>a{
-  border:1px solid transparent;
-  display:flex;
-  padding-left:0;
-  padding-right:0;
-  min-width:30px;
-  justify-content:center;
-}
-.article-page-menu > ul > li:not(:first-child):not(:last-child):hover > a {
-  border-color:#afafaf;
+.detail-box > .con > table > tbody > tr > th {
+  text-align: left;
 }
 
-/* 게시물 페이지 버튼 끝 */
-
-/* 게시물 검색 시작 */
-.article-search-box{
-	margin-bottom:10px;
-}
-/* 게시물 검색 끝 */
-
-/* 상세페이지 시작 */
-.article-detail-box__info{
-  font-size:1.1rem;
-  padding:10px 0;
-  border-bottom:solid 3px black;
+.detail-box > .con > table > tbody > tr > th,
+.detail-box > .con > table > tbody > tr > td {
+  padding: 20px 0;
 }
 
+@media (max-width: 800px) {
+  .detail-box > .con > table > tbody > tr,
+  .detail-box > .con > table > tbody > tr > th,
+  .detail-box > .con > table > tbody > tr > td {
+    display: block;
+  }
 
-.article-detail-box__info>div>div{
-  margin-right:5px;
+  .detail-box > .con > table > tbody > tr {
+    border-bottom: 1px solid #dfdfdf;
+  }
 }
-
-.article-detail-box__body{
-  padding:20px 0;
-}
-
-.article-detail-box__bottom{
-  border-top:solid 3px black;
-  padding:10px 0;
-}
-
-.article-detail-box__bottom>a{
-  padding-left:10px;
-}
-/* 상세페이지 끝 */
+/* 상세내용 박스 끝 */

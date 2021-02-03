@@ -53,8 +53,8 @@
 					<!-- Logo -->
 					<div class="logo">
 						<a href="../home/main">
-						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSMncB%2FbtqUL9pa2xz%2FoLGOTPSKDbOhxhU8P2whjk%2Fimg.png" id="img1">
-						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbHZM6I%2FbtqULCkQvuk%2FOBx0Os6BdgN4GMkyHfXgdk%2Fimg.png" id="img2">
+						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fck3Lob%2FbtqVvOYBYDZ%2FxXds6G7plqZ0NfG8l9ckZk%2Fimg.png" id="img1">
+						<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fck3Lob%2FbtqVvOYBYDZ%2FxXds6G7plqZ0NfG8l9ckZk%2Fimg.png" id="img2">
 						</a>
 					</div>
 					<!-- Main-menu -->
@@ -88,7 +88,28 @@
 								<span class="flaticon-search"></span>
 							</div>
 							</li>
-							<li><a href="../member/login"><i class="far fa-user"></i><span class="flaticon-user"></span></a></li>
+							<li>
+								<c:if test="${isLogined == false}">
+									<a href="../member/login">
+										<i class="far fa-user"></i>
+										<span class="flaticon-user"></span>
+									</a>
+								</c:if>
+								<c:if test="${isLogined}">
+									<a href="../member/modify">
+										<i class="fas fa-user"></i>
+										<span class="flaticon-user"></span>
+									</a>
+								</c:if>
+							</li>
+							<c:if test="${isLogined}">
+								<li>
+									<a href="../member/doLogout">
+										<i class="far fa-sign-out"></i>
+										<span class="flaticon-user"></span>
+									</a>
+								</li>
+							</c:if>
 							<!--<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="flaticon-shopping-cart"></span></a> </li>-->
 						</ul>
 					</div>
