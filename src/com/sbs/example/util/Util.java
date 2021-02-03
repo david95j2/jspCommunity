@@ -21,10 +21,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Util {
-	
+
 	public static Map getJsonMapFromFile(InputStream is) {
 		ObjectMapper mapper = new ObjectMapper();
-			
+
 		try {
 			return mapper.readValue(is, Map.class);
 		} catch (IOException e) {
@@ -32,7 +32,7 @@ public class Util {
 		}
 		return null;
 	}
-	
+
 	public static String getJsonText(Object obj) {
 		ObjectMapper mapper = new ObjectMapper();
 		String rs = "";
@@ -43,7 +43,7 @@ public class Util {
 		}
 		return rs;
 	}
-	
+
 	public static int sendMail(String smtpServerId, String smtpServerPw, String from, String fromName, String to,
 			String title, String body) {
 		System.out.println(smtpServerId);
@@ -92,7 +92,8 @@ public class Util {
 
 	public static String getTempPassword(int length) {
 		int index = 0;
-		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',
+				'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
 		StringBuffer sb = new StringBuffer();
 
@@ -103,7 +104,7 @@ public class Util {
 
 		return sb.toString();
 	}
-	
+
 	public static String sha256(String base) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -125,26 +126,34 @@ public class Util {
 	}
 
 	public static int getAsInt(Object value, int defaultValue) {
-		if ( value instanceof Integer ) {
-			return (int)value;
-		}
-		else if ( value instanceof Long ) {
-			return Long.valueOf((long)value).intValue();
-		}
-		else if ( value instanceof Float ) {
-			return Float.valueOf((float)value).intValue();
-		}
-		else if ( value instanceof Double ) {
-			return Double.valueOf((double)value).intValue();
-		}
-		else if ( value instanceof String ) {
+		if (value instanceof Integer) {
+			return (int) value;
+		} else if (value instanceof Long) {
+			return Long.valueOf((long) value).intValue();
+		} else if (value instanceof Float) {
+			return Float.valueOf((float) value).intValue();
+		} else if (value instanceof Double) {
+			return Double.valueOf((double) value).intValue();
+		} else if (value instanceof String) {
 			try {
-				return Integer.parseInt((String)value);
-			}
-			catch ( NumberFormatException e ) {
+				return Integer.parseInt((String) value);
+			} catch (NumberFormatException e) {
 			}
 		}
-		
+
 		return defaultValue;
+	}
+
+	public static boolean isEmpty(Object obj) {
+		if (obj == null) {
+			return true;
+		}
+
+		if (obj instanceof String) {
+			if (((String) obj).trim().length() == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

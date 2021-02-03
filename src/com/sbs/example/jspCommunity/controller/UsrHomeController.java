@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.service.AttrService;
 
-public class UsrHomeController {
+public class UsrHomeController extends Controller{
 	public String showMain(HttpServletRequest req, HttpServletResponse resp) {
 		return "usr/home/main";
 	}
