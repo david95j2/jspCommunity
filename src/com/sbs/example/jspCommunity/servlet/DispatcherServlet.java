@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.example.jspCommunity.App;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.mysqlutil.MysqlUtil;
@@ -54,32 +55,40 @@ public abstract class DispatcherServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 
 		String requestUri = req.getRequestURI();
+		System.out.println(requestUri);
 		String[] requestUriBits = requestUri.split("/");
-
-		if (requestUriBits.length < 5) {
+		
+		int minBitsCount = 5;
+		
+		if (App.isProductMode()) {
+			minBitsCount = 4;
+		}
+		
+		if (requestUriBits.length < minBitsCount) {
 			resp.getWriter().append("올바른 요청이 아닙니다.");
 			return null;
 		}
 		
-		// 톰캣안에서 spring.profiles.active 변수를 받아옴 cf). 정해진 변수 이름 아님!
-		String profilesActive = System.getProperty("spring.profiles.active");
-		
-		boolean isProductionMode = false;
-		
-		// production 변수가 톰캣안에 있을 시 개발모드로 설정하겠다.
-		if (profilesActive != null && profilesActive.equals("production")) {
-			isProductionMode = true;
-		}
-		
-		if (isProductionMode) {
+		if (App.isProductMode()) {
 			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunity");
 		} else {
 			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 			MysqlUtil.setDevMode(false);
 		}
-		String controllerTypeName = requestUriBits[2];
-		String controllerName = requestUriBits[3];
-		String actionMethodName = requestUriBits[4];
+		
+		int controllerTypeNameIndex = 2;
+		int controllerNameIndex = 3;
+		int actionMethodNameIndex = 4;
+		
+		if (App.isProductMode()) {
+			controllerTypeNameIndex = 1;
+			controllerNameIndex = 2;
+			actionMethodNameIndex = 3;
+		}
+		
+		String controllerTypeName = requestUriBits[controllerTypeNameIndex];
+		String controllerName = requestUriBits[controllerNameIndex];
+		String actionMethodName = requestUriBits[actionMethodNameIndex];
 
 		String actionUrl = "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
 
