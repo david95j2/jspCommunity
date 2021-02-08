@@ -142,7 +142,12 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/modify");
 		needToLoginActionUrls.add("/usr/article/doModify");
 		needToLoginActionUrls.add("/usr/article/doDelete");
-
+		
+		needToLoginActionUrls.add("/usr/reply/doWrite");
+		needToLoginActionUrls.add("/usr/reply/modify");
+		needToLoginActionUrls.add("/usr/reply/doModify");
+		needToLoginActionUrls.add("/usr/reply/doDelete");
+		
 		if (needToLoginActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined") == false) {
 				req.setAttribute("alertMsg", "로그인 후 이용해주세요.");

@@ -98,4 +98,98 @@
 	</div>
 </div>
 
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span>
+			<i class="fas fa-newspaper"></i>
+		</span>
+		<span>댓글작성</span>
+	</h1>
+</div>
+
+<c:if test="${isLogined == false}">
+	<div
+		class="article-reply-write-form-box form-box padding-0-10 con-min-width">
+		<div class="con">
+			<a class="udl hover-link" href="../member/login?afterLoginUrl=${encodedCurrentUrl}">로그인</a> 후 이용해주세요.
+		</div>
+	</div>
+</c:if>
+<c:if test="${isLogined}">
+	<div
+		class="article-reply-write-form-box form-box padding-0-10 con-min-width">
+		<script>
+	let Reply__DoWriteForm__submited = false;
+	let Reply__DoWriteForm__checkedLoginId = "";
+	
+	// 폼 발송전 체크
+	function Reply__DoWriteForm__submit(form) {
+		if ( Reply__DoWriteForm__submited ) {
+			alert('처리중입니다.');
+			return;
+		}
+			
+		const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+		const body = editor.getMarkdown().trim();
+		
+		if ( body.length == 0 ) {
+			alert('내용을 입력해주세요.');
+			editor.focus();
+			
+			return;
+		}
+		
+		form.body.value = body;
+		
+		form.submit();
+		Reply__DoWriteForm__submited = true;
+	}
+	</script>
+
+		<form class="con" action="../reply/doWrite" method="POST"
+			onsubmit="Reply__DoWriteForm__submit(this); return false;">
+			<input type="hidden" name="redirectUrl" value="${currentUrl}" />
+			<input type="hidden" name="relTypeCode" value="article" />
+			<input type="hidden" name="relId" value="${article.id}" />
+			<input type="hidden" name="body" />
+
+			<table>
+				<colgroup>
+					<col width="150">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>
+							<span>내용</span>
+						</th>
+						<td>
+							<div>
+								<div>
+									<script type="text/x-template"></script>
+									<div class="toast-ui-editor" data-height="200"></div>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th>
+							<span>작성</span>
+						</th>
+						<td>
+							<div>
+								<div class="btn-wrap">
+									<input class="btn btn-primary" type="submit" value="작성" />
+									<button class="btn btn-info" type="button"
+										onclick="history.back();">뒤로가기</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</c:if>
+
 <%@ include file="../../part/foot.jspf"%>
