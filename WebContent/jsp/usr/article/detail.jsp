@@ -23,10 +23,10 @@
 			<tbody>
 				<tr>
 					<th>
-						<span>번호</span>
+						<span>제목</span>
 					</th>
 					<td>
-						<div>${article.id}</div>
+						<div>${article.title}</div>
 					</td>
 				</tr>
 				<tr>
@@ -39,14 +39,6 @@
 				</tr>
 				<tr>
 					<th>
-						<span>수정날짜</span>
-					</th>
-					<td>
-						<div>${article.updateDate}</div>
-					</td>
-				</tr>
-				<tr>
-					<th>
 						<span>작성자</span>
 					</th>
 					<td>
@@ -55,10 +47,18 @@
 				</tr>
 				<tr>
 					<th>
-						<span>제목</span>
+						<span>공감 수</span>
 					</th>
 					<td>
-						<div>${article.title}</div>
+						<div>${article.extra__likeOnlyPoint}</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>비공감 수</span>
+					</th>
+					<td>
+						<div>${article.extra__dislikeOnlyPoint}</div>
 					</td>
 				</tr>
 				<tr>

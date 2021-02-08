@@ -6,7 +6,7 @@ public class App {
 		
 		// 톰캣안에서 spring.profiles.active 변수를 받아옴 cf). 정해진 변수 이름 아님!
 		String profilesActive = System.getProperty("spring.profiles.active");
-		System.out.println(profilesActive);
+		
 		if (profilesActive == null ) {
 			return false;
 		}
@@ -66,7 +66,7 @@ public class App {
 			return 443;
 		}
 		
-		return 8083;
+		return 8080;
 	}
 
 	private static String getSiteDomain() {
