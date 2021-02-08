@@ -55,7 +55,6 @@ public abstract class DispatcherServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 
 		String requestUri = req.getRequestURI();
-		System.out.println(requestUri);
 		String[] requestUriBits = requestUri.split("/");
 		
 		int minBitsCount = 5;
@@ -73,7 +72,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunityReal");
 		} else {
 			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunityReal");
-			MysqlUtil.setDevMode(false);
+			MysqlUtil.setDevMode(true);
 		}
 		
 		int controllerTypeNameIndex = 2;

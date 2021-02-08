@@ -39,7 +39,7 @@
 				</tr>
 				<tr>
 					<th>
-						<span>갱신날짜</span>
+						<span>수정날짜</span>
 					</th>
 					<td>
 						<div>${article.updateDate}</div>
@@ -63,8 +63,10 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<script type="text/x-template">${article.body}</script>
-						<div class="toast-ui-viewer"></div>
+						<div class="toast-viewer-css">
+							<script type="text/x-template">${article.body}</script>
+							<div class="toast-ui-viewer"></div>
+						</div>
 					</td>
 				</tr>
 			</tbody>
