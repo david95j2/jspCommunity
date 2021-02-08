@@ -46,22 +46,6 @@
 					</td>
 				</tr>
 				<tr>
-					<th>
-						<span>공감 수</span>
-					</th>
-					<td>
-						<div>${article.extra__likeOnlyPoint}</div>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<span>비공감 수</span>
-					</th>
-					<td>
-						<div>${article.extra__dislikeOnlyPoint}</div>
-					</td>
-				</tr>
-				<tr>
 					<td colspan="2">
 						<div class="toast-viewer-css">
 							<script type="text/x-template">${article.body}</script>
@@ -79,31 +63,31 @@
 		<c:if test="${article.extra.actorCanLike}">
 			<a class="btn btn-primary hov-red" href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 			 onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-				<span><i class="fas fa-thumbs-up"></i></span>
-				<span>좋아요</span>
+				<span><i class="far fa-thumbs-up"></i></span>
+				<span>${article.extra__likeOnlyPoint}</span>
 			</a>
 		</c:if>
 		
 		<c:if test="${article.extra.actorCanCancelLike}">
 			<a class="btn btn-info hov-red" href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 			 onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
-				<span><i class="fas fa-slash"></i></span>
-				<span>좋아요 취소</span>
+				<span><i class="fas fa-thumbs-up"></i></span>
+				<span>${article.extra__likeOnlyPoint}</span>
 			</a>
 		</c:if>
 		
 		<c:if test="${article.extra.actorCanDislike}">
 			<a class="btn btn-danger hov-red" href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
-				<span><i class="fas fa-thumbs-down"></i></span>
-				<span>싫어요</span>
+				<span><i class="far fa-thumbs-down"></i></span>
+				<span>${article.extra__dislikeOnlyPoint}</span>
 			</a>
 		</c:if>
 		
 		<c:if test="${article.extra.actorCanCancelDislike}">
 			<a class="btn btn-info hov-red" href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 			 onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
-				<span><span><i class="fas fa-slash"></i></span></span>
-				<span>싫어요 취소</span>
+				<span><i class="fas fa-thumbs-down"></i></span>
+				<span>${article.extra__dislikeOnlyPoint}</span>
 			</a>
 		</c:if>
 		
