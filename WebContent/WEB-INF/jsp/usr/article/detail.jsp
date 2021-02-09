@@ -190,26 +190,6 @@
 	</div>
 </c:if>
 
-<div class="title-bar padding-0-10 con-min-width">
-	<h1 class="con">
-		<span>
-			<i class="fas fa-list"></i>
-		</span>
-		<span>댓글 리스트</span>
-	</h1>
-</div>
-
-<div class="reply-list-total-count-box padding-0-10 con-min-width">
-	<div class="con">
-		<div>
-			<span>
-				<i class="fas fa-clipboard-list"></i>
-			</span>
-			<span>총 게시물 수 : </span>
-			<span class="color-red"> ${replies.size()} </span>
-		</div>
-	</div>
-</div>
 
 <div class="reply-list-box article-list-box padding-0-10 con-min-width">
 	<div class="con">
@@ -259,6 +239,14 @@
 							<script type="text/x-template">${reply.body}</script>
 							<div class="toast-ui-viewer"></div>
 						</td>
+						<td>
+							<div class="btn-wrap">
+								<a class="btn btn-info hov-red" href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
+								<a class="btn btn-danger hov-red"
+									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
+									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
+							</div>
+						</td>
 						<td class="visible-sm-down">
 							<div class="flex">
 								<span class="article-list-box__id article-list-box__id--mobile">${reply.id}</span>
@@ -286,10 +274,15 @@
 								<span
 									class="article-list-box__reg-date article-list-box__reg-date--mobile">${reply.regDate}</span>
 							</div>
-							
 							<div>
 								<script type="text/x-template">${reply.body}</script>
 								<div class="toast-ui-viewer"></div>
+							</div>
+							<div class="btn-wrap">
+								<a class="btn btn-info hov-red" href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
+								<a class="btn btn-danger hov-red"
+									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
+									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
 							</div>
 						</td>
 					</tr>

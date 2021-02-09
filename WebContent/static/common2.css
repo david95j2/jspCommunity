@@ -117,10 +117,6 @@ html,body {
   height:100%;
 }
 
-.udl {
-  text-decoration: underline;
-}
-
 .hov-red:hover {color:red;}
 
 .col-black {color:black;}
@@ -621,10 +617,6 @@ header .roll .header-area {
 .con {margin:0 auto 0 auto;}
 
 /* 타이틀 시작 */
-main > .title-bar:not(:first-child) {
-	margin-top:30px;
-}
-
 .title-bar {
   margin-top:30px;
   margin-bottom:20px;
@@ -712,24 +704,6 @@ main > .title-bar:not(:first-child) {
 
 .article-list-box > .con > table tr {
   border-bottom: 1px solid #dfdfdf;
-}
-
-.article-list-box > .con > table td .tui-editor-contents > :first-child {
-	margin-top:0;
-}
-
-.article-list-box > .con > table td .tui-editor-contents > :last-child {
-	margin-bottom:0;
-}
-
-.article-list-box > .con > table tr {
-  border-bottom: 1px solid #dfdfdf;
-  transition:background-color 1s;
-}
-
-.article-list-box > .con > table tr.focus {
-  background-color:#dfdfdf;
-  transition:background-color 0s;
 }
 
 .article-list-box__title {
@@ -960,6 +934,10 @@ input, button {
   text-align: left;
 }
 
+.detail-box > .con > table > tbody > tr:nth-child(3) {
+  border-bottom:3px solid;
+}
+
 .detail-box > .con > table > tbody > tr > th,
 .detail-box > .con > table > tbody > tr > td {
   padding: 20px 0;
@@ -980,7 +958,7 @@ input, button {
 
 /* 토스트 ui viewer 시작 */
 .toast-viewer-css {
-	border:2px solid;
+    border-bottom:3px solid;
     min-height: 150px;
     padding: 0 15px 0 15px;
 }

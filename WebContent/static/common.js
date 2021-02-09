@@ -1,3 +1,4 @@
+// 토스트에디터 시작
 // 유튜브 플러그인 시작
 function youtubePlugin() {
   toastui.Editor.codeBlockManager.setReplacer('youtube', youtubeId => {
@@ -43,12 +44,35 @@ function renderCodepen(wrapperId, url) {
 function Editor__init() {
   $('.toast-ui-editor').each(function(index, node) {
     var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-    
-    var editor = new toastui.Editor({
+
+	// 토스트 UI에
+	// <br/> 두개 들어가는 버그를 없애기 위한 궁여지책
+	if ( initialValue.length == 0 ) {
+		initialValue = " ";
+	}
+	
+	let height = 600;
+	
+	if ( $(node).attr('data-height') ) {
+		height = parseInt($(node).attr('data-height'));
+	}
+	
+	let previewStyle = 'vertical';
+	
+	if ( $(node).attr('data-previewStyle') ) {
+		previewStyle = $(node).attr('data-previewStyle');
+	}
+	else {
+		if ( $(window).width() < 600 ) {
+			previewStyle = 'tab';
+		}
+	}
+	
+	var editor = new toastui.Editor({
       el: node,
-      previewStyle: 'vertical',
+      previewStyle: previewStyle,
       initialValue: initialValue,
-      height:600,
+      height:height,
       plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
     });
 
@@ -57,46 +81,20 @@ function Editor__init() {
 }
 
 function EditorViewer__init() {
-    $('.toast-ui-editor').each(function(index, node) {
-        var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-
-	    // 토스트 UI에
-		// <br/> 두개 들어가는 버그를 없애기 위한 궁여지책
-		if ( initialValue.length == 0 ) {
-			initialValue = " ";
-		}
-		
-		let height = 600;
-		
-		if ( $(node).attr('data-height') ) {
-			height = parseInt($(node).attr('data-height'));
-		}
-		
-		let previewStyle = 'vertical';
-		
-		if ( $(node).attr('data-previewStyle') ) {
-	        previewStyle = $(node).attr('data-previewStyle');
-		} else {
-		      if ( $(window).width() < 600 ) {
-				previewStyle = 'tab';
-			  }
-		}
-		
-		var editor = new toastui.Editor({
-	        el: node,
-	        previewStyle: previewStyle,
-	        initialValue: initialValue,
-	        height:height,
-	        plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
-    	});
-
-		$(node).data('data-toast-editor', editor);
-  	});
+  $('.toast-ui-viewer').each(function(index, node) {
+    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
+    var viewer = new toastui.Editor.factory({
+      el: node,
+      initialValue: initialValue,
+      viewer:true,
+      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+    });
+  });
 }
 
 EditorViewer__init();
 Editor__init();
-//토스트에디터 끝
+// 토스트에디터 끝
 
 $(function() {
     var rollHeader = 100;
