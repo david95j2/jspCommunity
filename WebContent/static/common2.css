@@ -714,6 +714,24 @@ main > .title-bar:not(:first-child) {
   border-bottom: 1px solid #dfdfdf;
 }
 
+.article-list-box > .con > table td .tui-editor-contents > :first-child {
+	margin-top:0;
+}
+
+.article-list-box > .con > table td .tui-editor-contents > :last-child {
+	margin-bottom:0;
+}
+
+.article-list-box > .con > table tr {
+  border-bottom: 1px solid #dfdfdf;
+  transition:background-color 1s;
+}
+
+.article-list-box > .con > table tr.focus {
+  background-color:#dfdfdf;
+  transition:background-color 0s;
+}
+
 .article-list-box__title {
   display: block;
 }
