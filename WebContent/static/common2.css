@@ -934,7 +934,7 @@ input, button {
   text-align: left;
 }
 
-.detail-box > .con > table > tbody > tr:nth-child(3) {
+.detail-box > .con > table > tbody > tr:nth-child(2) {
   border-bottom:3px solid;
 }
 

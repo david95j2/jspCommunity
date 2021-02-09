@@ -7,10 +7,7 @@
 
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
-		<span>
-			<i class="fas fa-newspaper"></i>
-		</span>
-		<span>${pageTitle}</span>
+		<span>${article.title}</span>
 	</h1>
 </div>
 
@@ -21,14 +18,6 @@
 				<col width="150">
 			</colgroup>
 			<tbody>
-				<tr>
-					<th>
-						<span>제목</span>
-					</th>
-					<td>
-						<div>${article.title}</div>
-					</td>
-				</tr>
 				<tr>
 					<th>
 						<span>작성날짜</span>
