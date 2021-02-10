@@ -22,7 +22,7 @@ public class Container {
 	public static ReplyService replyService;
 	public static ReplyDao replyDao;
 	public static UsrReplyController usrReplyController;
-	
+
 	public static ArticleService articleService;
 	public static ArticleDao articleDao;
 	public static UsrArticleController usrArticleController;
@@ -31,11 +31,11 @@ public class Container {
 	public static MemberService memberService;
 	public static UsrMemberController usrMemberController;
 	public static AdmMemberController admMemberController;
-	
+
 	public static UsrLikeController usrLikeController;
 	public static LikeService likeService;
 	public static LikeDao likeDao;
-	
+
 	public static UsrHomeController usrHomeController;
 
 	public static AttrService attrService;
@@ -53,9 +53,9 @@ public class Container {
 		attrService = new AttrService();
 		likeService = new LikeService();
 		emailService = new EmailService();
-		
-		replyService = new ReplyService();
+
 		memberService = new MemberService();
+		replyService = new ReplyService();
 		articleService = new ArticleService();
 
 		usrLikeController = new UsrLikeController();
