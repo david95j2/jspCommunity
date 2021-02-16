@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
+
+<%@ page import="com.sbs.example.jspCommunity.dto.Reply"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
+
+<%
+	Article article = (Article) request.getAttribute("article");
+	int id = (int) request.getAttribute("id");
+	List<Reply> articleReplys = (List<Reply>) request.getAttribute("replies");
+%>
 
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
@@ -97,6 +107,22 @@
 		onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 		href="doDelete?id=${article.id}">삭제</a>
 </div>
+
+<div class="reply-box">
+		<%
+			for (Reply articleReply : articleReplys) {
+				if ( id == articleReply.getRelId() ) {
+		%>
+		<div class="repl-text">
+				<div>내용 : <%=articleReply.getBody()%></div>
+				<div>작성날짜 : <%=articleReply.getRegDate()%></div>
+				<div>작성자 : <%=articleReply.getExtra__writer()%></div>
+				<div class="artRepl"><a href="#" onclick="open_win('./articleRepl?id=<%=articleReply.getId()%>', 'articleRepl')">댓글 수정/삭제</a></div>
+			</div>
+		<%
+				}
+			}
+		%>
 </div>
 
 <div class="title-bar padding-0-10 con-min-width">
@@ -116,79 +142,77 @@
 		</div>
 	</div>
 </c:if>
-<c:if test="${isLogined}">
-	<div
-		class="article-reply-write-form-box form-box padding-0-10 con-min-width">
-		<script>
-			let Reply__DoWriteForm__submited = false;
-			let Reply__DoWriteForm__checkedLoginId = "";
+<div
+	class="article-reply-write-form-box form-box padding-0-10 con-min-width">
+	<script>
+		let Reply__DoWriteForm__submited = false;
+		let Reply__DoWriteForm__checkedLoginId = "";
 
-			// 폼 발송전 체크
-			function Reply__DoWriteForm__submit(form) {
-				if (Reply__DoWriteForm__submited) {
-					alert('처리중입니다.');
-					return;
-				}
-
-				const editor = $(form).find('.toast-ui-editor').data(
-						'data-toast-editor');
-				const body = editor.getMarkdown().trim();
-
-				if (body.length == 0) {
-					alert('내용을 입력해주세요.');
-					editor.focus();
-
-					return;
-				}
-
-				form.body.value = body;
-
-				form.submit();
-				Reply__DoWriteForm__submited = true;
+		// 폼 발송전 체크
+		function Reply__DoWriteForm__submit(form) {
+			if (Reply__DoWriteForm__submited) {
+				alert('처리중입니다.');
+				return;
 			}
-		</script>
 
-		<form class="con" action="../reply/doWrite" method="POST"
-			onsubmit="Reply__DoWriteForm__submit(this); return false;">
-			<input type="hidden" name="redirectUrl" value="${currentUrl}" /> <input
-				type="hidden" name="relTypeCode" value="article" /> <input
-				type="hidden" name="relId" value="${article.id}" /> <input
-				type="hidden" name="body" />
+			const editor = $(form).find('.toast-ui-editor').data(
+					'data-toast-editor');
+			const body = editor.getMarkdown().trim();
 
-			<table>
-				<colgroup>
-					<col width="150">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th><span>내용</span></th>
-						<td>
+			if (body.length == 0) {
+				alert('내용을 입력해주세요.');
+				editor.focus();
+
+				return;
+			}
+
+			form.body.value = body;
+
+			form.submit();
+			Reply__DoWriteForm__submited = true;
+		}
+	</script>
+
+	<form class="con" action="../reply/doWrite" method="POST"
+		onsubmit="Reply__DoWriteForm__submit(this); return false;">
+		<input type="hidden" name="redirectUrl" value="${currentUrl}" /> <input
+			type="hidden" name="relTypeCode" value="article" /> <input
+			type="hidden" name="relId" value="${article.id}" /> <input
+			type="hidden" name="body" />
+
+		<table>
+			<colgroup>
+				<col width="150">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th><span>내용</span></th>
+					<td>
+						<div>
 							<div>
-								<div>
-									<script type="text/x-template"></script>
-									<div class="toast-ui-editor" data-height="200"></div>
-								</div>
+								<script type="text/x-template"></script>
+								<div class="toast-ui-editor" data-height="200"></div>
 							</div>
-						</td>
-					</tr>
+						</div>
+					</td>
+				</tr>
 
-					<tr>
-						<th><span>작성</span></th>
-						<td>
-							<div>
-								<div class="btn-wrap">
-									<input class="btn btn-primary" type="submit" value="작성" />
-									<button class="btn btn-info" type="button"
-										onclick="history.back();">뒤로가기</button>
-								</div>
+				<tr>
+					<th><span>작성</span></th>
+					<td>
+						<div>
+							<div class="btn-wrap">
+								<input class="btn btn-primary" type="submit" value="작성" />
+								<button class="btn btn-info" type="button"
+									onclick="history.back();">뒤로가기</button>
 							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
-</c:if>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
 
 
 <div class="reply-list-box article-list-box padding-0-10 con-min-width">

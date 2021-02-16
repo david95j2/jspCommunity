@@ -96,6 +96,8 @@ public class UsrArticleController extends Controller{
 			return msgAndBack(req, "게시물 번호를 입력해주세요.");
 		}
 		
+		req.setAttribute("id", id);
+		
 		Member loginedMember = (Member)req.getAttribute("loginedMember");
 
 		Article article = articleService.getForPrintArticleById(id,loginedMember);
