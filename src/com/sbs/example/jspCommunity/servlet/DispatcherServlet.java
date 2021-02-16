@@ -69,9 +69,9 @@ public abstract class DispatcherServlet extends HttpServlet {
 		}
 		
 		if (App.isProductMode()) {
-			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunityReal");
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunity");
 		} else {
-			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunityReal");
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 			MysqlUtil.setDevMode(true);
 		}
 		
@@ -142,6 +142,11 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/modify");
 		needToLoginActionUrls.add("/usr/article/doModify");
 		needToLoginActionUrls.add("/usr/article/doDelete");
+		
+		needToLoginActionUrls.add("/usr/like/doLike");
+		needToLoginActionUrls.add("/usr/like/doCancleLike");
+		needToLoginActionUrls.add("/usr/like/doDislike");
+		needToLoginActionUrls.add("/usr/like/doCancelDislike");
 		
 		needToLoginActionUrls.add("/usr/reply/doWrite");
 		needToLoginActionUrls.add("/usr/reply/modify");

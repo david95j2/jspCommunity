@@ -66,7 +66,7 @@ public class App {
 			return 443;
 		}
 		
-		return 8080;
+		return 8083;
 	}
 
 	private static String getSiteDomain() {
