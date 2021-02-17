@@ -66,7 +66,8 @@
 							<li class="hot"><a href="#">Article</a>
 							<ul class="submenu">
 								<li><a href="../article/list?boardId=1">Notice</a></li>
-								<li><a href="../article/list?boardId=2">Free</a></li>
+								<li><a href="../article/list?boardId=2">Music</a></li>
+								<li><a href="../article/list?boardId=3">Game</a></li>
 							</ul>
 							</li>
 							<li><a href="#">Blog</a>

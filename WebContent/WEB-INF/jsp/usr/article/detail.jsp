@@ -9,11 +9,6 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
-<%
-	Article article = (Article) request.getAttribute("article");
-	int id = (int) request.getAttribute("id");
-	List<Reply> articleReplys = (List<Reply>) request.getAttribute("replies");
-%>
 
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
@@ -108,22 +103,6 @@
 		href="doDelete?id=${article.id}">삭제</a>
 </div>
 
-<div class="reply-box">
-		<%
-			for (Reply articleReply : articleReplys) {
-				if ( id == articleReply.getRelId() ) {
-		%>
-		<div class="repl-text">
-				<div>내용 : <%=articleReply.getBody()%></div>
-				<div>작성날짜 : <%=articleReply.getRegDate()%></div>
-				<div>작성자 : <%=articleReply.getExtra__writer()%></div>
-				<div class="artRepl"><a href="#" onclick="open_win('./articleRepl?id=<%=articleReply.getId()%>', 'articleRepl')">댓글 수정/삭제</a></div>
-			</div>
-		<%
-				}
-			}
-		%>
-</div>
 
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
