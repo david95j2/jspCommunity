@@ -5,6 +5,15 @@
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../../part/head.jspf"%>
 
+<!-- 이슈 탑박스 시작 -->
+<div class="issue-banner-box active-on-visible relative">
+  <div class="txt-box absolute-middle absolute-center text-align-center">
+    <div class="title">IT Issue <strong>확인하기</strong></div>
+    <a href="#" class="btn-go-recruit">이슈 정보</a>
+  </div>
+</div>
+<!-- 이슈 배너박스 끝 -->
+
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span>
