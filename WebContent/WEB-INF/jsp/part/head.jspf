@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
 <title>${pageTitle}</title>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 
 <!-- 반응형 모바일을 위해 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -55,7 +55,7 @@ window.onpageshow =  function(event) { // BFCahe
 
 </head>
 <body>
-	<c:if test="${waringPw}">
+	<c:if test="${waringPw == null}">
 		<div class="pwWaringBox">
 			<div class="pwWaringBox-context">
 				<span>현재 임시비밀번호를 사용중입니다. 비밀번호를 변경해주세요</span>
@@ -73,12 +73,12 @@ window.onpageshow =  function(event) { // BFCahe
 
   <nav class="menu-box-1">
     <ul>
-      <c:if test="isLogined == false">
+      <c:if test="${isLogined == false}">
       	<li>
           <a href="../member/login">로그인하기</a>
         </li>
       </c:if>
-      <c:if test="isLogined">
+      <c:if test="${isLogined}">
       <li>
         <a>회원정보</a>
         <ul>
@@ -129,11 +129,11 @@ window.onpageshow =  function(event) { // BFCahe
             <a href="../article/list?boardId=7">빅데이터</a>
           </li>
           <li>
-            <a href="../article/list?boardId=8">안드로이드 / iOS</a>
+            <a href="../article/list?boardId=8">안드로이드 & iOS</a>
           </li>
         </ul>
       </li>
-      <c:if test="isLogined">
+      <c:if test="${isLogined}">
       	<li>
           <a href="../member/doLogout">로그아웃하기</a>
         </li>
@@ -200,7 +200,7 @@ window.onpageshow =  function(event) { // BFCahe
               <a href="../article/list?boardId=7">BigData</a>
             </li>
             <li>
-              <a href="../article/list?boardId=8">Android/iOS</a>
+              <a href="../article/list?boardId=8">Android & iOS</a>
             </li>
           </ul>
         </li>
@@ -210,7 +210,7 @@ window.onpageshow =  function(event) { // BFCahe
     <div class="status-bar flex">
       <div class="flex flex-ai-c">
         <ul class="flex">
-          <c:if test="isLogined == false">
+          <c:if test="${isLogined == false}">
             <li class="login">
               <a href="../member/login">
                 <i class="far fa-user"></i>
@@ -218,19 +218,19 @@ window.onpageshow =  function(event) { // BFCahe
             </li>
             <li class="status-bar__msg">
               <a href="../member/login">
-                <span>환영합니다</span>
+                <span>로그인</span>
               </a>
             </li>
           </c:if>
-          <c:if test="isLogined">
+          <c:if test="${isLogined}">
             <li class="modify">
               <a href="../member/modify">
                 <i class="fas fa-user"></i>
               </a>
             </li>
-            <li class="status-bar__msg">
+            <li class="status-bar__msg nickname">
               <a href="../member/login">
-                <span></span>
+                <span>${loginedMember.getNickname()} 님</span>
               </a>
             </li>
             <li class="logout">

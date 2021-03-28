@@ -1,15 +1,12 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -103,6 +100,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = Container.memberService.getMemberById(loginedMemberId);
+			
 			String value = Container.attrService.getValue("member__"+ loginedMemberId+"__extra__isUsingTempPassword");
 			if (value.equals("1")) {
 				waringPw = true;

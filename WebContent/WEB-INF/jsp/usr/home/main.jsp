@@ -49,10 +49,10 @@
 
 		<nav class="menu-box-1">
 			<ul>
-				<c:if test="isLogined == false">
+				<c:if test="${ isLogined == false }">
 					<li><a href="../member/login">로그인하기</a></li>
 				</c:if>
-				<c:if test="isLogined">
+				<c:if test="${isLogined}">
 					<li><a>회원정보</a>
 						<ul>
 							<li><a href="../member/modify">회원정보수정</a></li>
@@ -77,7 +77,7 @@
 						<li><a href="../article/list?boardId=7">빅데이터</a></li>
 						<li><a href="../article/list?boardId=8">안드로이드 & iOS</a></li>
 					</ul></li>
-				<c:if test="isLogined">
+				<c:if test="${isLogined}">
 					<li><a href="../member/doLogout">로그아웃하기</a></li>
 				</c:if>
 			</ul>
@@ -125,22 +125,35 @@
 			<div class="status-bar flex">
 				<div class="flex flex-ai-c">
 					<ul class="flex">
-						<c:if test="isLogined == false">
-							<li class="login"><a href="../member/login"> <i
-									class="far fa-user"></i>
-							</a></li>
-							<li class="status-bar__msg"><a href="../member/login"> <span>환영합니다</span>
-							</a></li>
+						<c:if test="${isLogined == false}">
+							<li class="login">
+								<a href="../member/login">
+									<i class="far fa-user"></i>
+								</a>
+							</li>
+							<li class="status-bar__msg">
+								<a href="../member/login">
+								<span>로그인</span>
+								</a>
+							</li>
 						</c:if>
-						<c:if test="isLogined">
-							<li class="modify"><a href="../member/modify"> <i
-									class="fas fa-user"></i>
-							</a></li>
-							<li class="status-bar__msg"><a href="../member/login"> <span></span>
-							</a></li>
-							<li class="logout"><a href="../member/doLogout"> <i
-									class="fas fa-sign-out-alt"></i> <sapn>로그아웃</sapn>
-							</a></li>
+						<c:if test="${isLogined}">
+							<li class="modify">
+								<a href="../member/modify">
+									<i class="fas fa-user"></i>
+								</a>
+							</li>
+							<li class="status-bar__msg nickname">
+								<a href="../member/modify">
+									<span>${loginedMember.getNickname()}님</span>
+								</a>
+							</li>
+							<li class="logout">
+								<a href="../member/doLogout"> 
+									<i class="fas fa-sign-out-alt"></i>
+									<span>로그아웃</span>
+								</a>
+							</li>
 						</c:if>
 					</ul>
 				</div>
@@ -164,9 +177,7 @@
 		</div>
 
 		<div class="img-box">
-			<img
-				src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1PbM4%2Fbtq03GHefLw%2F6DbwU4y7u06eVKuio8pcXk%2Fimg.jpg"
-				alt="">
+			<img src="https://storage.cloud.google.com/test_bucket__data/firstImage.jpg" alt="">
 		</div>
 	</div>
 	<!-- 상단배너박스 끝 -->
@@ -188,9 +199,7 @@
 				</div>
 			</div>
 			<div class="img-box">
-				<img
-					src="https://storage.cloud.google.com/test_bucket__data/relax.png"
-					alt="">
+				<img src="https://storage.cloud.google.com/test_bucket__data/relax.png" alt="">
 			</div>
 		</div>
 	</div>

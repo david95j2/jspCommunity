@@ -532,22 +532,26 @@ body {
   transition:height 0.3s;
 }
 
-.login {
-  margin-top:4.5px;
+.status-bar > div > ul > li:nth-child(1) {
+  margin-top:3px;
 }
-.login:hover {
+
+.status-bar > div > ul > li:hover {
   color:red;
 }
 
 .status-bar__msg {
   font-weight:bold;
   font-size:17px;
-  margin-top:3px;
   margin-left:12px;
 }
 
 .status-bar__msg:hover {
   color:red;
+}
+
+.nickname {
+  margin-right:10px;
 }
 
 /* 탑바 끝 */
