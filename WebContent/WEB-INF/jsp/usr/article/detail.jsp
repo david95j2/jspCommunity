@@ -145,7 +145,7 @@ function modifyFormCheck(el) {
 <!-- 게시물 상세 박스 끝 -->
 
 <!-- 게시물 버튼 박스 시작 -->
-<div class="article-btn-box padding-0-10 con-min-width">
+<div class="con article-btn-box padding-0-10 con-min-width">
 	<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
 	<c:if test="${isLikedArticle == true }">
   		<i class="fas fa-thumbs-up"></i>
@@ -178,7 +178,7 @@ function modifyFormCheck(el) {
 </div>
 
 <!-- 댓글 입력 창 시작 -->
-<div class="articleDetailBox__reply">
+<div class="con articleDetailBox__reply">
 	
 	<!-- 댓글 입력 창(로그인 안했을 때) -->
 	<c:if test="${isLogined == false }">

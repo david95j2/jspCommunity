@@ -229,7 +229,7 @@ window.onpageshow =  function(event) { // BFCahe
               </a>
             </li>
             <li class="status-bar__msg nickname">
-              <a href="../member/login">
+              <a href="../member/modify">
                 <span>${loginedMember.getNickname()} 님</span>
               </a>
             </li>
@@ -249,4 +249,4 @@ window.onpageshow =  function(event) { // BFCahe
 	
 	
 	<main class="body-content">
-		<div class="con">
+		<div>
