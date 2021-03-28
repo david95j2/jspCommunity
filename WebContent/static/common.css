@@ -1,3 +1,33 @@
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff")
+      format("woff");
+}
+
 
 html {
   /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
@@ -915,25 +945,63 @@ body {
 }
 /* 타이틀 끝 */
 
-/* 하단바 시작 */
-.bottom-bar {
-  height:100px;
-  background-color:black;
+/* 게시물 리스트 페이지박스 시작 */
+.article-list-page-box {
+  margin-top: -38px;
 }
-/* 하단바 끝 */
+
+.article-list-page-box > .con > a {
+  padding: 10px;
+  border: 1px solid transparent;
+  margin: 0 5px;
+}
+
+.article-list-page-box__page-btn--no {
+  border-color: #dfdfdf !important;
+}
+
+.article-list-page-box__page-btn--no.color-red {
+  border-color: #afafaf !important;
+}
+
+@media (max-width: 800px) {
+  .article-list-page-box > .con > a {
+    padding: 7px;
+    border: 0 solid transparent;
+    margin: 0;
+  }
+}
+/* 게시물 리스트 페이지박스 끝 */
+
+/* 게시물 버튼박스 시작 */
+.article-btn-box {
+  margin-top: 20px;
+}
+/* 게시물 리스트 버튼박스 끝 */
+
+/* 게시물 리스트 게시물 개수 박스 시작 */
+.article-list-total-count-box {
+  margin-top: 30px;
+}
+/* 게시물 리스트 게시물 개수 박스 끝 */
 
 /* 게시물 리스트 박스 시작 */
 
 /* 게시물 리스트 박스 - PC 시작 */
+.article-list-box {
+  margin-top: 30px;
+}
+
 .article-list-box > .con > table {
   border-top:3px solid black;
   width:100%;
   border-collapse:collapse;
   table-layout:fixed;
+  text-align: center;
 }
 
 .article-list-box > .con > table > thead > tr > th {
-  text-align:left;
+  text-align:center;
 }
 
 .article-list-box > .con > table th,
@@ -1005,38 +1073,37 @@ body {
 
 /* 버튼 시작 */
 .btn {
-  font-size: 1rem;
-  line-height: 1rem;
-  padding: 10px 15px 7px 15px;
-  display: inline-flex;
-  font-weight: bold;
-  border-radius: 10px;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  background-color: #3D94F6;
-  color: #FFFFFF;
-  text-shadow: 1px 1px 20px #000000;
-  text-decoration: none;
-  box-sizing: border-box;
-  justify-content: center;
-  text-align: center;
+    letter-spacing: 5px;
+    font-size: 1rem;
+    padding: 10px 15px 7px 15px;
+    display: inline-flex;
+    font-weight: bolder;
+    outline: 0;
+    border: 3px solid #3E5939;
+    cursor: pointer;
+    color: #3E5939;
+    text-decoration: none;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+    background: white;
+    font-family: "LotteMartDream", sans-serif;
 }
 
 .btn-success {
-  background-color: #28a745;
+  background-color: #ffffff;
 }
 
 .btn-info {
-  background-color: #17a2b8;
+  background-color: #ffffff;
 }
 
 .btn-danger {
-  background-color: #dc3540;
+  background-color: #ffffff;
 }
 
 .btn-warning {
-  background-color: #ffcc10;
+  background-color: #ffffff;
 }
 /* 버튼 끝 */
 
@@ -1084,12 +1151,37 @@ body {
   padding:10px 0;
 }
 
+.form-box > form > table > tbody > tr > td > div {
+  display: flex;
+}
+
+.form-box > form > table > tbody > tr:nth-child(2) > td:hover > a {
+	color:red;
+}
+  
+.form-box > form > table > tbody > tr:nth-child(4) > td:hover > a {
+	color:red;
+}
+
+.form-box > form > table > tbody > tr > td > div > :only-child {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-box > form > table > tbody > tr > td > div > select {
+  padding: 10px;
+}
+
 .form-box > form > table > tbody > tr > td > div > input[type="text"],
-.form-box > form > table > tbody > tr > td > div > input[type="password"]{
-  display:block;
-  width:100%;
-  box-sizing:border-box;
-  padding:10px;
+.form-box > form > table > tbody > tr > td > div > input[type="password"],
+.form-box > form > table > tbody > tr > td > div > input[type="tel"],
+.form-box > form > table > tbody > tr > td > div > input[type="email"] {
+  flex: 1 0 0;
+  padding: 10px;
+}
+
+.form-box > form > table > tbody > tr > td > div > input + .btn {
+  margin-left: 10px;
 }
 
 @media ( max-width:881px ) {
@@ -1102,8 +1194,52 @@ body {
   .form-box > form > table > tbody > tr {
     border-bottom: 1px solid #dfdfdf;
   }
+  
+  .form-box > form > table > tbody > tr > td > div {
+    flex-wrap: wrap;
+  }
+
+  .form-box > form > table > tbody > tr > td > div > input + .btn {
+    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+  }
 }
 /* 폼박스 끝 */
+
+/* 상세내용박스 시작 */
+.detail-box > .con > table {
+  border-top: 3px solid black;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detail-box > .con > table > tbody > tr > th {
+  text-align: left;
+}
+
+.detail-box > .con > table > tbody > tr:nth-child(2) {
+  border-bottom:3px solid;
+}
+
+.detail-box > .con > table > tbody > tr > th,
+.detail-box > .con > table > tbody > tr > td {
+  padding: 20px 0;
+}
+
+@media (max-width: 800px) {
+  .detail-box > .con > table > tbody > tr,
+  .detail-box > .con > table > tbody > tr > th,
+  .detail-box > .con > table > tbody > tr > td {
+    display: block;
+  }
+
+  .detail-box > .con > table > tbody > tr {
+    border-bottom: 1px solid #dfdfdf;
+  }
+}
+/* 상세내용 박스 끝 */
 
 /* 하단 바 시작 */
 .bottom-bar {
@@ -1128,5 +1264,13 @@ body {
   }
 }
 /* 모바일 하단 바 끝 */
+
+/* toast-ui 시작 */
+.toast-viewer-css {
+    border: 2px solid;
+    min-height: 150px;
+    padding: 0 15px 0 15px;
+}
+/* toast-ui 끝 */
 
 /* 커스텀 끝 */
