@@ -170,39 +170,6 @@ function modifyFormCheck(el) {
 </div>
 <!-- 게시물 버튼 박스 끝 -->
 
-<!-- 댓글 입력 창 시작 -->
-<div class="articleDetailBox__reply">
-	
-<!-- 댓글 입력 창(로그인 안했을 때) -->
-	<c:if test="${isLogined == false }">
-	<div class="flex flex-dir-col flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
-		<div class="articleDetailBox__reply-isNotLogined__text">로그인한 회원만 댓글을 작성할 수 있습니다.</div>
-		<c:url value="/usr/member/login" var="url">
-			<c:param name="afterLoginUrl" value="${currentUrl }"/>
-		</c:url>
-		<a href="${url }">로그인</a>
-	</div>
-	</c:if>
-		
-	<!-- 댓글 입력 창(로그인 했을 때) -->
-	<c:if test="${isLogined }">
-	<div class="articleDetailBox__reply-isLogined">
-		<form name="writeReplyForm" class="articleDetailBox__reply-form" action="../reply/doWrite" method="POST" onsubmit="return writeFormCheck(this);">
-			<input type="hidden" name="body">
-			<input type="hidden" name="memberId" value="${sessionScope.loginedMemberId }">
-			<input type="hidden" name="articleId" value="${article.id }">
-			<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
-		<div class="writeReplyBodyInput">
-			 <script type="text/x-template"></script>
-	  		<div class="toast-ui-editor"></div>
-	  	</div>
-	  	<button class="submitWriteReply">등록</button>
-	  	</form>
-	</div>
-	</c:if>
-</div>
-
-
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span> <i class="fas fa-newspaper"></i>

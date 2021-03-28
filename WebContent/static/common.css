@@ -1274,3 +1274,334 @@ body {
 /* toast-ui 끝 */
 
 /* 커스텀 끝 */
+
+.articleDetailBox__reply {
+  margin-top: 20px;
+}
+.articleDetailBox__reply-isNotLogined {
+  position: relative;
+  height: 100px;
+  border: 1px solid #dddddd;
+  border-radius: 20px;
+}
+.articleDetailBox__reply-isNotLogined__text {
+  margin-bottom: 5px;
+}
+.articleDetailBox__reply-isNotLogined > a {
+  padding: 5px;
+  border: 1px solid #dddddd;
+}
+.articleDetailBox__reply-isNotLogined > a:hover {
+  background-color: #2c2f3f;
+  color: white;
+}
+.articleDetailBox__reply-isLogined {
+  position: relative;
+}
+.articleDetailBox__reply-isLogined .toast-ui-editor {
+  height: 170px !important;
+}
+.articleDetailBox__reply-form {
+  position: relative;
+}
+.writeReplyBodyInput {
+  position: relative;
+}
+.articleDetailBox__reply-modifyform__btns{
+  margin-top: 15px;
+}
+
+.submitReplyModify , .submitReplyModifyCancel {
+  font-size:14px;
+  padding:7px;
+  margin-left:4px;
+}
+
+.submitWriteReply{
+	position:relative;
+	left:100%;
+	transform:translateX(-100%);
+	margin-top:5px;
+	padding:7px;
+	font-size:14px;
+}
+
+.articleDetailBox__articleReplyList {
+  margin-top: 10px;
+}
+.articleDetailBox__articleReplyList__reply-1-pc__deletedReply{
+	color:#afafaf;
+	height:44px;
+}
+.articleDetailBox__articleReplyList__reply-1-mb__deletedReply{
+	color:#afafaf;
+	height:40px;
+}
+.articleDetailBox__articleReplyList__reply-1-pc__box-2{
+	height:18px;
+	margin-top:10px;
+}
+.articleDetailBox__articleReplyList__info{
+	padding:5px 0;
+}
+.articleDetailBox__articleReplyList__replies{
+	padding-bottom:5px;
+	border-top:2px solid #afafaf;
+}
+.articleDetailBox__articleReplyList__reply{
+	padding:10px 4px;
+	border-bottom:1px solid #DDDDDD;
+	transition:all .3s;
+}
+.articleDetailBox__articleReplyList__reply.focus{
+	background-color:#DDDDDD;
+	transition:all .3s;
+}
+.articleDetailBox__articleReplyList__reply input{
+	transition:all .3s;
+}
+.articleDetailBox__articleReplyList__reply.focus input{
+	background-color:#DDDDDD;
+	transition:all .3s;
+}
+
+@media (max-width:768px){
+	.articleDetailBox__articleReplyList__reply-1-pc{
+	display:none !important;
+	}
+}
+@media (min-width:769px){
+	.articleDetailBox__articleReplyList__reply-1-mb{
+	display:none !important;
+	}
+}
+.articleDetailBox__articleReplyList__reply-1-mb__box1 *{
+	font-size:12px !important;
+}
+.articleDetailBox__articleReplyList__reply-1-mb__box1 > div:nth-child(2) > div {
+	padding:0 5px;
+}
+.articleDetailBox__articleReplyList__reply-1-mb__box2 {
+	margin-top:10px;
+	font-size:18px;
+}
+:root {
+  --reply__writer__width: 100px;
+  --reply__regDate__width: 150px;
+  --reply__btns-1__width:70px;
+  --reply__btns-2__width:180px;
+  --reply__body__width: calc(100% - var(--reply__regDate__width) - var(--reply__writer__width) - var(--reply__btns__width));
+}
+.reply__writer{
+	width:var(--reply__writer__width);
+	 white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reply__regDate{
+	text-align:center;
+	width:var(--reply__regDate__width);
+}
+.reply__body{
+	width:var(--reply__body__width);
+	 white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reply__btns-1{
+	text-align:center;
+	width:var(--reply__btns-1__width);
+}
+.reply__btns-2{
+	width:var(--reply__btns-2__width);
+	text-align:center;
+}
+.reply__btns > div.click:hover {
+	cursor:pointer;
+	text-decoration:underline;
+}
+.reply__btns-mb-1{
+	width:130px;
+	
+}
+.reply__btns-mb-2{
+	width:80px;
+	font-size:12px;
+}
+.reply__btns-mb-2 input{
+	 background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size:12px !important;
+  font-family:inherit;
+}
+
+.articleDetailBox__reply-modify{
+	display:none;
+}
+.articleDetailBox__reply-modify .toast-ui-editor {
+	height:170px !important;
+}
+.reply__btns__delete-form > input{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size:16px;
+  font-family:inherit;
+}
+.reply__btns__modify{
+	cursor:pointer;
+}
+.articleDetailModify > input,
+.articleDetailDelete > input {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin: 0 7px;
+  font-family: "S-CoreDream-5Medium";
+}
+@media (min-width: 769px) {
+  .articleDetailInfo-mb {
+    display: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .articleDetailInfo-pc {
+    display: none !important;
+  }
+}
+.articleDetailInfo-mb * {
+	font-size:12px !important;
+}
+.articleDetailInfo-mb > div:nth-child(2) {
+  margin-top: 5px;
+}
+.replyReply-container{
+	margin-top:10px;
+}
+.reply__reply{
+	margin-right:15px;
+}
+
+.reply__reply-mb{
+	margin-right:15px;
+	font-size:12px;
+}
+.articleDetailBox__reply-reply{
+	display:none;
+}
+.articleDetailBox__reply-reply .toast-ui-editor{
+	height:170px !important;	
+}
+.replyreplies__arrow{
+	background-image:url("../image/replyArrow.png");
+	background-size:contain;
+	background-repeat:no-repeat;
+	width:10%;
+	height:15px;
+	background-position:center center;
+}
+.replyreplies__replyReplyList{
+	width:90%;
+}
+.replyReply-btns{
+	margin-top:10px;
+}
+.replyReply__submit{
+	font-size:14px;
+}
+.replyReply__cancel{
+	font-size:14px;
+	margin-left:5px;
+}
+
+.replyreplies-mb{
+	
+	font-size:12px;
+}
+@media ( max-width:768px ) {
+	.replyreplies-pc{
+		display:none !important;
+	}
+}
+
+@media ( min-width:769px ) {
+	.replyreplies-mb{
+		display:none !important;
+	}
+}
+
+:root{
+  --replyreplies__writer__width: 100px;
+  --replyreplies__regDate__width: 150px;
+  --replyreplies__btns-1__width:180px;
+  --replyreplies__btns-2__width:90px;
+  --replyreplies__body__width:calc ( 100% - var(--replyreplies__writer_width) - var(--replyreplies__btns-1_width) var(--replyreplies__regDate_width) );
+  
+  --replyreplies__writer-mb__width: 80px;
+  --replyreplies__regDate-mb__width: 110px;
+  --replyreplies__btns-1-mb__width:140px;
+  --replyreplies__btns-2-mb__width:60px;
+	
+}
+.replyreplies{
+	padding:10px;
+	margin-top:5px;
+	border:1px solid #ececec;
+	background-color:#f8f8f8;
+}
+.replyreplies .toast-ui-editor{
+	height:170px !important;
+}
+.replyreplies__writer{
+	width:var(--replyreplies__writer__width);
+}
+.replyreplies__regDate{
+	width:var(--replyreplies__regDate__width);
+	text-align:right;
+}
+.replyreplies__btns-1{
+	width:var(--replyreplies__btns-1__width);
+}
+.replyreplies__body{
+	width:var(--replyreplies__body__width);
+}
+.replyreplies__replyReplyList__replyContainer__box-2{
+	margin-top:10px;
+	height:18px;
+}
+.replyreplies__btns-2{
+	width:var(--replyreplies__btns-2__width);
+}
+
+.replyreplies__writer-mb{
+	width:var(--replyreplies__writer-mb__width);
+}
+.replyreplies__btns-1-mb{
+	width:var(--replyreplies__btns-1-mb__width);
+	margin-top:10px;
+}
+.replyreplies__btns-1-mb > div:not(:first-child) {
+	margin-left:8px;
+}
+.replyreplies__btns-2-mb{
+	width:var(--replyreplies__btns-2-mb__width);
+}
+.replyreplies__regDate-mb{
+	width:var(--replyreplies__regDate-mb__width);
+	text-align:right;
+}
+.replyreplies__body-mb{
+	margin-top:10px;
+	font-size:18px;
+}
+.articleDetailBox__replyReply-modify{
+	display:none;
+}
+.replyreplies__btns-2__deleteForm input{
+	background-color: inherit;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+}
+/* 게시물 상세보기 끝 */
