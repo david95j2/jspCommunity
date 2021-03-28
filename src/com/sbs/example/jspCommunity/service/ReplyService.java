@@ -44,5 +44,10 @@ public class ReplyService {
 	public int doWriteArticleReply(int articleId, String body, int memberId) {
 		return replyDao.doWriteArticleReply(articleId,body,memberId);
 	}
+	
+	// id 번인 게시물 댓글 불러오기
+	public List<Reply> getArticleReplysByArticleId(int id) {
+		return replyDao.getArticleReplysByArticleId(id);
+	}
 
 }

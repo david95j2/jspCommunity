@@ -151,7 +151,7 @@
 							<span class="article-list-box__reg-date">${article.regDate}</span>
 						</td>
 						<td>
-							<span class="article-list-box__hit">${article.hitsCount}</span>
+							<span class="article-list-box__hit">${article.hitCount}</span>
 						</td>
 						<td>
 							<span class="article-list-box__like">${article.extra__likeOnlyPoint}</span>

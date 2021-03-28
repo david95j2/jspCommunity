@@ -9,6 +9,46 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
+<script>
+function doLikeBtn(){
+	const memberId = ${article.memberId};
+	const articleId = ${article.id};
+	$.get(
+			"doLikeArticle",
+			{
+				memberId,
+				articleId
+			},
+			function(data) {
+			if(data.success){
+				$('.articleDetailBody__likeBtn > i').attr('class','fas fa-thumbs-up');
+			} else{
+				$('.articleDetailBody__likeBtn > i').attr('class','far fa-thumbs-up');
+			  }
+			},
+			"json"
+		);
+}
+function doDislikeBtn(){
+	const memberId = ${article.memberId};
+	const articleId = ${article.id};
+	$.get(
+			"doDislikeArticle",
+			{
+				memberId,
+				articleId
+			},
+			function(data) {
+			if(data.success){
+				$('.articleDetailBody__dislikeBtn > i').attr('class','fas fa-thumbs-down');
+			} else{
+				$('.articleDetailBody__dislikeBtn > i').attr('class','far fa-thumbs-down');
+			  }
+			},
+			"json"
+		);
+}
+</script>
 
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
@@ -16,6 +56,7 @@
 	</h1>
 </div>
 
+<!-- 게시물 상세 박스 시작 -->
 <div class="article-detail-box detail-box padding-0-10 con-min-width">
 	<div class="con">
 		<table>
@@ -47,61 +88,33 @@
 		</table>
 	</div>
 </div>
+<!-- 게시물 상세 박스 끝 -->
 
+<!-- 게시물 버튼 박스 시작 -->
 <div class="article-btn-box padding-0-10 con-min-width">
-	<c:choose>
-		<c:when test="${article.extra.actorCanLike}">
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="far fa-thumbs-up"></i>${article.extra__likeOnlyPoint} </a>
-			</div>
-		</c:when>
-		<c:when test="${article.extra.actorCanCancelLike}">
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="fas fa-thumbs-up"></i>${article.extra__likeOnlyPoint} </a>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="far fa-thumbs-up"></i>${article.extra__likeOnlyPoint} </a>
-			</div>
-		</c:otherwise>
-	</c:choose>
-	<c:choose>
-		<c:when test="${article.extra.actorCanDislike}">
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="far fa-thumbs-down"></i>${article.extra__dislikeOnlyPoint} </a>
-			</div>
-		</c:when>
-		<c:when test="${article.extra.actorCanCancelDislike}">
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="fas fa-thumbs-down"></i>${article.extra__dislikeOnlyPoint} </a>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="btn">
-				<a onclick="history.go(0)"
-					href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"><i
-					class="far fa-thumbs-down"></i>${article.extra__dislikeOnlyPoint} </a>
-			</div>
-		</c:otherwise>
-	</c:choose>
-
+	<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
+	<c:if test="${isLikedArticle == true }">
+  		<i class="fas fa-thumbs-up"></i>
+  	</c:if>
+	<c:if test="${isLikedArticle == false }">  
+  		<i class="far fa-thumbs-up"></i>
+  	</c:if>
+  	</div>
+  	<div class="btn articleDetailBody__dislikeBtn" onclick="doDislikeBtn();">
+  	<c:if test="${isLikedArticle == true }">
+  		<i class="fas fa-thumbs-down"></i>
+  	</c:if>
+  	<c:if test="${isLikedArticle == false }">  
+  		<i class="far fa-thumbs-down"></i>
+  	</c:if>
+  	</div>
 	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a> <a
 		class="btn btn-info hov-red" href="modify?id=${article.id}">수정</a> <a
 		class="btn btn-danger hov-red"
 		onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 		href="doDelete?id=${article.id}">삭제</a>
 </div>
+<!-- 게시물 버튼 박스 끝 -->
 
 
 <div class="title-bar padding-0-10 con-min-width">
@@ -121,6 +134,8 @@
 		</div>
 	</div>
 </c:if>
+
+<!-- 댓글 쓰기 폼 시작 -->
 <div
 	class="article-reply-write-form-box form-box padding-0-10 con-min-width">
 	<script>

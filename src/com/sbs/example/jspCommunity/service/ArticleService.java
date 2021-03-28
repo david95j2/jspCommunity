@@ -86,4 +86,41 @@ public class ArticleService {
 	public Article getArticleById(int id) {
 		return articleDao.getArticleById(id);
 	}
+	
+	// 조회수 증가
+	public void doIncreaseArticleHitCount(Article article) {
+		articleDao.doIncreaseArticleHitCount(article);
+	}
+	
+	// 좋아요 처리 확인
+	public boolean isLikedArticle(int id, int memberId) {
+		return articleDao.isLikedArticle(id,memberId);
+	}
+
+	// 좋아요 
+	public void doLikeArticle(int id, int memberId) {
+		articleDao.doLikeArticle(id,memberId);
+		
+	}
+	
+	// 좋아요 제거
+	public void removeLikeArticle(int id, int memberId) {
+		articleDao.removeLikeArticle(id,memberId);
+		
+	}
+	
+	// 싫어요 처리 확인
+	public boolean isDislikedArticle(int id, int memberId) {
+		return articleDao.isDislikedArticle(id,memberId);
+	}
+	
+	// 싫어요
+	public void doDislikeArticle(int id, int memberId) {
+		articleDao.doDislikeArticle(id,memberId);
+	}
+	
+	// 싫어요 제거
+	public void removeDislikeArticle(int id, int memberId) {
+		articleDao.removeDislikeArticle(id,memberId);	
+	}
 }

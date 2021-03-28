@@ -105,4 +105,28 @@ public class ReplyDao {
 		return newReplyId;
 	}
 
+
+	public List<Reply> getArticleReplysByArticleId(int id) {
+		List<Reply> replys = null;
+		
+		SecSql sql = new SecSql();
+		
+		sql.append("SELECT R.* , M.nickName AS extra__writer FROM `reply` AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
+		sql.append("WHERE R.relTypeCode = 'article'");
+		sql.append("AND R.relId = ?", id);
+		
+		List<Map<String,Object>> replyMapList = MysqlUtil.selectRows(sql);
+		
+		if(!replyMapList.isEmpty()) {
+			replys = new ArrayList<>();
+			for(Map<String,Object> replyMap : replyMapList) {
+				replys.add(new Reply(replyMap));
+			}
+		}
+		
+		return replys;
+	}
+
 }

@@ -14,7 +14,7 @@ public class Article {
 	private String body;
 	private int memberId;
 	private int boardId;
-	private int hitsCount;
+	private int hitCount;
 	
 	private Map<String, Object> extra;
 	
@@ -33,7 +33,7 @@ public class Article {
 		this.body = (String) map.get("body");
 		this.memberId = (int) map.get("memberId");
 		this.boardId = (int) map.get("boardId");
-		this.hitsCount = (int) map.get("hitsCount");
+		this.hitCount = (int) map.get("hitCount");
 
 		if (map.containsKey("extra__writer")) {
 			this.extra__writer = (String) map.get("extra__writer");

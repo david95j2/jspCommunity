@@ -26,6 +26,14 @@ public class UsrReplyController extends Controller {
 		int articleId = Integer.parseInt(req.getParameter("articleId"));
 
 		int newReplyId = replyService.doWriteArticleReply(articleId, body, memberId);
+
+		String afterWriteReplyUrl = req.getParameter("afterWriteReplyUrl");
+		afterWriteReplyUrl = afterWriteReplyUrl.replace("[NEW_REPLY_ID]", newReplyId + "");
+
+		if (Util.isEmpty(req.getParameter("afterWriteReplyUrl")) == false) {
+
+			req.setAttribute("replaceUrl", afterWriteReplyUrl);
+		}
 		
 		ResultData rs = new ResultData("","");
 

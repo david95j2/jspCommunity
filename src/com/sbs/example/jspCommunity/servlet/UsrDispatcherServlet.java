@@ -70,7 +70,11 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				jspPath = articleController.doWrite(req, resp);
 			} else if (actionMethodName.equals("doDelete")) {
 				jspPath = articleController.doDelete(req, resp);
-			}
+			} else if (actionMethodName.equals("doLikeArticle")) {
+				jspPath = articleController.doLike(req,resp);
+			} else if (actionMethodName.equals("doDislikeArticle")) {
+				jspPath = articleController.doDislike(req,resp);
+			} 
 		} else if (controllerName.equals("like")) {
 			UsrLikeController likeController = Container.usrLikeController;
 
