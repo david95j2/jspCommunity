@@ -14,6 +14,7 @@ public class Reply {
 	private int relId;
 	private String body;
 	private int memberId;
+	private int status;
 
 	private Map<String, Object> extra;
 
@@ -26,8 +27,10 @@ public class Reply {
 		this.id = (int) map.get("id");
 		this.regDate = (String) map.get("regDate");
 		this.updateDate = (String) map.get("updateDate");
+		this.relTypeCode = (String) map.get("relTypeCode");
 		this.body = (String) map.get("body");
 		this.memberId = (int) map.get("memberId");
+		this.status = (int) map.get("status");
 
 		this.relTypeCode = (String) map.get("relTypeCode");
 		this.relId = (int) map.get("relId");

@@ -78,4 +78,31 @@ public class ReplyDao {
 		return MysqlUtil.delete(sql);
 	}
 
+
+	public int doWriteArticleReply(int articleId, String body, int memberId) {
+		int newReplyId = 0;
+
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO reply SET");
+		sql.append("regDate = NOW() , updateDate = NOW()");
+		sql.append(",`relTypeCode` = 'article'");
+		sql.append(",`relId` = ?", articleId);
+		sql.append(",`body` = ?", body);
+		sql.append(",`memberId` = ?", memberId);
+		sql.append(",`status` = 1");
+
+		newReplyId = MysqlUtil.insert(sql);
+
+		sql = new SecSql();
+
+		sql.append("UPDATE article SET");
+		sql.append("replyCount = replyCount + 1");
+		sql.append("WHERE id = ?", articleId);
+
+		MysqlUtil.update(sql);
+
+		return newReplyId;
+	}
+
 }

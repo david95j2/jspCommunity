@@ -41,4 +41,8 @@ public class ReplyService {
 		return replyDao.delete(id);
 	}
 
+	public int doWriteArticleReply(int articleId, String body, int memberId) {
+		return replyDao.doWriteArticleReply(articleId,body,memberId);
+	}
+
 }
