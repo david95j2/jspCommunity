@@ -340,13 +340,13 @@ label[for] {
 }
 
 @media ( max-width:880px ) {
-  .visible-on-md-up {
+  .visible-md-up {
     display:none;
   }
 }
 
 @media ( min-width:881px ) {
-  .visible-on-sm-down {
+  .visible-sm-down {
     display:none;
   }
 }
