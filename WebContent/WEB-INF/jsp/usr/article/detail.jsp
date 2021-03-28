@@ -170,12 +170,19 @@ function modifyFormCheck(el) {
 </div>
 <!-- 게시물 버튼 박스 끝 -->
 
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span><i class="fas fa-newspaper"></i></span>
+		<span>댓글작성</span>
+	</h1>
+</div>
+
 <!-- 댓글 입력 창 시작 -->
 <div class="articleDetailBox__reply">
 	
-<!-- 댓글 입력 창(로그인 안했을 때) -->
+	<!-- 댓글 입력 창(로그인 안했을 때) -->
 	<c:if test="${isLogined == false }">
-	<div class="flex flex-dir-col flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
+	<div class="flex flex-di-c flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
 		<div class="articleDetailBox__reply-isNotLogined__text">로그인한 회원만 댓글을 작성할 수 있습니다.</div>
 		<c:url value="/usr/member/login" var="url">
 			<c:param name="afterLoginUrl" value="${currentUrl }"/>
@@ -194,159 +201,58 @@ function modifyFormCheck(el) {
 			<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 		<div class="writeReplyBodyInput">
 			 <script type="text/x-template"></script>
-	  		<div class="toast-ui-editor"></div>
+	  		 <div class="toast-ui-editor"></div>
 	  	</div>
-	  	<button class="submitWriteReply">등록</button>
+	  	<button class="writeReplyBodyInput">등록</button>
 	  	</form>
 	</div>
 	</c:if>
-</div>
-
-
-<div class="title-bar padding-0-10 con-min-width">
-	<h1 class="con">
-		<span> <i class="fas fa-newspaper"></i>
-		</span> <span>댓글작성</span>
-	</h1>
-</div>
-
-<c:if test="${isLogined == false}">
-	<div
-		class="article-reply-write-form-box form-box padding-0-10 con-min-width">
-		<div class="con">
-			<a class="udl hover-link"
-				href="../member/login?afterLoginUrl=${encodedCurrentUrl}">로그인</a> 후
-			이용해주세요.
+	
+	<!-- 댓글 리스트 -->
+	<div class="articleDetailBox__articleReplyList">
+		<div class="articleDetailBox__articleReplyList__info">
+			<span>전체 댓글 수</span>
+			<span>${totalReplyCount }</span>
 		</div>
-	</div>
-</c:if>
-
-<!-- 댓글 쓰기 폼 시작 -->
-<div class="article-reply-write-form-box form-box padding-0-10 con-min-width">
-	<form class="con" action="../reply/doWrite" method="POST"
-		onsubmit="Reply__DoWriteForm__submit(this); return false;">
-		<input type="hidden" name="redirectUrl" value="${currentUrl}" /> <input
-			type="hidden" name="relTypeCode" value="article" /> <input
-			type="hidden" name="relId" value="${article.id}" /> <input
-			type="hidden" name="body" />
-
-		<table>
-			<colgroup>
-				<col width="150">
-			</colgroup>
-			<tbody>
-				<tr>
-					<th><span>내용</span></th>
-					<td>
-						<div>
-							<div>
-								<script type="text/x-template"></script>
-								<div class="toast-ui-editor" data-height="200"></div>
+		<div class="articleDetailBox__articleReplyList__replys">
+			<c:forEach var="reply" items="${replys }">
+				<div class="flex flex-di-c articleDetailBox__articleReplyList__reply">
+					<div class="flex articleDetailBox__articleReplyList__reply-1">
+						<div class="reply__writer">${reply.extra__writer }</div>
+						<div class="flex-grow-1 reply__body">${reply.body }</div>
+						<c:if test="${loginedMemberId == reply.memberId }">
+						<div class="reply__btns flex flex-ai-c flex-jc-sa">
+							<div class="reply__btns__modify" onclick="modifyFormOpen(this);">수정</div>
+							<div class="reply__btns__delete">
+								<form class="reply__btns__delete-form" action="../reply/doDelete">
+									<input type="submit" value="삭제">
+									<input type="hidden" name="id" value="${reply.id }">
+									<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
+								</form>
 							</div>
 						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<th><span>작성</span></th>
-					<td>
-						<div>
-							<div class="btn-wrap">
-								<input class="btn btn-primary" type="submit" value="작성" />
-								<button class="btn btn-info" type="button"
-									onclick="history.back();">뒤로가기</button>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-</div>
-
-
-<div class="reply-list-box article-list-box padding-0-10 con-min-width">
-	<div class="con">
-		<table>
-			<colgroup>
-				<col width="50">
-				<col width="150">
-				<col width="100">
-				<col width="100">
-			</colgroup>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>날짜</th>
-					<th>작성자</th>
-					<th>좋아요</th>
-					<th>내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${replies}" var="reply">
-					<tr>
-						<td><span class="article-list-box__id">${reply.id}</span></td>
-						<td><span class="article-list-box__reg-date">${reply.regDate}</span>
-						</td>
-						<td><span class="article-list-box__writer">${reply.extra__writer}</span>
-						</td>
-						<td><span class="article-list-box__likeOnlyPoint"> <span>
-									<i class="far fa-thumbs-up"></i>
-							</span> <span> ${reply.extra__likeOnlyPoint} </span>
-						</span> <span class="article-list-box__dislikeOnlyPoint"> <span>
-									<i class="far fa-thumbs-down"></i>
-							</span> <span> ${reply.extra__dislikeOnlyPoint} </span>
-						</span></td>
-						<td><script type="text/x-template">${reply.body}</script>
-							<div class="toast-ui-viewer"></div></td>
-						<td>
-							<div class="btn-wrap">
-								<a class="btn btn-info hov-red"
-									href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
-								<a class="btn btn-danger hov-red"
-									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
-									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
-							</div>
-						</td>
-						<td class="visible-sm-down">
-							<div class="flex">
-								<span class="article-list-box__id article-list-box__id--mobile">${reply.id}</span>
-							</div>
-
-							<div class="flex">
-								<span class="article-list-box__likeOnlyPoint"> <span>
-										<i class="far fa-thumbs-up"></i>
-								</span> <span> ${reply.extra__likeOnlyPoint} </span>
-								</span> <span class="article-list-box__dislikeOnlyPoint"> <span>
-										<i class="far fa-thumbs-down"></i>
-								</span> <span> ${reply.extra__dislikeOnlyPoint} </span>
-								</span>
-							</div>
-
-							<div class="flex">
-								<span
-									class="article-list-box__writer article-list-box__writer--mobile">${reply.extra__writer}</span>
-								<span>&nbsp;|&nbsp;</span> <span
-									class="article-list-box__reg-date article-list-box__reg-date--mobile">${reply.regDate}</span>
-							</div>
-							<div>
-								<script type="text/x-template">${reply.body}</script>
-								<div class="toast-ui-viewer"></div>
-							</div>
-							<div class="btn-wrap">
-								<a class="btn btn-info hov-red"
-									href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
-								<a class="btn btn-danger hov-red"
-									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
-									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
-							</div>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+						</c:if>
+						<div class="reply__regDate">${reply.regDate }</div>
+					</div>	
+		
+					<div class="articleDetailBox__reply-modify">
+						<form name="writeReplyModifyForm" class="articleDetailBox__reply-modifyform" action="../reply/doModify" method="POST" onsubmit="return modifyFormCheck(this);">
+							<input type="hidden" name="body">
+							<input type="hidden" name="id" value="${reply.id }">
+							<input type="hidden" name="memberId" value="${sessionScope.loginedMemberId }">
+							<input type="hidden" name="articleId" value="${article.id }">
+							<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
+							<div class="writeReplyBodyInput">
+					 			<script type="text/x-template"></script>
+			  					<div class="toast-ui-editor"></div>
+			  				</div>
+			  				<button class="submitWriteReply">수정</button>  
+		  				</form>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>	
 </div>
 
 <%@ include file="../../part/foot.jspf"%>
