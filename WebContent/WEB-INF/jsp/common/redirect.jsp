@@ -16,7 +16,7 @@ if ( historyBack ) {
 
 var replaceUrl = '<%=request.getAttribute("replaceUrl")%>'.trim();
 
-if ( replaceUrl && replaceUrl != 'null') {
+if ( replaceUrl != '' && replaceUrl != 'null') {
 	location.replace(replaceUrl);
 }
 </script>
