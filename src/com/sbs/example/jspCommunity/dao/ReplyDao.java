@@ -80,7 +80,8 @@ public class ReplyDao {
 		sql.append("ON R.memberId = M.id");
 		sql.append("LEFT JOIN `like` AS L");
 		sql.append("ON R.id = L.relId");
-		sql.append("WHERE R.relId = ?",id);
+		sql.append("WHERE R.relTypeCode = 'article'");
+		sql.append("AND R.relId = ?",id);
 		sql.append("GROUP BY R.id");
 		
 		List<Map<String,Object>> replyMapList = MysqlUtil.selectRows(sql);
@@ -133,10 +134,10 @@ public class ReplyDao {
 
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT * FROM recommend");
+		sql.append("SELECT * FROM `like`");
 		sql.append("WHERE relId = ? ", id);
 		sql.append("AND memberId = ?", memberId);
-		sql.append("AND relType = 'reply'");
+		sql.append("AND relTypeCode = 'reply'");
 		sql.append("AND `point` = 1");
 
 		Map<String, Object> map = MysqlUtil.selectRow(sql);
@@ -152,10 +153,10 @@ public class ReplyDao {
 	public void doDeleteReplyLike(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("DELETE FROM recommend");
+		sql.append("DELETE FROM `like`");
 		sql.append("WHERE relId = ? ", id);
 		sql.append("AND memberId = ?", memberId);
-		sql.append("AND relType = 'reply'");
+		sql.append("AND relTypeCode = 'reply'");
 		sql.append("AND `point` = 1");
 		
 		MysqlUtil.delete(sql);
@@ -168,12 +169,12 @@ public class ReplyDao {
 		SecSql sql = new SecSql();
 
 		sql.append("SELECT R.* "
-				+ ",IFNULL(SUM(IF(RC.point > 0 , RC.point , 0)) , 0) AS extra__likeCount"				
-				+ ",IFNULL(SUM(IF(RC.point < 0 , RC.point * -1 , 0)) , 0) AS extra__dislikeCount"
+				+ ",IFNULL(SUM(IF(L.point > 0 , L.point , 0)) , 0) AS extra__likeCount"				
+				+ ",IFNULL(SUM(IF(L.point < 0 , L.point * -1 , 0)) , 0) AS extra__dislikeCount"
 				+ " FROM reply AS R");
-		sql.append("LEFT JOIN recommend AS RC");
+		sql.append("LEFT JOIN `like` AS L");
 		sql.append("ON R.id = RC.relId");
-		sql.append("AND RC.relType = 'reply'");
+		sql.append("AND L.relTypeCode = 'reply'");
 		sql.append("WHERE R.id = ? ", id);
 		sql.append("GROUP BY R.id");
 		Map<String,Object> map = MysqlUtil.selectRow(sql);
@@ -189,8 +190,9 @@ public class ReplyDao {
 	public void doIncreaseReplyLike(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO recommend SET");
-		sql.append("relType = 'reply'");
+		sql.append("INSERT INTO `like` SET");
+		sql.append("regDate = NOW() , updateDate = NOW()");
+		sql.append(", relTypeCode = 'reply'");
 		sql.append(",`point` = 1");
 		sql.append(",relId = ?",id);
 		sql.append(",memberId = ?" , memberId);
@@ -201,10 +203,10 @@ public class ReplyDao {
 	public boolean isDisLikedReply(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT * FROM recommend");
+		sql.append("SELECT * FROM `like`");
 		sql.append("WHERE relId = ? ", id);
 		sql.append("AND memberId = ?", memberId);
-		sql.append("AND relType = 'reply'");
+		sql.append("AND relTypeCode = 'reply'");
 		sql.append("AND `point` = -1");
 
 		Map<String, Object> map = MysqlUtil.selectRow(sql);
@@ -219,10 +221,10 @@ public class ReplyDao {
 	public void doDeleteReplyDisLike(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("DELETE FROM recommend");
+		sql.append("DELETE FROM `like`");
 		sql.append("WHERE relId = ? ", id);
 		sql.append("AND memberId = ?", memberId);
-		sql.append("AND relType = 'reply'");
+		sql.append("AND relTypeCode = 'reply'");
 		sql.append("AND `point` = -1");
 		
 		MysqlUtil.delete(sql);
@@ -231,8 +233,9 @@ public class ReplyDao {
 	public void doIncreaseReplyDisLike(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO recommend SET");
-		sql.append("relType = 'reply'");
+		sql.append("INSERT INTO `like` SET");
+		sql.append("regDate = NOW() , updateDate = NOW()");
+		sql.append(", relTypeCode = 'reply'");
 		sql.append(",`point` = -1");
 		sql.append(",relId = ?",id);
 		sql.append(",memberId = ?" , memberId);

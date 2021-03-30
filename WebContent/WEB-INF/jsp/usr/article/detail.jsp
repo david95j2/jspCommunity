@@ -382,11 +382,11 @@ function doDisLikeReplyBtn(el,id){
 									<div class="flex flex-ai-c flex-jc-sa reply__btns-2">
 										<div class="reply__btns__like <c:if test="${isLogined }"> click</c:if>" <c:if test="${isLogined }">onclick="doLikeReplyBtn(this,${reply.id});"</c:if>>
 											<i class="far fa-thumbs-up"></i>
-											<span class="replyLikeCount">좋아요 ${reply.extra__likeCount }</span>
+											<span class="replyLikeCount">${reply.extra__likeCount }</span>
 										</div>
 										<div class="reply__btns__dislike <c:if test="${isLogined }"> click </c:if>" <c:if test="${isLogined }">onclick="doDisLikeReplyBtn(this,${reply.id});"</c:if>>
 											<i class="far fa-thumbs-down"></i>
-											<span class="replyDislikeCount">싫어요 ${reply.extra__dislikeCount }</span>
+											<span class="replyDislikeCount">${reply.extra__dislikeCount }</span>
 										</div>
 									</div>
 									<div class="reply__regDate">${reply.regDate }</div>
@@ -428,10 +428,10 @@ function doDisLikeReplyBtn(el,id){
 													<span class="flex-grow-1 replyreplies__body">${replyReply.body }</span>
 													<div class="flex flex-ai-c flex-jc-sa replyreplies__btns-1">
 														<span>
-															<i class="far fa-thumbs-up"></i>좋아요 ${replyReply.extra__likeCount }
+															<i class="far fa-thumbs-up"></i>${replyReply.extra__likeCount }
 														</span>
 														<span>
-															<i class="far fa-thumbs-down"></i>싫어요 ${replyReply.extra__dislikeCount }
+															<i class="far fa-thumbs-down"></i>${replyReply.extra__dislikeCount }
 														</span>
 													</div>
 													<span class="replyreplies__regDate">${reply.regDate }</span>
