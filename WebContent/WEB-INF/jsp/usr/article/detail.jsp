@@ -10,97 +10,6 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
-<script>
-function doLikeBtn(){
-	const memberId = ${loginedMemberId};
-	const articleId = ${article.id};
-	$.get(
-			"doLikeArticle",
-			{
-				memberId,
-				articleId
-			},
-			function(data) {
-			if(data.success){
-				$('.articleDetailBody__likeBtn > i').attr('class','fas fa-thumbs-up');
-				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
-			} else{
-				$('.articleDetailBody__likeBtn > i').attr('class','far fa-thumbs-up');
-				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
-			  }
-			},
-			"json"
-		);
-}
-function doDislikeBtn(){
-	const memberId = ${loginedMemberId};
-	const articleId = ${article.id};
-	$.get(
-			"doDislikeArticle",
-			{
-				memberId,
-				articleId
-			},
-			function(data) {
-			if(data.success){
-				$('.articleDetailBody__dislikeBtn > i').attr('class','fas fa-thumbs-down');
-				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
-			} else{
-				$('.articleDetailBody__dislikeBtn > i').attr('class','far fa-thumbs-down');
-				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
-			  }
-			},
-			"json"
-		);
-}
-</script>
-
-<script>
-function doLikeReplyBtn(el,id){
-	const memberId = ${loginedMemberId};
-	const replyId = id;
-	$.get(
-			"${appUrl}/usr/reply/doLikeReply",
-			{
-				memberId,
-				replyId
-			},
-			function(data) {
-			if(data.success){
-				$(el).children('i').attr('class','fas fa-thumbs-up');
-				$(el).children('span').text('좋아요 '+data.body.replyLikeCount);
-				}
-			else{
-				$(el).children('i').attr('class','far fa-thumbs-up');
-				$(el).children('span').text('좋아요 '+data.body.replyLikeCount);
-				}
-			},
-			"json"
-		);
-}
-function doDisLikeReplyBtn(el,id){
-	const memberId = ${loginedMemberId};
-	const replyId = id;
-	$.get(
-			"${appUrl}/usr/reply/doDisLikeReply",
-			{
-				memberId,
-				replyId
-			},
-			function(data) {
-			if(data.success){
-				$(el).children('i').attr('class','fas fa-thumbs-down');
-				$(el).children('span').text('싫어요 '+data.body.replyDislikeCount);
-				}
-			else{
-				$(el).children('i').attr('class','far fa-thumbs-down');
-				$(el).children('span').text('싫어요 '+data.body.replyDislikeCount);
-				}
-			},
-			"json"
-		);
-}
-</script>
 
 <script>
 let DoWriteForm__submited = false;
@@ -148,6 +57,48 @@ function writeFormCheck(el) {
 </script>
 
 <script>
+	let writeReplyReplyForm__submited = false;
+	
+	function replyReplyFormCheck(el){
+	
+	if ( writeReplyReplyForm__submited ) {
+		alert('처리중입니다.');
+		return false;
+	}
+	
+	
+	const editor = $(el).find('.toast-ui-editor').data('data-toast-editor');
+	const body = editor.getMarkdown().trim();
+	
+	$(el).closest('form').get(0).body.value = body;
+	
+	if ( body.length == 0 ) {
+		alert('내용을 입력해주세요.');
+		editor.focus();		
+		return false;
+	}
+	
+	
+	$.get(
+			"${appUrl}/usr/reply/doWrite",
+			{
+				body,
+				replyId : $(el).closest('form').get(0).replyId.value,
+				memberId : $(el).closest('form').get(0).memberId.value,
+				articleId : $(el).closest('form').get(0).articleId.value,
+				afterWriteReplyUrl : $(el).closest('form').get(0).afterWriteReplyUrl.value
+			},
+			function(data) {
+			loadRepliesList();
+			},
+			"json"
+		);
+		return false;
+	
+	}
+</script>
+
+<script>
 function modifyFormOpen(el){
 	const form = $(el).parents().parents().siblings('.articleDetailBox__reply-modify');
 	$(form).css({
@@ -184,6 +135,7 @@ function modifyReplyCancel(el){
 		$(form).css('display','none');
 }
 </script>
+
 <script>
 	$(function() {
 		if ( param.focusReplyId ) {
@@ -243,6 +195,51 @@ function modifyReplyCancel(el){
 </div>
 <!-- 게시물 상세 박스 끝 -->
 
+<script>
+function doLikeBtn(){
+	const memberId = ${loginedMemberId};
+	const articleId = ${article.id};
+	$.get(
+			"doLikeArticle",
+			{
+				memberId,
+				articleId
+			},
+			function(data) {
+			if(data.success){
+				$('.articleDetailBody__likeBtn > i').attr('class','fas fa-thumbs-up');
+				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
+			} else{
+				$('.articleDetailBody__likeBtn > i').attr('class','far fa-thumbs-up');
+				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
+			  }
+			},
+			"json"
+		);
+}
+function doDislikeBtn(){
+	const memberId = ${loginedMemberId};
+	const articleId = ${article.id};
+	$.get(
+			"doDislikeArticle",
+			{
+				memberId,
+				articleId
+			},
+			function(data) {
+			if(data.success){
+				$('.articleDetailBody__dislikeBtn > i').attr('class','fas fa-thumbs-down');
+				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
+			} else{
+				$('.articleDetailBody__dislikeBtn > i').attr('class','far fa-thumbs-down');
+				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
+			  }
+			},
+			"json"
+		);
+}
+</script>
+
 <!-- 게시물 버튼 박스 시작 -->
 <div class="con article-btn-box padding-0-10 con-min-width">
 		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
@@ -278,6 +275,53 @@ function modifyReplyCancel(el){
 		<span>댓글</span>
 	</h1>
 </div>
+
+<script>
+function doLikeReplyBtn(el,id){
+	const memberId = ${loginedMemberId};
+	const replyId = id;
+	$.get(
+			"${appUrl}/usr/reply/doLikeReply",
+			{
+				memberId,
+				replyId
+			},
+			function(data) {
+			if(data.success){
+				$(el).children('i').attr('class','fas fa-thumbs-up');
+				$(el).children('span').text('좋아요 '+data.body.replyLikeCount);
+				}
+			else{
+				$(el).children('i').attr('class','far fa-thumbs-up');
+				$(el).children('span').text('좋아요 '+data.body.replyLikeCount);
+				}
+			},
+			"json"
+		);
+}
+function doDisLikeReplyBtn(el,id){
+	const memberId = ${loginedMemberId};
+	const replyId = id;
+	$.get(
+			"${appUrl}/usr/reply/doDisLikeReply",
+			{
+				memberId,
+				replyId
+			},
+			function(data) {
+			if(data.success){
+				$(el).children('i').attr('class','fas fa-thumbs-down');
+				$(el).children('span').text('싫어요 '+data.body.replyDislikeCount);
+				}
+			else{
+				$(el).children('i').attr('class','far fa-thumbs-down');
+				$(el).children('span').text('싫어요 '+data.body.replyDislikeCount);
+				}
+			},
+			"json"
+		);
+}
+</script>
 
 <!-- 댓글 시작 -->
 <div class="con articleDetailBox__reply">
@@ -457,7 +501,7 @@ function modifyReplyCancel(el){
 							
 							<!-- 대댓글 리스트 시작 -->
 							<c:forEach var="replyReply" items="${replies }">
-								<c:if test="${replyReply.relType eq 'reply' && replyReply.relId == reply.id}">
+								<c:if test="${replyReply.relTypeCode eq 'reply' && replyReply.relId == reply.id}">
 									<div class="flex replyreplies-mb">
 										<div class="replyreplies__arrow"></div>
 										<div class="flex flex-di-c replyreplies__replyReplyList">
