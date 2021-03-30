@@ -42,7 +42,7 @@
 	<!-- 모바일 탑바 시작 -->
 	<div
 		class="mobile-top-bar visible-sm-down flex flex-jc-sb  con-min-width">
-		<a href="../home/main" class="logo flex flex-ai-c"> <img
+		<a href="${appUrl }/usr/home/main" class="logo flex flex-ai-c"> <img
 			src="https://storage.cloud.google.com/test_bucket__data/logo.png"
 			alt="">
 		</a> <a class="btn-toggle-menu-box-1 flex-as-c"></a>
@@ -50,22 +50,22 @@
 		<nav class="menu-box-1">
 			<ul>
 				<c:if test="${ isLogined == false }">
-					<li><a href="../member/login">로그인하기</a></li>
+					<li><a href="${appUrl }/usr/member/login">로그인하기</a></li>
 				</c:if>
 				<c:if test="${isLogined}">
 					<li><a>회원정보</a>
 						<ul>
-							<li><a href="../member/modify">회원정보수정</a></li>
+							<li><a href="${appUrl }/usr/member/modify">회원정보수정</a></li>
 						</ul></li>
 				</c:if>
 				<li><a>게시판모아모아</a>
 					<ul>
-						<li><a href="../article/list?boardId=1">MySQL</a></li>
-						<li><a href="../article/list?boardId=2">JAVA</a></li>
-						<li><a href="../article/list?boardId=3">JavaScript</a></li>
-						<li><a href="../article/list?boardId=4">VUE</a></li>
-						<li><a href="../article/list?boardId=5">Spring</a></li>
-						<li><a href="../article/list?boardId=6">Big Data</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=1">MySQL</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=2">JAVA</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=3">JavaScript</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=4">VUE</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=5">Spring</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=6">Big Data</a></li>
 					</ul></li>
 				<li><a>About Me</a>
 					<ul>
@@ -74,11 +74,11 @@
 					</ul></li>
 				<li><a>이슈</a>
 					<ul>
-						<li><a href="../article/list?boardId=7">빅데이터</a></li>
-						<li><a href="../article/list?boardId=8">안드로이드 & iOS</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=7">빅데이터</a></li>
+						<li><a href="${appUrl }/usr/article/list?boardId=8">안드로이드 & iOS</a></li>
 					</ul></li>
 				<c:if test="${isLogined}">
-					<li><a href="../member/doLogout">로그아웃하기</a></li>
+					<li><a href="${appUrl }/usr/member/doLogout">로그아웃하기</a></li>
 				</c:if>
 			</ul>
 		</nav>
@@ -96,18 +96,18 @@
 
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">
-					<li><a class="flex flex-ai-c height-100p" href="../home/main">HOME</a>
+					<li><a class="flex flex-ai-c height-100p" href="${appUrl }/usr/home/main">HOME</a>
 					</li>
 					<li><a class="flex flex-ai-c height-100p"
-						href="../article/write?boardId=1">Write</a></li>
+						href="${appUrl }/usr/article/write?boardId=1">Write</a></li>
 					<li><a class="flex flex-ai-c height-100p">Articles</a>
 						<ul>
-							<li><a href="../article/list?boardId=1">MySQL</a></li>
-							<li><a href="../article/list?boardId=2">JAVA</a></li>
-							<li><a href="../article/list?boardId=3">JavaScript</a></li>
-							<li><a href="../article/list?boardId=4">Vue</a></li>
-							<li><a href="../article/list?boardId=5">Spring</a></li>
-							<li><a href="../article/list?boardId=6">Big Data</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=1">MySQL</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=2">JAVA</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=3">JavaScript</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=4">Vue</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=5">Spring</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=6">Big Data</a></li>
 						</ul></li>
 					<li><a class="flex flex-ai-c height-100p">About Me</a>
 						<ul>
@@ -116,8 +116,8 @@
 						</ul></li>
 					<li><a class="flex flex-ai-c height-100p">IT Issue</a>
 						<ul>
-							<li><a href="../article/list?boardId=7">BigData</a></li>
-							<li><a href="../article/list?boardId=8">Android & iOS</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=7">BigData</a></li>
+							<li><a href="${appUrl }/usr/article/list?boardId=8">Android & iOS</a></li>
 						</ul></li>
 				</ul>
 			</nav>
@@ -127,29 +127,29 @@
 					<ul class="flex">
 						<c:if test="${isLogined == false}">
 							<li class="login">
-								<a href="../member/login">
+								<a href="${appUrl }/usr/member/login">
 									<i class="far fa-user"></i>
 								</a>
 							</li>
 							<li class="status-bar__msg">
-								<a href="../member/login">
+								<a href="${appUrl }/usr/member/login">
 								<span>로그인</span>
 								</a>
 							</li>
 						</c:if>
 						<c:if test="${isLogined}">
 							<li class="modify">
-								<a href="../member/modify">
+								<a href="${appUrl }/usr/member/modify">
 									<i class="fas fa-user"></i>
 								</a>
 							</li>
 							<li class="status-bar__msg nickname">
-								<a href="../member/modify">
+								<a href="${appUrl }/usr/member/modify">
 									<span>${loginedMember.getNickname()}님</span>
 								</a>
 							</li>
 							<li class="logout">
-								<a href="../member/doLogout"> 
+								<a href="${appUrl }/usr/member/doLogout"> 
 									<i class="fas fa-sign-out-alt"></i>
 									<span>로그아웃</span>
 								</a>

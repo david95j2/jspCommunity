@@ -72,6 +72,8 @@ public abstract class DispatcherServlet extends HttpServlet {
 			MysqlUtil.setDevMode(true);
 		}
 		
+		req.setAttribute("appUrl", App.getAppUrl());
+		
 		int controllerTypeNameIndex = 2;
 		int controllerNameIndex = 3;
 		int actionMethodNameIndex = 4;
@@ -145,6 +147,8 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/modify");
 		needToLoginActionUrls.add("/usr/article/doModify");
 		needToLoginActionUrls.add("/usr/article/doDelete");
+		needToLoginActionUrls.add("/usr/article/dolikeArticle");
+		needToLoginActionUrls.add("/usr/article/doDislikeArticle");		
 		
 		needToLoginActionUrls.add("/usr/like/doLike");
 		needToLoginActionUrls.add("/usr/like/doCancleLike");

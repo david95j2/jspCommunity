@@ -218,8 +218,8 @@ public class ArticleDao {
 	public boolean isLikedArticle(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT * FROM `recommend`");
-		sql.append("WHERE `relType` = 'article'");
+		sql.append("SELECT * FROM `like`");
+		sql.append("WHERE `relTypeCode` = 'article'");
 		sql.append("AND `relType2` = 'like'");
 		sql.append("AND `relId` = ?", id);
 		sql.append("AND `memberId` = ?", memberId);
@@ -231,28 +231,29 @@ public class ArticleDao {
 		}
 
 		return false;
-	}
+	}	
 
 	public void doLikeArticle(int id, int memberId) {
 
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO `recommend` SET");
-		sql.append("`relType` = 'article'");
+		sql.append("INSERT INTO `like` SET");
+		sql.append("regDate = NOW(), updateDate = NOW(),");
+		sql.append("`relTypeCode` = 'article'");
 		sql.append(",`relType2` = 'like'");
 		sql.append(", `relId` = ?", id);
 		sql.append(", memberId = ?", memberId);
+		sql.append(",`point` = 1");
 
 		MysqlUtil.insert(sql);
-
 	}
 
 	public void removeLikeArticle(int id, int memberId) {
 
 		SecSql sql = new SecSql();
 
-		sql.append("DELETE FROM `recommend`");
-		sql.append("WHERE `relType` = 'article'");
+		sql.append("DELETE FROM `like`");
+		sql.append("WHERE `relTypeCode` = 'article'");
 		sql.append("AND `relType2` = 'like'");
 		sql.append("AND `relId` = ?", id);
 		sql.append("AND memberId = ?", memberId);
@@ -263,8 +264,8 @@ public class ArticleDao {
 	public boolean isDislikedArticle(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT * FROM `recommend`");
-		sql.append("WHERE `relType` = 'article'");
+		sql.append("SELECT * FROM `like`");
+		sql.append("WHERE `relTypeCode` = 'article'");
 		sql.append("AND `relType2` = 'dislike'");
 		sql.append("AND `relId` = ?", id);
 		sql.append("AND `memberId` = ?", memberId);
@@ -281,11 +282,13 @@ public class ArticleDao {
 	public void doDislikeArticle(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO `recommend` SET");
-		sql.append("`relType` = 'article'");
+		sql.append("INSERT INTO `like` SET");
+		sql.append("regDate = NOW(), updateDate = NOW()");
+		sql.append(",`relTypeCode` = 'article'");
 		sql.append(",`relType2` = 'dislike'");
 		sql.append(", `relId` = ?", id);
 		sql.append(", memberId = ?", memberId);
+		sql.append(",`point` = -1");		
 
 		MysqlUtil.insert(sql);
 	}
@@ -293,12 +296,12 @@ public class ArticleDao {
 	public void removeDislikeArticle(int id, int memberId) {
 		SecSql sql = new SecSql();
 
-		sql.append("DELETE FROM `recommend`");
-		sql.append("WHERE `relType` = 'article'");
+		sql.append("DELETE FROM `like`");
+		sql.append("WHERE `relTypeCode` = 'article'");
 		sql.append("AND `relType2` = 'dislike'");
 		sql.append("AND `relId` = ?", id);
 		sql.append("AND memberId = ?", memberId);
 
 		MysqlUtil.delete(sql);
-	}	
+	}
 }

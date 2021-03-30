@@ -1,5 +1,7 @@
 package com.sbs.example.jspCommunity.dao;
 
+import java.util.Map;
+
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -40,5 +42,5 @@ public class LikeDao {
 
 		return MysqlUtil.insert(sql);
 	}
-
+	
 }

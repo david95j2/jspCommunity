@@ -357,6 +357,10 @@ label[for] {
   flex-direction:column;
 }
 
+.flex-di-r {
+  flex-direction:row;
+}
+
 /* 라이브러리 - 디버그 시작 */
 .bd-red {
   border:2px solid red;
@@ -944,20 +948,17 @@ body {
   border-color: #afafaf !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 880px) {
   .article-list-page-box > .con > a {
     padding: 7px;
     border: 0 solid transparent;
     margin: 0;
   }
+  .article-list-page-box {
+    margin-top: 0;
+  }
 }
 /* 게시물 리스트 페이지박스 끝 */
-
-/* 게시물 버튼박스 시작 */
-.article-btn-box {
-  margin-top: 20px;
-}
-/* 게시물 리스트 버튼박스 끝 */
 
 /* 게시물 리스트 게시물 개수 박스 시작 */
 .article-list-total-count-box {
@@ -1085,6 +1086,22 @@ body {
 .btn-warning {
   background-color: #ffffff;
 }
+
+.btn-square{
+  border: 1px solid #dddddd;
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+.btn-square:hover{
+  background-color: #b7b5fd;
+  box-shadow: 0px 15px 20px #cbc9fc;
+  color: #fff;
+}
 /* 버튼 끝 */
 
 /* 버튼랩 시작 */
@@ -1208,6 +1225,11 @@ body {
   padding: 20px 0;
 }
 
+.detail-box > .con > table > tbody > tr > td > .toast-viewer-css
+ > .toast-ui-viewer > .tui-editor-contents {
+  font-size:15px;
+ }
+
 @media (max-width: 881px) {
   .detail-box > .con > table > tbody > tr,
   .detail-box > .con > table > tbody > tr > th,
@@ -1221,6 +1243,8 @@ body {
 }
 
 /* 댓글 관련 시작 */
+
+
 .articleDetailBox__reply {
   margin-top: 20px;
 }
@@ -1252,7 +1276,26 @@ body {
 }
 .writeReplyBodyInput {
   position: relative;
+  margin-top:3px;
+  padding:5px;
+  font-size: 15px;
+  font-weight: bold;
 }
+
+/* 좋아요 싫어요 버튼 시작 */
+.articleDetailBody__likeBtn > i {
+  padding:5px 0;
+}
+.articleDetailBody__dislikeBtn > i {
+  padding:5px 0;
+}
+.articleDetailBody__likeBtn > span {
+  font-size:19px;
+}
+.articleDetailBody__dislikeBtn > span {
+  font-size:19px;
+}
+/* 좋아요 싫어요 버튼 끝 */
 .articleDetailBox__reply-modifyform__btns{
   margin-top: 15px;
 }
@@ -1311,17 +1354,17 @@ body {
 }
 
 @media (max-width:881px){
-  .articleDetailBox__articleReplyList__reply-1-pc{
+  .articleDetailBox__articleReplyList__reply-1-pc {
     display:none !important;
   }
 }
 @media (min-width:880px){
-  .articleDetailBox__articleReplyList__reply-1-mb{
+  .articleDetailBox__articleReplyList__reply-1-mb {
     display:none !important;
   }
 }
 .articleDetailBox__articleReplyList__reply-1-mb__box1 *{
-  font-size:12px !important;
+  font-size:15px !important;
 }
 .articleDetailBox__articleReplyList__reply-1-mb__box1 > div:nth-child(2) > div {
   padding:0 5px;
@@ -1333,8 +1376,7 @@ body {
 :root {
   --reply__writer__width: 100px;
   --reply__regDate__width: 150px;
-  --reply__btns-1__width:70px;
-  --reply__btns-2__width:180px;
+  --reply__btns__width:80px;
   --reply__body__width: calc(100% - var(--reply__regDate__width) - var(--reply__writer__width) - var(--reply__btns__width));
 }
 .reply__writer{
@@ -1353,31 +1395,13 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.reply__btns-1{
-  text-align:center;
-  width:var(--reply__btns-1__width);
-}
-.reply__btns-2{
-  width:var(--reply__btns-2__width);
-  text-align:center;
+.reply__btns{
+	text-align:center;
+	width:var(--reply__btns__width);
 }
 .reply__btns > div.click:hover {
   cursor:pointer;
   text-decoration:underline;
-}
-.reply__btns-mb-1{
-  width:130px;
-}
-.reply__btns-mb-2{
-  width:80px;
-  font-size:12px;
-}
-.reply__btns-mb-2 input{
-  background-color: white;
-  border: none;
-  cursor: pointer;
-  font-size:12px !important;
-  font-family:inherit;
 }
 
 .articleDetailBox__reply-modify{
@@ -1404,12 +1428,12 @@ body {
   margin: 0 7px;
   font-family: "S-CoreDream-5Medium";
 }
-@media (min-width: 880px) {
+@media (max-width: 881px) {
   .articleDetailInfo-mb {
     display: none !important;
   }
 }
-@media (max-width: 881px) {
+@media (min-width: 880px) {
   .articleDetailInfo-pc {
     display: none !important;
   }
@@ -1462,13 +1486,13 @@ body {
 .replyreplies-mb{
   font-size:12px;
 }
-@media ( max-width:881px ) {
+@media ( min-width:880px ) {
   .replyreplies-pc{
 	display:none !important;
   }
 }
 
-@media ( min-width:880px ) {
+@media ( max-width:881px ) {
   .replyreplies-mb{
 	display:none !important;
   }

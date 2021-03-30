@@ -98,7 +98,7 @@ public class UsrArticleController extends Controller{
 
 		articleService.doIncreaseArticleHitCount(article);
 
-		article = articleService.getArticleById(id);
+		article = articleService.getForPrintArticleById(id);
 
 		int memberId = 0;
 
@@ -110,7 +110,7 @@ public class UsrArticleController extends Controller{
 
 		boolean isLikedArticle = articleService.isLikedArticle(id, memberId);
 		boolean isDislikedArticle = articleService.isDislikedArticle(id, memberId);
-
+				
 		List<Reply> replys = replyService.getArticleReplysByArticleId(id);
 
 		int totalReplyCount = 0;
@@ -278,8 +278,7 @@ public class UsrArticleController extends Controller{
 		return msgAndReplace(req, id + "번 게시물이 수정되었습니다.", String.format("detail?id=%d", id));
 	}
 	
-	public String doLike(HttpServletRequest request, HttpServletResponse response) {
-
+	public String doLikeArticle(HttpServletRequest request, HttpServletResponse response) {
 		int memberId = Integer.parseInt(request.getParameter("memberId"));
 		int id = Integer.parseInt(request.getParameter("articleId"));
 
@@ -291,6 +290,7 @@ public class UsrArticleController extends Controller{
 			articleService.removeLikeArticle(id, memberId);
 			resultCode = "F-1";
 		} else {
+			articleService.removeDislikeArticle(id, memberId);
 			articleService.doLikeArticle(id, memberId);
 			resultCode = "S-1";
 		}
@@ -299,7 +299,7 @@ public class UsrArticleController extends Controller{
 
 	}
 
-	public String doDislike(HttpServletRequest request, HttpServletResponse response) {
+	public String doDislikeArticle(HttpServletRequest request, HttpServletResponse response) {
 		int memberId = Integer.parseInt(request.getParameter("memberId"));
 		int id = Integer.parseInt(request.getParameter("articleId"));
 
@@ -311,6 +311,7 @@ public class UsrArticleController extends Controller{
 			articleService.removeDislikeArticle(id, memberId);
 			resultCode = "F-1";
 		} else {
+			articleService.removeLikeArticle(id, memberId);
 			articleService.doDislikeArticle(id, memberId);
 			resultCode = "S-1";
 		}

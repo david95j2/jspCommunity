@@ -102,6 +102,31 @@ function modifyFormCheck(el) {
 	
 	return true;
 }
+
+function modifyReplyCancel(el){
+	const form = $(el).parents().parents('.articleDetailBox__reply-modify');
+		$(form).css('display','none');
+}
+</script>
+<script>
+	$(function() {
+		if ( param.focusReplyId ) {
+			const $target = $('.articleDetailBox__articleReplyList__reply[data-id="' + param.focusReplyId + '"]');
+			$target.addClass('focus');
+		
+			setTimeout(function() {
+				const targetOffset = $target.offset();
+				
+				$(window).scrollTop(targetOffset.top - 100);
+				
+				setTimeout(function() {
+					$target.removeClass('focus');
+				}, 1000);
+			}, 1000);
+		}
+	});
+<script>
+
 </script>
 
 <div class="title-bar padding-0-10 con-min-width">
@@ -146,26 +171,25 @@ function modifyFormCheck(el) {
 
 <!-- 게시물 버튼 박스 시작 -->
 <div class="con article-btn-box padding-0-10 con-min-width">
-	<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
-	<c:if test="${isLikedArticle == true }">
-  		<i class="fas fa-thumbs-up"></i>
-  	</c:if>
-	<c:if test="${isLikedArticle == false }">  
-  		<i class="far fa-thumbs-up"></i>
-  	</c:if>
-  	</div>
-  	<div class="btn articleDetailBody__dislikeBtn" onclick="doDislikeBtn();">
-  	<c:if test="${isLikedArticle == true }">
-  		<i class="fas fa-thumbs-down"></i>
-  	</c:if>
-  	<c:if test="${isLikedArticle == false }">  
-  		<i class="far fa-thumbs-down"></i>
-  	</c:if>
-  	</div>
-	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a> <a
-		class="btn btn-info hov-red" href="modify?id=${article.id}">수정</a> <a
-		class="btn btn-danger hov-red"
-		onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
+		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
+			<c:if test="${isLikedArticle == true }">
+		  		<i class="fas fa-thumbs-up"></i><span>${article.extra__likeOnlyPoint }</span>
+		  	</c:if>
+			<c:if test="${isLikedArticle == false }">  
+		  		<i class="far fa-thumbs-up"></i><span>${article.extra__likeOnlyPoint }</span>
+		  	</c:if>
+	  	</div>
+	  	<div class="btn articleDetailBody__dislikeBtn" onclick="doDislikeBtn();">
+		  	<c:if test="${isLikedArticle == true }">
+		  		<i class="fas fa-thumbs-down"></i><span>${article.extra__dislikeOnlyPoint }</span>
+		  	</c:if>
+		  	<c:if test="${isLikedArticle == false }">  
+		  		<i class="far fa-thumbs-down"></i><span>${article.extra__dislikeOnlyPoint }</span>
+		  	</c:if>
+	  	</div>
+  	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a>
+	<a class="btn btn-info hov-red" href="modify?id=${article.id}">수정</a>
+	<a class="btn btn-danger hov-red" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 		href="doDelete?id=${article.id}">삭제</a>
 </div>
 <!-- 게시물 버튼 박스 끝 -->
@@ -173,7 +197,7 @@ function modifyFormCheck(el) {
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span><i class="fas fa-newspaper"></i></span>
-		<span>댓글작성</span>
+		<span>댓글</span>
 	</h1>
 </div>
 
@@ -185,7 +209,7 @@ function modifyFormCheck(el) {
 	<div class="flex flex-di-c flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
 		<div class="articleDetailBox__reply-isNotLogined__text">로그인한 회원만 댓글을 작성할 수 있습니다.</div>
 		<c:url value="/usr/member/login" var="url">
-			<c:param name="afterLoginUrl" value="${currentUrl }"/>
+			<c:param name="afterLoginUrl" value="${encodedCurrentUrl }"/>
 		</c:url>
 		<a href="${url }">로그인</a>
 	</div>
@@ -194,16 +218,16 @@ function modifyFormCheck(el) {
 	<!-- 댓글 입력 창(로그인 했을 때) -->
 	<c:if test="${isLogined }">
 	<div class="articleDetailBox__reply-isLogined">
-		<form name="writeReplyForm" class="articleDetailBox__reply-form" action="../reply/doWrite" method="POST" onsubmit="return writeFormCheck(this);">
+		<form name="writeReplyForm" class="articleDetailBox__reply-form" action="${appUrl }/usr/reply/doWrite" method="POST" onsubmit="return writeFormCheck(this);">
 			<input type="hidden" name="body">
 			<input type="hidden" name="memberId" value="${sessionScope.loginedMemberId }">
 			<input type="hidden" name="articleId" value="${article.id }">
-			<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
+			<input type="hidden" name="afterWriteReplyUrl" value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}">
 		<div class="writeReplyBodyInput">
 			 <script type="text/x-template"></script>
 	  		 <div class="toast-ui-editor"></div>
 	  	</div>
-	  	<button class="writeReplyBodyInput">등록</button>
+	  	<button class="btn-square writeReplyBodyInput">등록</button>
 	  	</form>
 	</div>
 	</c:if>
@@ -216,24 +240,48 @@ function modifyFormCheck(el) {
 		</div>
 		<div class="articleDetailBox__articleReplyList__replys">
 			<c:forEach var="reply" items="${replys }">
-				<div class="flex flex-di-c articleDetailBox__articleReplyList__reply">
-					<div class="flex articleDetailBox__articleReplyList__reply-1">
+				<div data-id="${reply.id }" class="flex flex-di-c articleDetailBox__articleReplyList__reply">
+					<!-- 댓글 리스트 본문 PC버전 -->
+					<div class="flex articleDetailBox__articleReplyList__reply-1-pc">
 						<div class="reply__writer">${reply.extra__writer }</div>
 						<div class="flex-grow-1 reply__body">${reply.body }</div>
 						<c:if test="${loginedMemberId == reply.memberId }">
 						<div class="reply__btns flex flex-ai-c flex-jc-sa">
 							<div class="reply__btns__modify" onclick="modifyFormOpen(this);">수정</div>
 							<div class="reply__btns__delete">
-								<form class="reply__btns__delete-form" action="../reply/doDelete">
+								<form class="reply__btns__delete-form" action="${appUrl }/usr/reply/doDelete">
 									<input type="submit" value="삭제">
 									<input type="hidden" name="id" value="${reply.id }">
-									<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
+									<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
 								</form>
 							</div>
 						</div>
 						</c:if>
 						<div class="reply__regDate">${reply.regDate }</div>
 					</div>	
+					
+					<!-- 댓글 리스트 본문 모바일버전 -->
+					<div class="flex flex-di-c articleDetailBox__articleReplyList__reply-1-mb">
+						<div class="flex flex-ai-c flex-jc-sb articleDetailBox__articleReplyList__reply-1-mb__box1">
+							<div>${reply.extra__writer }</div>
+							<div class="flex flex-ai-c">
+								<c:if test="${loginedMemberId == reply.memberId }">
+									<div class="reply__btns__modify" onclick="modifyFormOpen(this);">수정</div>
+									<div class="reply__btns__delete">
+										<form class="reply__btns__delete-form" action="${appUrl }/usr/reply/doDelete">
+											<input type="submit" value="삭제">
+											<input type="hidden" name="id" value="${reply.id }">
+											<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
+										</form>
+									</div>
+								</c:if>
+								<div>${reply.regDate }</div>
+							</div>
+						</div>
+						<div class="articleDetailBox__articleReplyList__reply-1-mb__box2">
+							<div>${reply.body }</div>
+						</div>
+					</div>
 		
 					<div class="articleDetailBox__reply-modify">
 						<form name="writeReplyModifyForm" class="articleDetailBox__reply-modifyform" action="../reply/doModify" method="POST" onsubmit="return modifyFormCheck(this);">
@@ -241,12 +289,15 @@ function modifyFormCheck(el) {
 							<input type="hidden" name="id" value="${reply.id }">
 							<input type="hidden" name="memberId" value="${sessionScope.loginedMemberId }">
 							<input type="hidden" name="articleId" value="${article.id }">
-							<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
+							<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
 							<div class="writeReplyBodyInput">
 					 			<script type="text/x-template"></script>
 			  					<div class="toast-ui-editor"></div>
 			  				</div>
-			  				<button class="submitWriteReply">수정</button>  
+			  				<div class="flex flex-ai-c flex-jc-e articleDetailBox__reply-modifyform__btns">
+			  					<button class="submitWriteReply">수정</button>
+			  					<span class="btn-square submitReplyModifyCancel" onclick="modifyReplyCancel(this);">취소</span>
+			  				</div>
 		  				</form>
 					</div>
 				</div>

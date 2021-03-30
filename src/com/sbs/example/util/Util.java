@@ -162,6 +162,46 @@ public class Util {
 		}
 		return false;
 	}
+	
+	public static String getNewUriRemoved(String url, String paramName) {
+		String deleteStrStarts = paramName + "=";
+		int delStartPos = url.indexOf(deleteStrStarts);
+
+		if (delStartPos != -1) {
+			int delEndPos = url.indexOf("&", delStartPos);
+
+			if (delEndPos != -1) {
+				delEndPos++;
+				url = url.substring(0, delStartPos) + url.substring(delEndPos, url.length());
+			} else {
+				url = url.substring(0, delStartPos);
+			}
+		}
+
+		if (url.charAt(url.length() - 1) == '?') {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		if (url.charAt(url.length() - 1) == '&') {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		return url;
+	}
+
+	public static String getNewUrl(String url, String paramName, String paramValue) {
+		url = getNewUriRemoved(url, paramName);
+
+		if (url.contains("?")) {
+			url += "&" + paramName + "=" + paramValue;
+		} else {
+			url += "?" + paramName + "=" + paramValue;
+		}
+
+		url = url.replace("?&", "?");
+
+		return url;
+	}
 
 	public static String getUrlEncoded(String url) {
 		try {

@@ -141,7 +141,7 @@
 							<span class="article-list-box__id">${article.id}</span>
 						</td>
 						<td>
-							<a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}"
+							<a href="${appUrl }/usr/article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}"
 								class="article-list-box__title article-list-box__title--pc hov-red">${article.title}</a>
 						</td>
 						<td>
@@ -160,7 +160,7 @@
 							<div class="flex">
 								<span class="article-list-box__id article-list-box__id--mobile">${article.id}</span>
 
-								<a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}"
+								<a href="${appUrl }/usr/article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}"
 									class="article-list-box__title article-list-box__title--mobile flex-grow-1 hov-red">${article.title}</a>
 							</div>
 
