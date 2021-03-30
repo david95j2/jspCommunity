@@ -9,20 +9,6 @@ import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
 public class ReplyDao {
-
-	public int write(Map<String, Object> args) {
-		SecSql sql = new SecSql();
-		sql.append("INSERT INTO reply");
-		sql.append("SET regDate = NOW()");
-		sql.append(", updateDate = NOW()");
-		sql.append(", relTypeCode = ?", args.get("relTypeCode"));
-		sql.append(", relId = ?", args.get("relId"));
-		sql.append(", memberId = ?", args.get("memberId"));
-		sql.append(", `body` = ?", args.get("body"));
-
-		return MysqlUtil.insert(sql);
-	}
-	
 	
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
 		List<Reply> replies = new ArrayList<>();
@@ -111,11 +97,16 @@ public class ReplyDao {
 		
 		SecSql sql = new SecSql();
 		
-		sql.append("SELECT R.* , M.nickName AS extra__writer FROM `reply` AS R");
+		sql.append("SELECT R.* , M.nickName AS extra__writer");
+		sql.append(",IFNULL(SUM(IF(L.point > 0 , L.point , 0)) , 0) AS extra__likeCount");
+		sql.append(",IFNULL(SUM(IF(L.point < 0 , L.point * -1 , 0)) , 0) AS extra__dislikeCount");
+		sql.append(" FROM `reply` AS R");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON R.memberId = M.id");
-		sql.append("WHERE R.relTypeCode = 'article'");
-		sql.append("AND R.relId = ?", id);
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON R.id = L.relId");
+		sql.append("WHERE R.relId = ?",id);
+		sql.append("GROUP BY R.id");
 		
 		List<Map<String,Object>> replyMapList = MysqlUtil.selectRows(sql);
 		
@@ -127,6 +118,40 @@ public class ReplyDao {
 		}
 		
 		return replies;
+	}
+
+
+	public void doModifyArticleReply(int id, int articleId, String body, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE `reply` SET");
+		sql.append("updateDate = NOW()");
+		sql.append(", `body` = ?", body);
+		sql.append("WHERE id = ?", id);
+		sql.append("AND `relTypeCode` = 'article'");
+		sql.append("AND `relId` = ?", articleId);
+		sql.append("AND memberId = ?", memberId);
+
+		MysqlUtil.update(sql);
+	}
+
+
+	public void doDeleteArticleReply(int id, int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE `reply` SET");
+		sql.append("`status` = -1");
+		sql.append("WHERE id = ?", id);
+
+		MysqlUtil.update(sql);
+
+		sql = new SecSql();
+
+		sql.append("UPDATE article SET");
+		sql.append("replyCount = replyCount -1");
+		sql.append("WHERE id = ?", articleId);
+
+		MysqlUtil.update(sql);
 	}
 
 }

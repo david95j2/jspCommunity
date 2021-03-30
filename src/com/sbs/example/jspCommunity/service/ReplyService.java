@@ -1,7 +1,6 @@
 package com.sbs.example.jspCommunity.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ReplyDao;
@@ -15,10 +14,6 @@ public class ReplyService {
 	public ReplyService() {
 		replyDao = Container.replyDao;
 		memberService = Container.memberService;
-	}
-
-	public int write(Map<String, Object> args) {
-		return replyDao.write(args);
 	}
 
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
@@ -37,10 +32,6 @@ public class ReplyService {
 		return reply.getMemberId() == actorId;
 	}
 
-	public int delete(int id) {
-		return replyDao.delete(id);
-	}
-
 	public int doWriteArticleReply(int articleId, String body, int memberId) {
 		return replyDao.doWriteArticleReply(articleId,body,memberId);
 	}
@@ -48,6 +39,14 @@ public class ReplyService {
 	// id 번인 게시물 댓글 불러오기
 	public List<Reply> getArticleReplysByArticleId(int id) {
 		return replyDao.getArticleReplysByArticleId(id);
+	}
+
+	public void doModifyArticleReply(int id, int articleId, String body, int memberId) {
+		replyDao.doModifyArticleReply(id,articleId,body,memberId);
+	}
+
+	public void doDeleteArticleReply(int id, int articleId) {
+		replyDao.doDeleteArticleReply(id,articleId);
 	}
 
 }

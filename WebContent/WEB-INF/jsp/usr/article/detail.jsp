@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.util.Util"%>
 <%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 
 <%@ page import="com.sbs.example.jspCommunity.dto.Reply"%>
@@ -11,7 +12,7 @@
 
 <script>
 function doLikeBtn(){
-	const memberId = ${article.memberId};
+	const memberId = ${loginedMemberId};
 	const articleId = ${article.id};
 	$.get(
 			"doLikeArticle",
@@ -22,15 +23,17 @@ function doLikeBtn(){
 			function(data) {
 			if(data.success){
 				$('.articleDetailBody__likeBtn > i').attr('class','fas fa-thumbs-up');
+				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
 			} else{
 				$('.articleDetailBody__likeBtn > i').attr('class','far fa-thumbs-up');
+				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
 			  }
 			},
 			"json"
 		);
 }
 function doDislikeBtn(){
-	const memberId = ${article.memberId};
+	const memberId = ${loginedMemberId};
 	const articleId = ${article.id};
 	$.get(
 			"doDislikeArticle",
@@ -41,8 +44,10 @@ function doDislikeBtn(){
 			function(data) {
 			if(data.success){
 				$('.articleDetailBody__dislikeBtn > i').attr('class','fas fa-thumbs-down');
+				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
 			} else{
 				$('.articleDetailBody__dislikeBtn > i').attr('class','far fa-thumbs-down');
+				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
 			  }
 			},
 			"json"
@@ -56,9 +61,12 @@ function writeFormCheck(el) {
 		return false;
 	}
 	
-	
 	const editor = $(el).find('.toast-ui-editor').data('data-toast-editor');
 	const body = editor.getMarkdown().trim();
+	
+	const memberId = writeReplyForm.memberId.value;
+	const articleId = writeReplyForm.articleId.value;
+	const afterWriteReplyUrl = writeReplyForm.afterWriteReplyUrl.value;	
 	
 	if ( body.length == 0 ) {
 		alert('내용을 입력해주세요.');
@@ -69,7 +77,24 @@ function writeFormCheck(el) {
 	
 	writeReplyForm.body.value = body;
 	
-	return true;
+	$.get(
+			"${appUrl}/usr/reply/doWrite",
+			{
+				body : writeReplyForm.body.value,
+				memberId,
+				articleId,
+				afterWriteReplyUrl
+			},
+			function(data) {
+			loadRepliesList();
+			$('.toast-ui-editor').html('');
+			EditorViewer__init();
+			Editor__init();	
+			},
+			"json"
+		);
+	
+	return false;
 }
 
 function modifyFormOpen(el){
@@ -125,8 +150,6 @@ function modifyReplyCancel(el){
 			}, 1000);
 		}
 	});
-<script>
-
 </script>
 
 <div class="title-bar padding-0-10 con-min-width">
@@ -173,18 +196,22 @@ function modifyReplyCancel(el){
 <div class="con article-btn-box padding-0-10 con-min-width">
 		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
 			<c:if test="${isLikedArticle == true }">
-		  		<i class="fas fa-thumbs-up"></i><span>${article.extra__likeOnlyPoint }</span>
+		  		<i class="fas fa-thumbs-up"></i>
+		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeOnlyPoint }</span>
 		  	</c:if>
 			<c:if test="${isLikedArticle == false }">  
-		  		<i class="far fa-thumbs-up"></i><span>${article.extra__likeOnlyPoint }</span>
+		  		<i class="far fa-thumbs-up"></i>
+		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeOnlyPoint }</span>
 		  	</c:if>
 	  	</div>
 	  	<div class="btn articleDetailBody__dislikeBtn" onclick="doDislikeBtn();">
 		  	<c:if test="${isLikedArticle == true }">
-		  		<i class="fas fa-thumbs-down"></i><span>${article.extra__dislikeOnlyPoint }</span>
+		  		<i class="fas fa-thumbs-down"></i>
+		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeOnlyPoint }</span>
 		  	</c:if>
 		  	<c:if test="${isLikedArticle == false }">  
-		  		<i class="far fa-thumbs-down"></i><span>${article.extra__dislikeOnlyPoint }</span>
+		  		<i class="far fa-thumbs-down"></i>
+		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeOnlyPoint }</span>
 		  	</c:if>
 	  	</div>
   	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a>
@@ -209,7 +236,7 @@ function modifyReplyCancel(el){
 	<div class="flex flex-di-c flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
 		<div class="articleDetailBox__reply-isNotLogined__text">로그인한 회원만 댓글을 작성할 수 있습니다.</div>
 		<c:url value="/usr/member/login" var="url">
-			<c:param name="afterLoginUrl" value="${encodedCurrentUrl }"/>
+			<c:param name="afterLoginUrl" value="${currentUrl }"/>
 		</c:url>
 		<a href="${url }">로그인</a>
 	</div>
@@ -252,7 +279,7 @@ function modifyReplyCancel(el){
 								<form class="reply__btns__delete-form" action="${appUrl }/usr/reply/doDelete">
 									<input type="submit" value="삭제">
 									<input type="hidden" name="id" value="${reply.id }">
-									<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
+									<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 								</form>
 							</div>
 						</div>
@@ -271,7 +298,7 @@ function modifyReplyCancel(el){
 										<form class="reply__btns__delete-form" action="${appUrl }/usr/reply/doDelete">
 											<input type="submit" value="삭제">
 											<input type="hidden" name="id" value="${reply.id }">
-											<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
+											<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 										</form>
 									</div>
 								</c:if>
@@ -284,12 +311,12 @@ function modifyReplyCancel(el){
 					</div>
 		
 					<div class="articleDetailBox__reply-modify">
-						<form name="writeReplyModifyForm" class="articleDetailBox__reply-modifyform" action="../reply/doModify" method="POST" onsubmit="return modifyFormCheck(this);">
+						<form name="writeReplyModifyForm" class="articleDetailBox__reply-modifyform" action="${appUrl}/usr/reply/doModify" method="POST" onsubmit="return modifyFormCheck(this);">
 							<input type="hidden" name="body">
 							<input type="hidden" name="id" value="${reply.id }">
 							<input type="hidden" name="memberId" value="${sessionScope.loginedMemberId }">
 							<input type="hidden" name="articleId" value="${article.id }">
-							<input type="hidden" name="afterWriteReplyUrl" value="${encodedCurrentUrl }">
+							<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 							<div class="writeReplyBodyInput">
 					 			<script type="text/x-template"></script>
 			  					<div class="toast-ui-editor"></div>

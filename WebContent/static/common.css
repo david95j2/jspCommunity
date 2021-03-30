@@ -603,7 +603,7 @@ body {
 
 .status-bar__msg {
   font-weight:bold;
-  font-size:17px;
+  font-size:14px;
   margin-left:12px;
 }
 
@@ -669,7 +669,7 @@ body {
 
   .top-banner-box .txt-box-group > .txt-box-2 {
     text-align:right;
-    font-size:9.6vw;
+    font-size: 8vw;
     font-weight:700;
     opacity:0.1;
     padding-right:6%;
@@ -697,7 +697,7 @@ body {
   }
   
   .top-banner-box .txt-box-group > .txt-box-2 {
-    font-size: 9.6vw;
+    font-size: 8vw;
   }
 }
 
@@ -819,7 +819,7 @@ body {
   }
 
   .blog-info-banner-box > .con > .txt-box > div > .btn-box > .btn-go-to-blog-info {
-    font-size:20px;
+    font-size:1vw;
   }
   
   .blog-info-banner-box > .con > .txt-box > div > .btn-box > .btn-go-to-blog-info:hover {
@@ -903,7 +903,7 @@ body {
 .issue-banner-box > .txt-box > .btn-go-recruit {
   background-color:#FF6E6E;
   padding:18px 30px;
-  font-size:20px;
+  font-size:1vw;
   border-radius:30px;
   display:inline-block;
   color:white;
@@ -1290,10 +1290,10 @@ body {
   padding:5px 0;
 }
 .articleDetailBody__likeBtn > span {
-  font-size:19px;
+  font-size:14px;
 }
 .articleDetailBody__dislikeBtn > span {
-  font-size:19px;
+  font-size:14px;
 }
 /* 좋아요 싫어요 버튼 끝 */
 .articleDetailBox__reply-modifyform__btns{
@@ -1307,8 +1307,6 @@ body {
 
 .submitWriteReply{
   position:relative;
-  left:100%;
-  transform:translateX(-100%);
   margin-top:5px;
   padding:7px;
   font-size:14px;

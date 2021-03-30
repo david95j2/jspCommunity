@@ -130,6 +130,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		req.setAttribute("encodedCurrentUrl",encodedCurrentUrl);
 		
 		Map<String, Object> param = Util.getParamMap(req);
+
 		String paramJson = Util.getJsonText(param);
 		
 		req.setAttribute("paramMap", param);
