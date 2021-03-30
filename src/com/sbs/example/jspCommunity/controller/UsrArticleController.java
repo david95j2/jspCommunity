@@ -111,18 +111,18 @@ public class UsrArticleController extends Controller{
 		boolean isLikedArticle = articleService.isLikedArticle(id, memberId);
 		boolean isDislikedArticle = articleService.isDislikedArticle(id, memberId);
 				
-		List<Reply> replys = replyService.getArticleReplysByArticleId(id);
+		List<Reply> replies = replyService.getArticleReplysByArticleId(id);
 
 		int totalReplyCount = 0;
 
-		if (replys != null) {
-			totalReplyCount = replys.size();
+		if (replies != null) {
+			totalReplyCount = replies.size();
 		}
 
 		req.setAttribute("article", article);
 		req.setAttribute("isLikedArticle", isLikedArticle);
 		req.setAttribute("isDislikedArticle", isDislikedArticle);
-		req.setAttribute("replys", replys);
+		req.setAttribute("replies", replies);
 		req.setAttribute("totalReplyCount", totalReplyCount);
 
 		return "usr/article/detail";

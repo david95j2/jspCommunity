@@ -9,27 +9,13 @@ import com.sbs.example.jspCommunity.dto.Reply;
 public class ReplyService {
 
 	private ReplyDao replyDao;
-	private MemberService memberService;
 
 	public ReplyService() {
 		replyDao = Container.replyDao;
-		memberService = Container.memberService;
 	}
 
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
 		return replyDao.getForPrintReplies(relTypeCode, relId);
-	}
-
-	public Reply getReply(int id) {
-		return replyDao.getReply(id);
-	}
-
-	public boolean actorCanDelete(Reply reply, int actorId) {
-		if (memberService.isAdmin(actorId)) {
-			return true;
-		}
-
-		return reply.getMemberId() == actorId;
 	}
 
 	public int doWriteArticleReply(int articleId, String body, int memberId) {
@@ -40,13 +26,44 @@ public class ReplyService {
 	public List<Reply> getArticleReplysByArticleId(int id) {
 		return replyDao.getArticleReplysByArticleId(id);
 	}
-
+	
+	// 댓글 수정
 	public void doModifyArticleReply(int id, int articleId, String body, int memberId) {
 		replyDao.doModifyArticleReply(id,articleId,body,memberId);
 	}
-
+	
+	// 댓글 삭제
 	public void doDeleteArticleReply(int id, int articleId) {
 		replyDao.doDeleteArticleReply(id,articleId);
 	}
+	
+	public boolean isLikedReply(int id, int memberId) {
+		return replyDao.isLikedReply(id,memberId);
+	}
 
+	public void doDeleteReplyLike(int id, int memberId ) {
+		replyDao.doDeleteReplyLike(id,memberId);
+	}
+
+	public Reply getReplyById(int id) {
+		return replyDao.getReplyById(id);
+	}
+
+	public void doIncreaseReplyLike(int id, int memberId) {
+		replyDao.doIncreaseReplyLike(id,memberId);
+	}
+	
+	public boolean isDisLikedReply(int id, int memberId) {
+		return replyDao.isDisLikedReply(id,memberId);
+	}
+
+	public void doDeleteReplyDisLike(int id, int memberId) {
+		replyDao.doDeleteReplyDisLike(id,memberId);
+		
+	}
+
+	public void doIncreaseReplyDisLike(int id, int memberId) {
+		replyDao.doIncreaseReplyDisLike(id,memberId);
+		
+	}
 }

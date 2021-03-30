@@ -39,31 +39,6 @@ public class ReplyDao {
 
 		return replies;
 	}
-	
-	public Reply getReply(int id) {
-		SecSql sql = new SecSql();
-		sql.append("SELECT R.*");
-		sql.append("FROM reply AS R");
-		sql.append("WHERE 1");
-		sql.append("AND R.id = ?", id);
-
-		Map<String, Object> map = MysqlUtil.selectRow(sql);
-
-		if (map.isEmpty()) {
-			return null;
-		}
-
-		return new Reply(map);
-	}
-
-	public int delete(int id) {
-		SecSql sql = new SecSql();
-		sql.append("DELETE FROM reply");
-		sql.append("WHERE id = ?", id);
-
-		return MysqlUtil.delete(sql);
-	}
-
 
 	public int doWriteArticleReply(int articleId, String body, int memberId) {
 		int newReplyId = 0;
@@ -153,5 +128,116 @@ public class ReplyDao {
 
 		MysqlUtil.update(sql);
 	}
+	
+	public boolean isLikedReply(int id, int memberId) {
 
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM recommend");
+		sql.append("WHERE relId = ? ", id);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND relType = 'reply'");
+		sql.append("AND `point` = 1");
+
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+
+		if (!map.isEmpty()) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public void doDeleteReplyLike(int id, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE FROM recommend");
+		sql.append("WHERE relId = ? ", id);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND relType = 'reply'");
+		sql.append("AND `point` = 1");
+		
+		MysqlUtil.delete(sql);
+	}
+
+	public Reply getReplyById(int id) {
+		
+		Reply reply = null;
+		
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT R.* "
+				+ ",IFNULL(SUM(IF(RC.point > 0 , RC.point , 0)) , 0) AS extra__likeCount"				
+				+ ",IFNULL(SUM(IF(RC.point < 0 , RC.point * -1 , 0)) , 0) AS extra__dislikeCount"
+				+ " FROM reply AS R");
+		sql.append("LEFT JOIN recommend AS RC");
+		sql.append("ON R.id = RC.relId");
+		sql.append("AND RC.relType = 'reply'");
+		sql.append("WHERE R.id = ? ", id);
+		sql.append("GROUP BY R.id");
+		Map<String,Object> map = MysqlUtil.selectRow(sql);
+		
+		if(!map.isEmpty()) {
+			reply = new Reply(map);
+		}
+		
+		return reply;
+				
+	}
+
+	public void doIncreaseReplyLike(int id, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO recommend SET");
+		sql.append("relType = 'reply'");
+		sql.append(",`point` = 1");
+		sql.append(",relId = ?",id);
+		sql.append(",memberId = ?" , memberId);
+		
+		MysqlUtil.update(sql);
+	}
+
+	public boolean isDisLikedReply(int id, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM recommend");
+		sql.append("WHERE relId = ? ", id);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND relType = 'reply'");
+		sql.append("AND `point` = -1");
+
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+
+		if (!map.isEmpty()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public void doDeleteReplyDisLike(int id, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE FROM recommend");
+		sql.append("WHERE relId = ? ", id);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND relType = 'reply'");
+		sql.append("AND `point` = -1");
+		
+		MysqlUtil.delete(sql);
+	}
+
+	public void doIncreaseReplyDisLike(int id, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO recommend SET");
+		sql.append("relType = 'reply'");
+		sql.append(",`point` = -1");
+		sql.append(",relId = ?",id);
+		sql.append(",memberId = ?" , memberId);
+		
+		MysqlUtil.update(sql);
+	}
+	
 }
