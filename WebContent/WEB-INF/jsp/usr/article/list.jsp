@@ -181,7 +181,7 @@
 
 <div class="article-btn-box padding-0-10 con-min-width">
 	<div class="con btn-wrap">
-		<a class="btn btn-primary" href="write?boardId=${param.boardId}">글쓰기</a>
+		<a class="btn hover-link btn-primary" href="write?boardId=${param.boardId}">글쓰기</a>
 	</div>
 </div>
 

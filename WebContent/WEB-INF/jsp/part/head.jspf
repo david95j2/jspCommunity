@@ -248,6 +248,6 @@ window.onpageshow =  function(event) { // BFCahe
 </div>
 <!-- 탑바 끝 -->
 	
-	
-	<main class="body-content">
-		<div>
+<!-- 바디 컨텐트 시작 -->	
+<main class="body-content">
+	<div>

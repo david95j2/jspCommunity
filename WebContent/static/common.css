@@ -265,8 +265,7 @@ label[for] {
 }
 
 .hover-link:hover {
-  text-decoration:underline;
-  color:red;
+  color:#FF6E6E;
 }
 
 .margin-t-8 {
@@ -1118,7 +1117,7 @@ body {
 /* 버튼 끝 */
 
 /* 버튼랩 시작 */
-@media (min-width: 880px) {
+@media (min-width: 881px) {
   .btn-wrap {
     display:flex;
   }
@@ -1127,7 +1126,7 @@ body {
     margin-left:10px;
   }
 }
-@media (max-width: 881px) {
+@media (max-width: 880px) {
   .btn {
     display: block;
     width: 100%;
@@ -1194,7 +1193,7 @@ body {
   margin-left: 10px;
 }
 
-@media ( max-width:881px ) {
+@media ( max-width:880px ) {
   .form-box > form > table > tbody > tr,
   .form-box > form > table > tbody > tr > th,
   .form-box > form > table > tbody > tr > td {
@@ -1243,7 +1242,7 @@ body {
   font-size:15px;
  }
 
-@media (max-width: 881px) {
+@media (max-width: 880px) {
   .detail-box > .con > table > tbody > tr,
   .detail-box > .con > table > tbody > tr > th,
   .detail-box > .con > table > tbody > tr > td {
@@ -1364,12 +1363,12 @@ body {
   transition:all .3s;
 }
 
-@media (max-width:881px){
+@media (max-width:880px){
   .articleDetailBox__articleReplyList__reply-1-pc {
     display:none !important;
   }
 }
-@media (min-width:880px){
+@media (min-width:881px){
   .articleDetailBox__articleReplyList__reply-1-mb {
     display:none !important;
   }
@@ -1439,12 +1438,12 @@ body {
   margin: 0 7px;
   font-family: "S-CoreDream-5Medium";
 }
-@media (max-width: 881px) {
+@media (min-width: 881px) {
   .articleDetailInfo-mb {
     display: none !important;
   }
 }
-@media (min-width: 880px) {
+@media (max-width: 880px) {
   .articleDetailInfo-pc {
     display: none !important;
   }
@@ -1497,13 +1496,13 @@ body {
 .replyreplies-mb{
   font-size:12px;
 }
-@media ( min-width:880px ) {
+@media ( max-width:880px ) {
   .replyreplies-pc{
 	display:none !important;
   }
 }
 
-@media ( max-width:881px ) {
+@media ( min-width:881px ) {
   .replyreplies-mb{
 	display:none !important;
   }

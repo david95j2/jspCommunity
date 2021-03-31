@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		</div>
-	</main>
+	</div>
+</main>
+<!-- 바디 콘텐트 끝 -->
 	
 <!-- 하단 바 시작 -->
 <footer class="bottom-bar con-min-width flex flex-jc-c">
