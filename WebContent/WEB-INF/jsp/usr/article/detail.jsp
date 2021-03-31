@@ -10,6 +10,72 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
+<script>
+function increaseHit(){
+	
+	let memberId = 0;
+	const articleId = ${article.id};
+	
+	if(${loginedMemberId}){
+	memberId = ${loginedMemberId};
+		}
+	
+	const date = new Date();
+	
+	const year = date.getFullYear();
+	const month = new String(date.getMonth());
+	const day = new String(date.getDate());
+	
+	const currentDate = new Date(year,month , day);
+	
+	if( JSON.parse(localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId))){
+		
+		const setYear = JSON.parse(localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId)).date.substr(0,4);
+        const setMonth = JSON.parse(localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId)).date.substr(5,2);
+		const setDay = JSON.parse(localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId)).date.substr(8,2);
+		const setDate = new Date(setYear,setMonth,setDay);
+		
+		if(currentDate.getTime() - setDate.getTime() > 86400000 ){
+			localStorage.removeItem('member_'+ memberId + '_' + 'article_' + articleId);
+			}
+		
+		}
+	
+	if( localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId)) {
+			return;
+		}
+	$.post(
+			"doIncreaseArticleHit",
+			{
+				memberId,
+				articleId
+			},
+			function(data) {
+			if(data.success){
+				$('.articleDetailHitCount').text('조회수 '+data.body.hitCount);
+				}
+			else{
+				}
+			},
+			"json"
+		);
+	const setMonth = new String(date.getMonth() -1);
+	const setDay = new String(date.getDate() +1);
+	
+	const setData = {
+			'memberId' : memberId,
+			'articleId' : ${article.id},
+			'date' : new Date(year,setMonth,setDay)
+			};
+	
+	localStorage.setItem('member_'+ memberId + '_' + 'article_' + articleId , JSON.stringify(setData));
+	
+}
+function countTime(){
+	setTimeout(increaseHit, 10000);
+}
+countTime();
+</script>
 
 <script>
 let DoWriteForm__submited = false;

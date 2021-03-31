@@ -175,15 +175,6 @@ public class ArticleDao {
 
 		return MysqlUtil.selectRowIntValue(sql);
 	}
-
-	public int updateReadCount(int id) {
-		SecSql sql = new SecSql();
-		sql.append("UPDATE article");
-		sql.append("SET hitCount = hitCount+1");
-		sql.append("WHERE id = ?",id);
-
-		return MysqlUtil.update(sql);
-	}
 	
 	public Article getArticleById(int id) {
 		Article article = null;
@@ -214,6 +205,16 @@ public class ArticleDao {
 
 		MysqlUtil.update(sql);
 	}
+	
+	public void doIncreaseArticleHitCount(int articleId, int memberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE article SET");
+		sql.append("hitCount = hitCount + 1");
+		sql.append("WHERE id = ?", articleId);
+
+		MysqlUtil.update(sql);
+	}	
 
 	public boolean isLikedArticle(int id, int memberId) {
 		SecSql sql = new SecSql();
@@ -304,4 +305,5 @@ public class ArticleDao {
 
 		MysqlUtil.delete(sql);
 	}
+
 }

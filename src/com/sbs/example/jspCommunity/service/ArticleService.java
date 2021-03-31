@@ -19,18 +19,10 @@ public class ArticleService {
 	}
 
 	public Article getForPrintArticleById(int id) {
-		int result = articleDao.updateReadCount(id);
-
-		if (result == 1) {
 			return getForPrintArticleById(id, null);
-		} else {
-			return null;
-		}
 	}
 
 	public Article getForPrintArticleById(int id, Member actor) {
-		int result = articleDao.updateReadCount(id);
-		if (result == 1) {
 			Article article = articleDao.getForPrintArticleById(id);
 
 			if (article == null) {
@@ -42,9 +34,6 @@ public class ArticleService {
 			}
 
 			return article;
-		} else {
-			return null;
-		}
 	}
 
 	private void updateInfoForPrint(Article article, Member actor) {
@@ -124,5 +113,10 @@ public class ArticleService {
 	// 싫어요 제거
 	public void removeDislikeArticle(int id, int memberId) {
 		articleDao.removeDislikeArticle(id, memberId);
+	}
+	
+	// 조회수 증가
+	public void doIncreaseArticleHitCount(int articleId, int memberId) {
+		articleDao.doIncreaseArticleHitCount(articleId,memberId);
 	}
 }

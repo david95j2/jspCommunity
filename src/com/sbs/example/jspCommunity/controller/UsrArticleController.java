@@ -319,4 +319,22 @@ public class UsrArticleController extends Controller{
 		return json(request, new ResultData(resultCode, ""));
 	}
 
+	public String doIncreaseArticleHit(HttpServletRequest request, HttpServletResponse response) {
+
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		int articleId = Integer.parseInt(request.getParameter("articleId"));
+
+		articleService.doIncreaseArticleHitCount(articleId, memberId);
+
+		int hitCount = 0;
+		Article article = articleService.getArticleById(articleId);
+
+		hitCount = article.getHitCount();
+
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("hitCount", hitCount);
+
+		return json(request, new ResultData("S-1", "", map));
+	}	
 }
