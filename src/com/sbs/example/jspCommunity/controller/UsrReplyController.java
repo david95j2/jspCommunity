@@ -1,6 +1,7 @@
 package com.sbs.example.jspCommunity.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -130,4 +131,65 @@ public class UsrReplyController extends Controller {
 		return json(request, new ResultData(resultCode, "", map));
 
 	}	
+
+	public String doWriteReplyReply(HttpServletRequest request, HttpServletResponse response) {
+
+		String body = request.getParameter("body");
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		int replyId = Integer.parseInt(request.getParameter("replyId"));
+		String relType = "reply";
+		int articleId = Integer.parseInt(request.getParameter("articleId"));
+		
+		int newReplyId = replyService.doWriteReply(relType, replyId, body, memberId, articleId);
+
+		String afterWriteReplyUrl = request.getParameter("afterWriteReplyUrl");
+		afterWriteReplyUrl = afterWriteReplyUrl.replace("[NEW_REPLY_ID]", newReplyId + "");
+
+		if (Util.isEmpty(request.getParameter("afterWriteReplyUrl")) == false) {
+
+			request.setAttribute("replaceUrl", afterWriteReplyUrl);
+		}
+		
+		return json(request,new ResultData("",""));
+	}
+
+	public String doModifyReplyReply(HttpServletRequest request, HttpServletResponse response) {
+
+		String body = request.getParameter("body");
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		int id = Integer.parseInt(request.getParameter("replyId"));
+
+		replyService.doModifyReplyReply(id, body, memberId);
+
+		String afterWriteReplyUrl = request.getParameter("afterWriteReplyUrl");
+		afterWriteReplyUrl = afterWriteReplyUrl.replace("[NEW_REPLY_ID]", id + "");
+
+		if (Util.isEmpty(request.getParameter("afterWriteReplyUrl")) == false) {
+
+			request.setAttribute("replaceUrl", afterWriteReplyUrl);
+		}
+
+		return json(request,new ResultData("",""));
+
+	}
+
+	public String doDeleteReplyReply(HttpServletRequest request, HttpServletResponse response) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		int articleId = Integer.parseInt(request.getParameter("articleId")); 
+
+		replyService.doDeleteReplyReply(id,articleId);
+
+		if (Util.isEmpty(request.getParameter("afterWriteReplyUrl")) == false) {
+
+			request.setAttribute("replaceUrl", request.getParameter("afterWriteReplyUrl"));
+		}
+
+		return "common/redirect";
+	}
+
+	public String getReplies(HttpServletRequest request, HttpServletResponse response) {		
+		List<Reply> replies = replyService.getReplies();
+		return json(request, new ResultData("S-1","",replies));
+	}
 }

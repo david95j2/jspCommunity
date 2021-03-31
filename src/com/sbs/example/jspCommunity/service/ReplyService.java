@@ -59,11 +59,26 @@ public class ReplyService {
 
 	public void doDeleteReplyDisLike(int id, int memberId) {
 		replyDao.doDeleteReplyDisLike(id,memberId);
-		
 	}
 
 	public void doIncreaseReplyDisLike(int id, int memberId) {
 		replyDao.doIncreaseReplyDisLike(id,memberId);
-		
 	}
+	
+	public List<Reply> getReplies() {
+		return replyDao.getReplies();
+	}
+
+	public int doWriteReply(String relType, int relId, String body, int memberId,int articleId) {
+		return replyDao.doWriteReply(relType,relId,body,memberId,articleId);
+	}
+
+	public void doModifyReplyReply(int id, String body, int memberId) {
+		replyDao.doModifyReplyReply(id,body,memberId);
+	}
+
+	public void doDeleteReplyReply(int id,int articleId) {
+		replyDao.doDeleteReplyReply(id,articleId);
+	}
+	
 }
