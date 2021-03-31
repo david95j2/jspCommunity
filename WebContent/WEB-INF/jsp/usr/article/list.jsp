@@ -142,7 +142,11 @@
 						</td>
 						<td>
 							<a href="${appUrl }/usr/article/detail?id=${article.id}&listUrl=${currentUrl}"
-								class="article-list-box__title article-list-box__title--pc hov-red">${article.title}</a>
+								class="article-list-box__title article-list-box__title--pc hov-red">${article.title}
+								<c:if test="${article.replyCount > 0}">
+									<span style="color: #787878">[${article.replyCount }]</span>
+								</c:if>
+							</a>
 						</td>
 						<td>
 							<span class="article-list-box__writer">${article.extra__writer}</span>
@@ -161,7 +165,11 @@
 								<span class="article-list-box__id article-list-box__id--mobile">${article.id}</span>
 
 								<a href="${appUrl }/usr/article/detail?id=${article.id}&listUrl=${currentUrl}"
-									class="article-list-box__title article-list-box__title--mobile flex-grow-1 hov-red">${article.title}</a>
+									class="article-list-box__title article-list-box__title--mobile flex-grow-1 hov-red">${article.title}
+									<c:if test="${article.replyCount > 0}">
+										<span style="color: #787878">[${article.replyCount }]</span>
+									</c:if>
+								</a>
 							</div>
 
 							<div class="flex">

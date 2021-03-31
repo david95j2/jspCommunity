@@ -27,7 +27,7 @@ public class ArticleDao {
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
 		sql.append("LEFT JOIN `like` AS L");
-		sql.append("ON L.relTypeCode = 'article'");
+		sql.append("ON L.relId = A.id");
 		sql.append("AND A.id = L.relId");
 		
 		if (boardId != 0) {

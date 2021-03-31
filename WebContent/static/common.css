@@ -264,22 +264,12 @@ label[for] {
   padding-right:10px;
 }
 
-.hover-link:hover {
-  color:#FF6E6E;
-}
-
 .margin-t-8 {
   margin-top:8px;
 }
 
 .margin-t-10 {
   margin-top:10px;
-}
-
-.text-ellipsis{
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
 }
 
 /* 라이브러리 - flex */
@@ -424,6 +414,20 @@ label[for] {
   min-width:320px;
 }
 
+.click:hover{
+	cursor:pointer;
+	text-decoration:underline;	
+}
+
+.hover-link:hover {
+  color:#FF6E6E;
+}
+
+.text-ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
 /* 모바일 탑바 시작 */
 .mobile-top-bar {
   position:fixed;

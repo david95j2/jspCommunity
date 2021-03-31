@@ -324,7 +324,7 @@ function doDisLikeReplyBtn(el,id){
 		<!-- 전체 댓글 수 정보 시작 -->
 		<div class="articleDetailBox__articleReplyList__info">
 			<span>전체 댓글 수</span>
-			<span>${totalReplyCount }</span>
+			<span>${article.replyCount }</span>
 		</div>
 		<!-- 전체 댓글 수 정보 끝 -->
 		
@@ -412,6 +412,7 @@ function doDisLikeReplyBtn(el,id){
 											<div class="reply__btns__delete click">
 												<form class="reply__btns__delete-form" action="" onsubmit="if ( confirm('정말 삭제하시겠습니까?') ) {doDeleteArticleReply(this);} return false;">														<input type="submit" value="삭제">
 													<input type="hidden" name="id" value="${reply.id }">
+													<input type="hidden" name="articleId" value="${article.id }">
 													<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 												</form>
 											</div>
@@ -477,6 +478,7 @@ function doDisLikeReplyBtn(el,id){
 												<form class="reply__btns__delete-form" action="${appUrl }/usr/reply/doDelete">
 													<input type="submit" value="삭제">
 													<input type="hidden" name="id" value="${reply.id }">
+													<input type="hidden" name="articleId" value="${article.id }">
 													<input type="hidden" name="afterWriteReplyUrl" value="${currentUrl }">
 												</form>
 											</div>
@@ -525,7 +527,7 @@ function doDisLikeReplyBtn(el,id){
 								<input type="hidden" name="body">
 								<input type="hidden" name="memberId" value="${loginedMemberId }">
 								<input type="hidden" name="replyId" value="${reply.id }">
-								<input type="hidden" name="articleId" value="${reply.relId }">
+								<input type="hidden" name="articleId" value="${article.id }">
 								<input type="hidden" name="afterWriteReplyUrl" value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}">
 								<div class="writeReplyBodyInput">
 									<script type="text/x-template"></script>
@@ -541,7 +543,15 @@ function doDisLikeReplyBtn(el,id){
 		
 						<!-- 대댓글 리스트 시작 -->
 						<div class="flex replyReply-container">
-							<div class="replyreplies__arrow"></div>
+							<c:forEach var="replyReply" items="${replies }">
+								<c:if test="${replyReply.relTypeCode eq 'reply' && replyReply.relId == reply.id}">
+									<c:set var="exists" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:if test="${exists }">
+								<div class="replyreplies__arrow"></div>
+							</c:if>							
+							<c:set var="exists" value="false"></c:set>
 							<div class="flex flex-di-c replyreplies__replyReplyList">
 								<c:forEach var="replyReply" items="${replies }">
 									<c:if test="${replyReply.relTypeCode eq 'reply' && replyReply.relId == reply.id}">
