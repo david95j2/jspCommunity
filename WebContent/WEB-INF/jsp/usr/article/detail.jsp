@@ -652,7 +652,12 @@ function doDisLikeReplyBtn(el,id){
 							'margin-top':'15px'
 						});
 					}
-								
+					
+					function modifyReplyCancel(el){
+						const form = $(el).parents().parents('.articleDetailBox__reply-modify');
+							$(form).css('display','none');
+					}					
+					
 					DoModifyForm__submited = false;
 							
 					function modifyFormCheck(el) {
@@ -672,13 +677,22 @@ function doDisLikeReplyBtn(el,id){
 						}
 									
 						$(el).closest('form').get(0).body.value = body;
-									
+
+						$.get(
+							"${appUrl}/usr/reply/doModifyArticleReply",
+							{
+								body,
+								replyId : $(el).closest('form').get(0).replyId.value,
+								memberId : $(el).closest('form').get(0).memberId.value,
+								articleId : $(el).closest('form').get(0).articleId.value,
+								afterWriteReplyUrl : $(el).closest('form').get(0).afterWriteReplyUrl.value
+							},  function(data) {
+								loadRepliesList();
+							},
+							"json"
+						);					
+						
 						return true;
-					}
-								
-					function modifyReplyCancel(el){
-						const form = $(el).parents().parents('.articleDetailBox__reply-modify');
-							$(form).css('display','none');
 					}
 				</script>		
 						
@@ -707,7 +721,7 @@ function doDisLikeReplyBtn(el,id){
 					<form name="writeReplyReplyForm" class="articleDetailBox__replyReplyForm" action="" method="POST" onsubmit="replyReplyFormCheck(this); return false;">
 						<input type="hidden" name="body">
 						<input type="hidden" name="memberId" value="${loginedMemberId }">
-						<input type="hidden" name="replyId" value="{$RRid}">
+						<input type="hidden" name="replyId" value="{$Rid}">
 						<input type="hidden" name="articleId" value="${article.id }">
 						<input type="hidden" name="afterWriteReplyUrl" value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}">
 						<div class="writeReplyBodyInput">
