@@ -1292,10 +1292,6 @@ body {
 }
 .writeReplyBodyInput {
   position: relative;
-  margin-top:3px;
-  padding:5px;
-  font-size: 15px;
-  font-weight: bold;
 }
 
 /* 좋아요 싫어요 버튼 시작 */

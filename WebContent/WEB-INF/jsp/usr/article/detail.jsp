@@ -393,6 +393,47 @@ function doDisLikeReplyBtn(el,id){
 			<span>${article.replyCount }</span>
 		</div>
 		<!-- 전체 댓글 수 정보 끝 -->
+
+		<script>
+		var replies;
+		
+		function loadRepliesList(){
+			
+		$.get('${appUrl}/usr/reply/getReplies',
+		{
+		
+		}, function(data){
+			for(var i = 0 ; i < data.body.length ; i++){
+			
+			var reply = data.body[i];
+			
+			replaceReply(reply);
+			
+			}
+		},
+		'json'
+		);	
+		
+		}
+		
+		function replaceReply(reply){
+		var html = $('.articleDetailBox__articleReplyList__replies').html();
+		
+		html = replaceAll(html, "${reply.extra__writer }", reply.extra__writer);
+		html = replaceAll(html, "${reply.regDate }", reply.regDate);
+		html = replaceAll(html, "${reply.body }", reply.body);
+		html = replaceAll(html, "${reply.extra__likeCount }", reply.extra__likeCount);
+		html = replaceAll(html, "${reply.extra__dislikeCount }", reply.extra__dislikeCount);
+		
+		replies.prepend(html);
+		}
+		
+		$(function() {
+		replies = $('.articleDetailBox__articleReplyList__replies');
+		
+		loadRepliesList();
+		});
+		</script>		
 		
 		<!-- 댓글 리스트 본문 시작 --> 
 		<div class="articleDetailBox__articleReplyList__replies">
@@ -431,44 +472,8 @@ function doDisLikeReplyBtn(el,id){
 									const form = $(el).parents().parents('.articleDetailBox__reply-reply');
 									$(form).css('display','none');
 								}
-								</script>
 								
-								<script>
-								function modifyFormOpen(el){
-									const form = $(el).parents().parents().siblings('.articleDetailBox__reply-modify');
-									$(form).css({
-										'display':'block',
-										'margin-top':'15px'
-										});
-								}
-								
-								let DoModifyForm__submited = false;
-								function modifyFormCheck(el) {
-									if ( DoModifyForm__submited ) {
-										alert('처리중입니다.');
-										return false;
-									}
-									
-									
-									const editor = $(el).find('.toast-ui-editor').data('data-toast-editor');
-									const body = editor.getMarkdown().trim();
-									
-									if ( body.length == 0 ) {
-										alert('내용을 입력해주세요.');
-										editor.focus();
-										
-										return false;
-									}
-									
-									$(el).closest('form').get(0).body.value = body;
-									
-									return true;
-								}
-								
-								function modifyReplyCancel(el){
-									const form = $(el).parents().parents('.articleDetailBox__reply-modify');
-										$(form).css('display','none');
-								}
+
 								</script>
 									
 								<div class="articleDetailBox__articleReplyList__reply-1-pc__box-2">
@@ -566,6 +571,44 @@ function doDisLikeReplyBtn(el,id){
 						<!-- 댓글 리스트 본문 모바일버전 끝 -->	
 
 						<!-- 댓글 수정 시작 -->
+						<script>
+							function modifyFormOpen(el){
+								const form = $(el).parents().parents().siblings('.articleDetailBox__reply-modify');
+								$(form).css({
+									'display':'block',
+									'margin-top':'15px'
+								});
+							}
+								
+							DoModifyForm__submited = false;
+							
+							function modifyFormCheck(el) {
+								if ( DoModifyForm__submited ) {
+									alert('처리중입니다.');
+									return false;
+								}
+											
+								const editor = $(el).find('.toast-ui-editor').data('data-toast-editor');
+								const body = editor.getMarkdown().trim();
+									
+								if ( body.length == 0 ) {
+									alert('내용을 입력해주세요.');
+									editor.focus();
+										
+									return false;
+								}
+									
+								$(el).closest('form').get(0).body.value = body;
+									
+								return true;
+							}
+								
+							function modifyReplyCancel(el){
+								const form = $(el).parents().parents('.articleDetailBox__reply-modify');
+									$(form).css('display','none');
+							}
+						</script>		
+						
 						<div class="articleDetailBox__reply-modify">
 							<form name="writeReplyModifyForm" class="articleDetailBox__reply-modifyform" action="${appUrl }/usr/reply/doModify"
 							 method="POST" onsubmit="return modifyFormCheck(this);">
@@ -728,7 +771,7 @@ function doDisLikeReplyBtn(el,id){
 											<!-- 대댓글 수정 시작 -->
 											<script>
 											function modifyReplyReplyFormOpen(el){
-											const form = $(el).parents().parents().parents().parents().parents().parents().parents().siblings('.articleDetailBox__replyReply-modify');
+											const form = $(el).parents().parents().parents().parents().parents().siblings('.articleDetailBox__replyReply-modify');
 											$(form).css({
 												'display':'block',
 												'margin-top':'15px'
@@ -794,7 +837,7 @@ function doDisLikeReplyBtn(el,id){
 										 		</form>
 											</div>											
 											<!-- 대댓글 수정 끝 -->											
-											
+
 										</div>
 									</c:if>
 								</c:forEach>

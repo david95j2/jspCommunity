@@ -80,7 +80,6 @@ public class ReplyDao {
 		sql.append("ON R.memberId = M.id");
 		sql.append("LEFT JOIN `like` AS L");
 		sql.append("ON R.id = L.relId");
-		sql.append("WHERE R.relId = ?",id);
 		sql.append("GROUP BY R.id");
 		
 		List<Map<String,Object>> replyMapList = MysqlUtil.selectRows(sql);
@@ -250,14 +249,13 @@ public class ReplyDao {
 		SecSql sql = new SecSql();
 
 		sql.append("SELECT R.* , M.nickName AS extra__writer"
-				+ ",IFNULL(SUM(IF(L.point > 0 , RC.point , 0)) , 0) AS extra__likeCount"
-				+ ",IFNULL(SUM(IF(L.point < 0 , RC.point * -1 , 0)) , 0) AS extra__dislikeCount"
+				+ ",IFNULL(SUM(IF(L.point > 0 , L.point , 0)) , 0) AS extra__likeCount"
+				+ ",IFNULL(SUM(IF(L.point < 0 , L.point * -1 , 0)) , 0) AS extra__dislikeCount"
 				+ " FROM `reply` AS R");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON R.memberId = M.id");
 		sql.append("LEFT JOIN `like` AS L");
 		sql.append("ON R.id = L.relId");
-		sql.append("AND L.relTypeCode = 'reply'");
 		sql.append("GROUP BY R.id");
 
 		List<Map<String, Object>> replyMapList = MysqlUtil.selectRows(sql);
