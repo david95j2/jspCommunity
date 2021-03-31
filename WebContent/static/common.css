@@ -428,6 +428,10 @@ label[for] {
   overflow: hidden;
   text-overflow: ellipsis; 
 }
+
+.template-box{
+	display:none !important;
+}
 /* 모바일 탑바 시작 */
 .mobile-top-bar {
   position:fixed;
