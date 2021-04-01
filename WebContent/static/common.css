@@ -260,6 +260,9 @@ label[for] {
 .font-size-dot-8rem {
   font-size:.8rem;
 }
+.font-size-12p {
+  font-size:12px;
+}
 
 .table-row {
   display:table;

@@ -7,6 +7,49 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
+		<script>
+		setInterval(timeBefore,1000);
+		    function timeBefore(){
+		        //현재시간
+		        var now = new Date(); 
+		        
+		        //글쓴 시간 
+		        var writeDay = new Date('2021-04-02 03:04:59');
+		        
+		        var minus;
+		        if(now.getFullYear() > writeDay.getFullYear()){
+		            minus= now.getFullYear()-writeDay.getFullYear();
+		            document.getElementsByClassName("sub")[0].innerHTML = minus+"년 전";
+		        }else if(now.getMonth() > writeDay.getMonth()){
+		            minus= now.getMonth()-writeDay.getMonth();
+		            document.getElementsByClassName("sub")[0].innerHTML = minus+"달 전";
+		        }else if(now.getDate() > writeDay.getDate()){
+		            minus= now.getDate()-writeDay.getDate();
+		            document.getElementsByClassName("sub")[0].innerHTML = minus+"일 전";
+		        }else if(now.getDate() == writeDay.getDate()){
+		            var nowTime = now.getTime();
+		            var writeTime = writeDay.getTime();
+		            if(nowTime>writeTime){
+		                sec =parseInt(nowTime - writeTime) / 1000;
+		                day  = parseInt(sec/60/60/24);
+		                sec = (sec - (day * 60 * 60 * 24));
+		                hour = parseInt(sec/60/60);
+		                sec = (sec - (hour*60*60));
+		                min = parseInt(sec/60);
+		                sec = parseInt(sec-(min*60));
+		                if(hour>0){
+		                    document.getElementsByClassName("sub")[0].innerHTML = hour+"시간 전";
+		                }else if(min>0){
+		                    document.getElementsByClassName("sub")[0].innerHTML = min+"분 전";
+		                }else if(sec>0){
+		                    document.getElementsByClassName("sub")[0].innerHTML = "방금 전";
+		                }
+		            }
+		        }
+		    }
+		    
+		</script>	
+
 <script>
 function increaseHit(){
 	
@@ -283,7 +326,7 @@ function doDislikeBtn(){
 </div>
 <!-- 게시물 버튼 박스 끝 -->
 
-<div class="title-bar padding-0-10 con-min-width">
+<div class="title-bar padding-0-10 con-min-width font-size-12p">
 	<h1 class="con">
 		<span><i class="fas fa-newspaper"></i></span>
 		<span>댓글</span>
@@ -337,6 +380,7 @@ function doDisLikeReplyBtn(el,id){
 }
 </script>
 
+
 <!-- 댓글 시작 -->
 <div class="con articleDetailBox__reply">
 	
@@ -344,9 +388,9 @@ function doDisLikeReplyBtn(el,id){
 	<c:if test="${isLogined == false }">
 		<div class="flex flex-di-c flex-jc-c flex-ai-c articleDetailBox__reply-isNotLogined">
 			<div class="articleDetailBox__reply-isNotLogined__text">로그인한 회원만 댓글을 작성할 수 있습니다.</div>
-			<c:url value="/usr/member/login" var="url">
-				<c:param name="afterLoginUrl" value="${currentUrl }"/>
-			</c:url>
+				<c:url value="/usr/member/login" var="url">
+					<c:param name="afterLoginUrl" value="${currentUrl }"/>
+				</c:url>
 			<a href="${url }">로그인</a>
 		</div>
 	</c:if>
@@ -538,7 +582,7 @@ function doDisLikeReplyBtn(el,id){
 									<span class="replyDislikeCount">{$RdislikeCount}</span>
 								</div>
 							</div>
-							<div class="reply__regDate">{$RregDate}</div>
+							<div class="reply__regDate sub">{$RregDate}</div>
 						</div>
 								
 						<script>
@@ -925,7 +969,7 @@ function doDisLikeReplyBtn(el,id){
 		<!-- 댓글 실제 -->
 		<div class="articleDetailBox__articleReplyList__replies real">
 		</div>
-		<!-- 댓글 실제 -->		
+		<!-- 댓글 실제 -->	
 		<!-- 댓글 리스트 본문 끝 -->
 	</div>	
 	<!-- 댓글 리스트 끝-->
