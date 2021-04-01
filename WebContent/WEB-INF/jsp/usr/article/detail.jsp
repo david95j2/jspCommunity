@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.example.util.Util"%>
-<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
-
-<%@ page import="com.sbs.example.jspCommunity.dto.Reply"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
@@ -257,6 +254,7 @@ function doDislikeBtn(){
 
 <!-- 게시물 버튼 박스 시작 -->
 <div class="con article-btn-box padding-0-10 con-min-width">
+		<c:if test="${isLogined }">
 		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
 			<c:if test="${isLikedArticle == true }">
 		  		<i class="fas fa-thumbs-up"></i>
@@ -277,6 +275,7 @@ function doDislikeBtn(){
 		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeCount }</span>
 		  	</c:if>
 	  	</div>
+	  	</c:if>
   	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a>
 	<a class="btn btn-info hov-red" href="modify?id=${article.id}">수정</a>
 	<a class="btn btn-danger hov-red" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
@@ -762,7 +761,7 @@ function doDisLikeReplyBtn(el,id){
 															<i class="far fa-thumbs-up"></i>{$RRlikeCount}
 														</div>
 														<div class="{$RRclick}" onclick="{$RRonClick2}">
-															<i class="far fa-thumbs-down"></i>{$RRlikeCount}
+															<i class="far fa-thumbs-down"></i>{$RRdislikeCount}
 														</div>
 													</div>
 													<span class="replyreplies__regDate">{$RRregDate}</span>
