@@ -158,7 +158,7 @@
 							<span class="article-list-box__hit">${article.hitCount}</span>
 						</td>
 						<td>
-							<span class="article-list-box__like">${article.extra__likeOnlyPoint}</span>
+							<span class="article-list-box__like">${article.extra__likeCount}</span>
 						</td>
 						<td class="visible-sm-down">
 							<div class="flex">

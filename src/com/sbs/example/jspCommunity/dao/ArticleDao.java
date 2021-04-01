@@ -18,9 +18,8 @@ public class ArticleDao {
 		sql.append(", M.name AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
-		sql.append(", IFNULL(SUM(L.point), 0) AS extra__likePoint");
-		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra__likeOnlyPoint");
-		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra__dislikeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)) , 0) AS extra__likeCount");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) AS extra__dislikeCount");
 		sql.append("FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
@@ -67,9 +66,8 @@ public class ArticleDao {
 		sql.append(", M.name AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
-		sql.append(", IFNULL(SUM(L.point), 0) AS extra__likePoint");
-		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra__likeOnlyPoint");
-		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra__dislikeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)) , 0) AS extra__likeCount");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) AS extra__dislikeCount");
 		sql.append("FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
@@ -180,12 +178,19 @@ public class ArticleDao {
 		Article article = null;
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT A.* , M.name AS extra__writer , B.name AS extra__boardName FROM article AS A ");
+		sql.append("SELECT A.* , M.name AS extra__writer , B.name AS extra__boardName");
+		sql.append(",IFNULL(SUM(IF(L.point > 0 , L.point , 0)) , 0) AS extra__likeCount");
+		sql.append(",IFNULL(SUM(IF(L.point < 0 , L.point * -1 , 0)) , 0) AS extra__dislikeCount");
+		sql.append(" FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON A.id = L.relId");
+		sql.append("AND L.relTypeCode = 'article'");		
 		sql.append("WHERE A.id = ?", id);
+		sql.append("GROUP BY A.id");
 
 		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
 		if (articleMap != null) {

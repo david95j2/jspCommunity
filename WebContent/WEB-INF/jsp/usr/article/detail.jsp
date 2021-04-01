@@ -191,6 +191,12 @@ function writeFormCheck(el) {
 					</td>
 				</tr>
 				<tr>
+					<th><span>조회수</span></th>
+					<td>
+						<div class="articleDetailHitCount">${article.hitCount}</div>
+					</td>
+				</tr>				
+				<tr>
 					<td colspan="2">
 						<div class="toast-viewer-css">
 							<script type="text/x-template">${article.body}</script>
@@ -217,10 +223,10 @@ function doLikeBtn(){
 			function(data) {
 			if(data.success){
 				$('.articleDetailBody__likeBtn > i').attr('class','fas fa-thumbs-up');
-				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
+				$('.articleDetailInfo-box2__likeCount').text(data.body.likeCount);				
 			} else{
 				$('.articleDetailBody__likeBtn > i').attr('class','far fa-thumbs-up');
-				$('.articleDetailInfo-box2__likeCount').text(data.extra__likeOnlyPoint);				
+				$('.articleDetailInfo-box2__likeCount').text(data.body.likeCount);				
 			  }
 			},
 			"json"
@@ -238,10 +244,10 @@ function doDislikeBtn(){
 			function(data) {
 			if(data.success){
 				$('.articleDetailBody__dislikeBtn > i').attr('class','fas fa-thumbs-down');
-				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
+				$('.articleDetailInfo-box2__dislikeCount').text(data.body.dislikeCount);
 			} else{
 				$('.articleDetailBody__dislikeBtn > i').attr('class','far fa-thumbs-down');
-				$('.articleDetailInfo-box2__dislikeCount').text(data.extra__dislikeOnlyPoint);
+				$('.articleDetailInfo-box2__dislikeCount').text(data.body.dislikeCount);
 			  }
 			},
 			"json"
@@ -254,21 +260,21 @@ function doDislikeBtn(){
 		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
 			<c:if test="${isLikedArticle == true }">
 		  		<i class="fas fa-thumbs-up"></i>
-		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeOnlyPoint }</span>
+		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeCount }</span>
 		  	</c:if>
 			<c:if test="${isLikedArticle == false }">  
 		  		<i class="far fa-thumbs-up"></i>
-		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeOnlyPoint }</span>
+		  		<span class="articleDetailInfo-box2__likeCount">${article.extra__likeCount }</span>
 		  	</c:if>
 	  	</div>
 	  	<div class="btn articleDetailBody__dislikeBtn" onclick="doDislikeBtn();">
 		  	<c:if test="${isLikedArticle == true }">
 		  		<i class="fas fa-thumbs-down"></i>
-		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeOnlyPoint }</span>
+		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeCount }</span>
 		  	</c:if>
 		  	<c:if test="${isLikedArticle == false }">  
 		  		<i class="far fa-thumbs-down"></i>
-		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeOnlyPoint }</span>
+		  		<span class="articleDetailInfo-box2__dislikeCount">${article.extra__dislikeCount }</span>
 		  	</c:if>
 	  	</div>
   	<a class="btn btn-info hov-red" href="${param.listUrl}">리스트</a>
@@ -360,7 +366,7 @@ function doDisLikeReplyBtn(el,id){
 					 <script type="text/x-template"></script>
 			  		 <div class="toast-ui-editor"></div>
 			  	</div>
-			  	<button class="btn-square writeReplyBodyInput">등록</button>
+			  	<button class="btn-square submitWriteReply">등록</button>
 		  	</form>
 		</div>
 	</c:if>
@@ -741,7 +747,7 @@ function doDisLikeReplyBtn(el,id){
 					<div class="flex replyReply-container">
 						<div class="replyreplies__arrow"></div>
 						<div class="flex flex-di-c replyreplies__replyReplyList">
-							<div data-id="{$RRid}" class="targetReply flex replyreplies">
+							<div data-id="{$RRid}" class="targetReply block replyreplies">
 											
 								<!-- 대댓글 리스트 PC버전 시작 -->
 								<div class="flex replyreplies-pc">

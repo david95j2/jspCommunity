@@ -96,8 +96,6 @@ public class UsrArticleController extends Controller{
 
 		req.setAttribute("article", article);
 
-		articleService.doIncreaseArticleHitCount(article);
-
 		article = articleService.getForPrintArticleById(id);
 
 		int memberId = 0;
@@ -113,17 +111,10 @@ public class UsrArticleController extends Controller{
 				
 		List<Reply> replies = replyService.getArticleReplysByArticleId(id);
 
-		int totalReplyCount = 0;
-
-		if (replies != null) {
-			totalReplyCount = replies.size();
-		}
-
 		req.setAttribute("article", article);
 		req.setAttribute("isLikedArticle", isLikedArticle);
 		req.setAttribute("isDislikedArticle", isDislikedArticle);
 		req.setAttribute("replies", replies);
-		req.setAttribute("totalReplyCount", totalReplyCount);
 
 		return "usr/article/detail";
 	}
@@ -283,19 +274,27 @@ public class UsrArticleController extends Controller{
 		int id = Integer.parseInt(request.getParameter("articleId"));
 
 		boolean isLikedArticle = articleService.isLikedArticle(id, memberId);
-
+		int likeCount = 0;
+		Article article = null;
 		String resultCode = null;
-
+		Map<String, Object> map = new HashMap<>();
+		
 		if (isLikedArticle) {
 			articleService.removeLikeArticle(id, memberId);
+			article = articleService.getArticleById(id);
+			likeCount = article.getExtra__likeCount();			
 			resultCode = "F-1";
+			map.put("likeCount", likeCount);			
 		} else {
 			articleService.removeDislikeArticle(id, memberId);
 			articleService.doLikeArticle(id, memberId);
+			article = articleService.getArticleById(id);
+			likeCount = article.getExtra__likeCount();			
 			resultCode = "S-1";
+			map.put("likeCount", likeCount);			
 		}
 
-		return json(request, new ResultData(resultCode, ""));
+		return json(request, new ResultData(resultCode, "", map));
 
 	}
 
@@ -304,19 +303,27 @@ public class UsrArticleController extends Controller{
 		int id = Integer.parseInt(request.getParameter("articleId"));
 
 		boolean isDislikedArticle = articleService.isDislikedArticle(id, memberId);
-
+		int dislikeCount = 0;
+		Article article = null;		
 		String resultCode = null;
-
+		Map<String, Object> map = new HashMap<>();
+		
 		if (isDislikedArticle) {
 			articleService.removeDislikeArticle(id, memberId);
+			article = articleService.getArticleById(id);			
 			resultCode = "F-1";
+			dislikeCount = article.getExtra__dislikeCount();
+			map.put("dislikeCount", dislikeCount);			
 		} else {
 			articleService.removeLikeArticle(id, memberId);
 			articleService.doDislikeArticle(id, memberId);
+			article = articleService.getArticleById(id);
+			dislikeCount = article.getExtra__dislikeCount();			
 			resultCode = "S-1";
+			map.put("dislikeCount", dislikeCount);			
 		}
 
-		return json(request, new ResultData(resultCode, ""));
+		return json(request, new ResultData(resultCode, "", map));
 	}
 
 	public String doIncreaseArticleHit(HttpServletRequest request, HttpServletResponse response) {

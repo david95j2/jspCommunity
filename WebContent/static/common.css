@@ -1,3 +1,39 @@
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 400;
+  src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2")
+      format("woff2"),
+    url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff")
+      format("woff");
+}
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 700;
+  src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2")
+      format("woff2"),
+    url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff")
+      format("woff");
+}
+@font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 300;
+  src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2")
+      format("woff2"),
+    url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff")
+      format("woff");
+}
+@font-face {
+  font-family: "S-CoreDream-5Medium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 폰트 불러오기 끝 */
+
 html {
   /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
   font-family: "Roboto", "Noto Sans KR", sans-serif;
@@ -412,6 +448,13 @@ label[for] {
 
 .con-min-width {
   min-width:320px;
+}
+
+input {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
 }
 
 .click:hover{
@@ -1239,7 +1282,7 @@ body {
   text-align: left;
 }
 
-.detail-box > .con > table > tbody > tr:nth-child(2) {
+.detail-box > .con > table > tbody > tr:nth-child(3) {
   border-bottom:3px solid;
 }
 
@@ -1266,7 +1309,6 @@ body {
 }
 
 /* 댓글 관련 시작 */
-
 
 .articleDetailBox__reply {
   margin-top: 20px;
@@ -1297,17 +1339,8 @@ body {
 .articleDetailBox__reply-form {
   position: relative;
 }
-.writeReplyBodyInput {
-  position: relative;
-}
 
 /* 좋아요 싫어요 버튼 시작 */
-.articleDetailBody__likeBtn > i {
-  padding:5px 0;
-}
-.articleDetailBody__dislikeBtn > i {
-  padding:5px 0;
-}
 .articleDetailBody__likeBtn > span {
   font-size:14px;
 }
@@ -1315,6 +1348,7 @@ body {
   font-size:14px;
 }
 /* 좋아요 싫어요 버튼 끝 */
+
 .articleDetailBox__reply-modifyform__btns{
   margin-top: 15px;
 }
@@ -1326,6 +1360,8 @@ body {
 
 .submitWriteReply{
   position:relative;
+  left:100%;
+  transform:translateX(-100%);
   margin-top:5px;
   padding:7px;
   font-size:14px;
@@ -1393,7 +1429,8 @@ body {
 :root {
   --reply__writer__width: 100px;
   --reply__regDate__width: 150px;
-  --reply__btns__width:80px;
+  --reply__btns-1__width:70px;
+  --reply__btns-2__width:180px;
   --reply__body__width: calc(100% - var(--reply__regDate__width) - var(--reply__writer__width) - var(--reply__btns__width));
 }
 .reply__writer{
@@ -1412,15 +1449,33 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.reply__btns{
-	text-align:center;
-	width:var(--reply__btns__width);
+.reply__btns-1 {
+  text-align:center;
+  width:var(--reply__btns-1__width);
+}
+.reply__btns-2 {
+  text-align:center;
+  width:var(--reply__btns-2__width);
 }
 .reply__btns > div.click:hover {
   cursor:pointer;
   text-decoration:underline;
 }
-
+.reply__btns-mb-1{
+  width:130px;
+	
+}
+.reply__btns-mb-2{
+  width:80px;
+  font-size:15px;
+}
+.reply__btns-mb-2 input{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size:12px !important;
+  font-family:inherit;
+}
 .articleDetailBox__reply-modify{
   display:none;
 }
