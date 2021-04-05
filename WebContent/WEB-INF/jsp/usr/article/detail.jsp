@@ -4,7 +4,7 @@
 <%@ page import="com.sbs.example.util.Util"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
+<c:set var="pageTitle" value="${article.title }" />
 <%@ include file="../../part/head.jspf"%>
 
 <script>
@@ -93,7 +93,7 @@ function increaseHit(){
 		},
 		function(data) {
 			if(data.success){
-				$('.articleDetailHitCount').text('조회수 '+data.body.hitCount);
+				$('.articleDetailHitCount').text(data.body.hitCount);
 			} else{
 				alert('경고.');
 			}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sbs.example.util.Util"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -7,6 +8,42 @@
 <title>${pageTitle}</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="apple-mobile-web-app-title" content="chillax blog" />
+<!-- 메타태그정보 //-->
+<!-- META -->
+<link rel="canonical" href="https://chillax.yadah.kr" />
+<meta name="subject" content="개발자의 기술/일상 블로그"/>
+<meta name="title" content="chillax blog" />
+<meta name="keywords" content="HTML, CSS, JAVASCRIPT, JAVA, SPRING, MySQL, 리눅스, 리액트" />
+<meta name="copyright" content="chillax blog" />
+<meta name="pubdate" content="${Util.getNowDate()}" />
+<meta name="lastmod" content="${Util.getNowDate()}" />
+<!-- OPENGRAPH -->
+<meta property="og:site_name" content="chillax blog" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="개발자의 기술/일상 블로그" />
+<meta property="og:description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:image" content="${pageContext.request.contextPath}/image/blue.jpg" />
+<meta property="og:image:alt" content="chillax.yadah.kr" />
+<meta property="og:image:width" content="486" />
+<meta property="og:image:height" content="324" />
+<meta property="og:updated_time" content="${Util.getNowDate()}"/>
+<meta property="og:pubdate" content="${Util.getNowDate()}" />
+<meta property="og:url" content="https://chillax.yadah.kr" />
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="개발자의 기술/일상 블로그" />
+<meta name="twitter:site" content="@chillax blog" />
+<meta name="twitter:creator" content="@chillax blog" />
+<meta name="twitter:image" content="${pageContext.request.contextPath}/image/blue.jpg">
+<meta name="twitter:description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
+<!-- GOOGLE+ -->
+<meta itemprop="headline" content="chillax blog" />
+<meta itemprop="name" content="chillax blog" />
+<meta itemprop="description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
+<meta itemprop="image" content="${pageContext.request.contextPath}/image/blue.jpg" />
 
 <!-- 유용한 링크 -->
 <!-- cdnsj : https://cdnjs.com/ -->
