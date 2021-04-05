@@ -1196,6 +1196,14 @@ body {
 }
 /* 버튼랩 끝 */
 
+/* toast-ui 시작 */
+.toast-viewer-css {
+    border: 2px solid;
+    min-height: 150px;
+    padding: 0 15px 0 15px;
+}
+/* toast-ui 끝 */
+
 /* 폼박스 시작 */
 .form-box > form {
   display:block;
@@ -1288,35 +1296,37 @@ body {
 .detail-box > .con > table > tbody > tr:nth-child(1) > td {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.detail-box > .con > table > tbody > tr > td > div:nth-child(2) {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div:nth-child(2) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 250px;  
+  width: 250px; 
+  padding-right: 30px; 
 }
 
-.detail-box > .con > table > tbody > tr > td > div > div {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div > div {
   display: flex;
   justify-content: space-between;
   width: 30px;  
 }
 
-.detail-box > .con > table > tbody > tr > td > div > div:nth-child(1) {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div > div:nth-child(1) {
   width: 60px;  
 }
 
-.detail-box > .con > table > tbody > tr > td > div > div > span {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div > div > span {
   font-weight: 700;  
 }
 
-.detail-box > .con > table > tbody > tr > td > div > div > div {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div > div > div {
   display: flex;
   align-items: center;
 }
 
-.detail-box > .con > table > tbody > tr > td > div > div > i {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td > div > div > i {
   display: flex;
   align-items: center;
 }
@@ -1333,7 +1343,7 @@ body {
 .detail-box > .con > table > tbody > tr > td > .toast-viewer-css
  > .toast-ui-viewer > .tui-editor-contents {
   font-size:15px;
- }
+}
 
 @media (max-width: 880px) {
   .detail-box > .con > table > tbody > tr,
@@ -1344,6 +1354,23 @@ body {
 
   .detail-box > .con > table > tbody > tr {
     border-bottom: 1px solid #dfdfdf;
+  }
+  
+  .title-bar {
+    font-size:small;
+  }
+
+  .detail-box > .con > table > tbody > tr > td > .toast-viewer-css
+   > .toast-ui-viewer > .tui-editor-contents {
+    font-size:12px;
+  }
+  
+  .toast-viewer-css {
+    padding: 0 8px !important;
+  }
+  
+  .detail-box > .con > table > tbody > tr:nth-child(1) > td > div:nth-child(2) {
+    width: 180px;
   }
 }
 
@@ -1709,14 +1736,6 @@ body {
   }
 }
 /* 모바일 하단 바 끝 */
-
-/* toast-ui 시작 */
-.toast-viewer-css {
-    border: 2px solid;
-    min-height: 150px;
-    padding: 0 15px 0 15px;
-}
-/* toast-ui 끝 */
 
 /* 커스텀 끝 */
 

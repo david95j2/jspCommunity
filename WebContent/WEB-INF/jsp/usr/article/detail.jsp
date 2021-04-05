@@ -204,14 +204,14 @@ function writeFormCheck(el) {
 	}
 </script>
 
-<div class="title-bar padding-0-10 con-min-width">
+<div class="title-bar con-min-width">
 	<h1 class="con">
 		<span>${article.title}</span>
 	</h1>
 </div>
 
 <!-- 게시물 상세 박스 시작 -->
-<div class="article-detail-box detail-box padding-0-10 con-min-width">
+<div class="article-detail-box detail-box con-min-width">
 	<div class="con">
 		<table>
 			<colgroup>
@@ -304,7 +304,7 @@ function doDislikeBtn(){
 </script>
 
 <!-- 게시물 버튼 박스 시작 -->
-<div class="con article-btn-box padding-0-10 con-min-width">
+<div class="con article-btn-box con-min-width">
 		<c:if test="${isLogined }">
 		<div class="btn articleDetailBody__likeBtn" onclick="doLikeBtn();">
 			<c:if test="${isLikedArticle == true }">
@@ -334,7 +334,7 @@ function doDislikeBtn(){
 </div>
 <!-- 게시물 버튼 박스 끝 -->
 
-<div class="title-bar padding-0-10 con-min-width font-size-12p">
+<div class="title-bar con-min-width font-size-12p">
 	<h1 class="con">
 		<span><i class="fas fa-newspaper"></i></span>
 		<span>댓글</span>
@@ -425,7 +425,9 @@ function doDisLikeReplyBtn(el,id){
 	
 	<!-- 댓글 리스트 시작-->
 	<div class="articleDetailBox__articleReplyList">
-	
+		<c:if test="">
+		
+		</c:if>
 		<!-- 전체 댓글 수 정보 시작 -->
 		<div class="articleDetailBox__articleReplyList__info">
 			<span>전체 댓글 수</span>
