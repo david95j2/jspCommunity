@@ -67,7 +67,7 @@ window.onpageshow =  function(event) { // BFCahe
 <!-- 모바일 탑바 시작 -->
 <div class="mobile-top-bar visible-sm-down flex flex-jc-sb  con-min-width">
   <a href="${appUrl }/usr/home/main" class="logo flex flex-ai-c">
-    <img src="https://storage.cloud.google.com/test_bucket__data/logo.png" alt="">
+    <img src="${pageContext.request.contextPath}/image/logo.png" alt="">
   </a>
 
   <a class="btn-toggle-menu-box-1 flex-as-c"></a>
@@ -149,7 +149,7 @@ window.onpageshow =  function(event) { // BFCahe
   <div class="menu-box-1-sub-menu-bg"></div>
   <div class="con height-100p flex flex-jc-sb">
     <a href="#" class="logo flex flex-ai-c">
-      <img src="https://storage.cloud.google.com/test_bucket__data/logo.png" alt="">
+      <img src="${pageContext.request.contextPath}/image/logo.png" alt="">
     </a>
 
     <nav class="menu-box-1">

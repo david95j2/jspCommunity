@@ -43,7 +43,7 @@
 	<div
 		class="mobile-top-bar visible-sm-down flex flex-jc-sb  con-min-width">
 		<a href="${appUrl }/usr/home/main" class="logo flex flex-ai-c"> <img
-			src="https://storage.cloud.google.com/test_bucket__data/logo.png"
+			src="${pageContext.request.contextPath}/image/logo.png"
 			alt="">
 		</a> <a class="btn-toggle-menu-box-1 flex-as-c"></a>
 
@@ -90,7 +90,7 @@
 		<div class="menu-box-1-sub-menu-bg"></div>
 		<div class="con height-100p flex flex-jc-sb">
 			<a href="#" class="logo flex flex-ai-c"> <img
-				src="https://storage.cloud.google.com/test_bucket__data/logo.png"
+				src="${pageContext.request.contextPath}/image/logo.png"
 				alt="">
 			</a>
 
@@ -177,7 +177,7 @@
 		</div>
 
 		<div class="img-box">
-			<img src="https://storage.cloud.google.com/test_bucket__data/firstImage.jpg" alt="">
+			<img src="${pageContext.request.contextPath}/image/firstImage.jpg" alt="">
 		</div>
 	</div>
 	<!-- 상단배너박스 끝 -->
@@ -199,7 +199,7 @@
 				</div>
 			</div>
 			<div class="img-box">
-				<img src="https://storage.cloud.google.com/test_bucket__data/relax.png" alt="">
+				<img src="${pageContext.request.contextPath}/image/relax.png" alt="">
 			</div>
 		</div>
 	</div>

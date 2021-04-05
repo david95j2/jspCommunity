@@ -7,48 +7,48 @@
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
 <%@ include file="../../part/head.jspf"%>
 
-		<script>
-		setInterval(timeBefore,1000);
-		    function timeBefore(){
-		        //현재시간
-		        var now = new Date(); 
+<script>
+setInterval(timeBefore,1000);
+function timeBefore(){
+	//현재시간
+	var now = new Date(); 
 		        
-		        //글쓴 시간 
-		        var writeDay = new Date('2021-04-02 03:04:59');
+	//글쓴 시간 
+	var writeDay = new Date('2021-04-02 03:04:59');
 		        
-		        var minus;
-		        if(now.getFullYear() > writeDay.getFullYear()){
-		            minus= now.getFullYear()-writeDay.getFullYear();
-		            document.getElementsByClassName("sub")[0].innerHTML = minus+"년 전";
-		        }else if(now.getMonth() > writeDay.getMonth()){
-		            minus= now.getMonth()-writeDay.getMonth();
-		            document.getElementsByClassName("sub")[0].innerHTML = minus+"달 전";
-		        }else if(now.getDate() > writeDay.getDate()){
-		            minus= now.getDate()-writeDay.getDate();
-		            document.getElementsByClassName("sub")[0].innerHTML = minus+"일 전";
-		        }else if(now.getDate() == writeDay.getDate()){
-		            var nowTime = now.getTime();
-		            var writeTime = writeDay.getTime();
-		            if(nowTime>writeTime){
-		                sec =parseInt(nowTime - writeTime) / 1000;
-		                day  = parseInt(sec/60/60/24);
-		                sec = (sec - (day * 60 * 60 * 24));
-		                hour = parseInt(sec/60/60);
-		                sec = (sec - (hour*60*60));
-		                min = parseInt(sec/60);
-		                sec = parseInt(sec-(min*60));
-		                if(hour>0){
-		                    document.getElementsByClassName("sub")[0].innerHTML = hour+"시간 전";
-		                }else if(min>0){
-		                    document.getElementsByClassName("sub")[0].innerHTML = min+"분 전";
-		                }else if(sec>0){
-		                    document.getElementsByClassName("sub")[0].innerHTML = "방금 전";
-		                }
-		            }
-		        }
+	var minus;
+	if(now.getFullYear() > writeDay.getFullYear()){
+		minus= now.getFullYear()-writeDay.getFullYear();
+		document.getElementsByClassName("sub")[0].innerHTML = minus+"년 전";
+	} else if(now.getMonth() > writeDay.getMonth()){
+		minus= now.getMonth()-writeDay.getMonth();
+		document.getElementsByClassName("sub")[0].innerHTML = minus+"달 전";
+	} else if(now.getDate() > writeDay.getDate()){
+		minus= now.getDate()-writeDay.getDate();
+		document.getElementsByClassName("sub")[0].innerHTML = minus+"일 전";
+	} else if(now.getDate() == writeDay.getDate()){
+		var nowTime = now.getTime();
+		var writeTime = writeDay.getTime();
+		
+		if(nowTime>writeTime){
+			sec =parseInt(nowTime - writeTime) / 1000;
+		    day  = parseInt(sec/60/60/24);
+		    sec = (sec - (day * 60 * 60 * 24));
+		    hour = parseInt(sec/60/60);
+		    sec = (sec - (hour*60*60));
+		    min = parseInt(sec/60);
+		    sec = parseInt(sec-(min*60));
+		    if(hour>0) {
+		         document.getElementsByClassName("sub")[0].innerHTML = hour+"시간 전";
+		    } else if(min>0) {
+		         document.getElementsByClassName("sub")[0].innerHTML = min+"분 전";
+		    } else if(sec>0) {
+		         document.getElementsByClassName("sub")[0].innerHTML = "방금 전";
 		    }
-		    
-		</script>	
+		}
+	}
+}
+</script>	
 
 <script>
 function increaseHit(){
@@ -57,8 +57,8 @@ function increaseHit(){
 	const articleId = ${article.id};
 	
 	if(${loginedMemberId}){
-	memberId = ${loginedMemberId};
-		}
+	  memberId = ${loginedMemberId};
+	}
 	
 	const date = new Date();
 	
@@ -77,36 +77,38 @@ function increaseHit(){
 		
 		if(currentDate.getTime() - setDate.getTime() > 86400000 ){
 			localStorage.removeItem('member_'+ memberId + '_' + 'article_' + articleId);
-			}
-		
 		}
+		
+	}
 	
 	if( localStorage.getItem('member_'+ memberId + '_' + 'article_' + articleId)) {
-			return;
-		}
+		return;
+	}
+	
 	$.post(
-			"doIncreaseArticleHit",
-			{
-				memberId,
-				articleId
-			},
-			function(data) {
+		"doIncreaseArticleHit",
+		{
+			memberId,
+			articleId
+		},
+		function(data) {
 			if(data.success){
 				$('.articleDetailHitCount').text('조회수 '+data.body.hitCount);
-				}
-			else{
-				}
-			},
-			"json"
-		);
+			} else{
+				alert('경고.');
+			}
+		},
+		"json"
+	);
+	
 	const setMonth = new String(date.getMonth() -1);
 	const setDay = new String(date.getDate() +1);
 	
 	const setData = {
-			'memberId' : memberId,
-			'articleId' : ${article.id},
-			'date' : new Date(year,setMonth,setDay)
-			};
+		'memberId' : memberId,
+		'articleId' : ${article.id},
+		'date' : new Date(year,setMonth,setDay)
+	};
 	
 	localStorage.setItem('member_'+ memberId + '_' + 'article_' + articleId , JSON.stringify(setData));
 	
