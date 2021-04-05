@@ -940,7 +940,7 @@ body {
 
 .issue-banner-box::before {
   content:"";
-  background-image:url(https://storage.cloud.google.com/test_bucket__data/issue.jfif);
+  background-image:url(../image/blue.jfif);
   background-size:cover;
   background-repeat:no-repeat;
   background-position:center;
@@ -1104,7 +1104,8 @@ body {
   }
 
   .article-list-box__title--mobile {
-    margin-left:5px;
+    text-align: left;
+    margin-left: 10px;
   }
 
   .article-list-box > .con > table > tbody > tr > td.visible-sm-down > .flex:nth-child(2) {

@@ -9,7 +9,7 @@
 <div class="issue-banner-box active-on-visible relative">
   <div class="txt-box absolute-middle absolute-center text-align-center">
     <div class="title">IT Issue <strong>확인하기</strong></div>
-    <a href="#" class="btn-go-recruit">이슈 정보</a>
+    <a href="${appUrl }/usr/article/list?boardId=7" class="btn-go-recruit">이슈 정보</a>
   </div>
 </div>
 <!-- 이슈 배너박스 끝 -->
@@ -161,7 +161,7 @@
 							<span class="article-list-box__like">${article.extra__likeCount}</span>
 						</td>
 						<td class="visible-sm-down">
-							<div class="flex">
+							<div class="flex flex-ai-c">
 								<span class="article-list-box__id article-list-box__id--mobile">${article.id}</span>
 
 								<a href="${appUrl }/usr/article/detail?id=${article.id}&listUrl=${currentUrl}"
@@ -172,7 +172,7 @@
 								</a>
 							</div>
 
-							<div class="flex">
+							<div class="flex flex-ai-c">
 								<span
 									class="article-list-box__writer article-list-box__writer--mobile">${article.extra__writer}</span>
 								<span>|</span>

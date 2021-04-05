@@ -124,7 +124,7 @@
 
 			<div class="status-bar flex">
 				<div class="flex flex-ai-c">
-					<ul class="flex">
+					<ul class="flex flex-ai-c">
 						<c:if test="${isLogined == false}">
 							<li class="login">
 								<a href="${appUrl }/usr/member/login">
@@ -194,7 +194,7 @@
 						생각을 통해 새로운 지식으로 발견합니다.
 					</div>
 					<div class="btn-box">
-						<a href="#" class="btn-go-to-blog-info">게시판 바로가기</a>
+						<a href="${appUrl }/usr/article/list?boardId=1" class="btn-go-to-blog-info">게시판 바로가기</a>
 					</div>
 				</div>
 			</div>
@@ -212,7 +212,7 @@
 			<div class="title">
 				IT Issue <strong>확인하기</strong>
 			</div>
-			<a href="#" class="btn-go-recruit">이슈 정보</a>
+			<a href="${appUrl }/usr/article/list?boardId=7" class="btn-go-recruit">이슈 정보</a>
 		</div>
 	</div>
 	<!-- 이슈모집배너박스 끝 -->

@@ -148,7 +148,7 @@ window.onpageshow =  function(event) { // BFCahe
 <div class="top-bar visible-md-up">
   <div class="menu-box-1-sub-menu-bg"></div>
   <div class="con height-100p flex flex-jc-sb">
-    <a href="#" class="logo flex flex-ai-c">
+    <a href="${appUrl }/usr/home/main" class="logo flex flex-ai-c">
       <img src="${pageContext.request.contextPath}/image/logo.png" alt="">
     </a>
 
@@ -210,7 +210,7 @@ window.onpageshow =  function(event) { // BFCahe
     
     <div class="status-bar flex">
       <div class="flex flex-ai-c">
-        <ul class="flex">
+        <ul class="flex flex-ai-c">
           <c:if test="${isLogined == false}">
             <li class="login">
               <a href="${appUrl }/usr/member/login">
