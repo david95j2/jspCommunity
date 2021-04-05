@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.sbs.example.util.Util"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<title>${pageTitle}</title>
+<title>개발자의 기술/일상 블로그</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +26,7 @@
 <meta property="og:title" content="개발자의 기술/일상 블로그" />
 <meta property="og:description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:image" content="${pageContext.request.contextPath}/image/blue.jpg" />
+<meta property="og:image" content="https://storage.googleapis.com/test_bucket__data/site.PNG" />
 <meta property="og:image:alt" content="chillax.yadah.kr" />
 <meta property="og:image:width" content="486" />
 <meta property="og:image:height" content="324" />
@@ -37,13 +38,13 @@
 <meta name="twitter:title" content="개발자의 기술/일상 블로그" />
 <meta name="twitter:site" content="@chillax blog" />
 <meta name="twitter:creator" content="@chillax blog" />
-<meta name="twitter:image" content="${pageContext.request.contextPath}/image/blue.jpg">
+<meta name="twitter:image" content="https://storage.googleapis.com/test_bucket__data/site.PNG">
 <meta name="twitter:description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
 <!-- GOOGLE+ -->
 <meta itemprop="headline" content="chillax blog" />
 <meta itemprop="name" content="chillax blog" />
 <meta itemprop="description" content="개발자의 기술/일상 관련 글들을 공유합니다." />
-<meta itemprop="image" content="${pageContext.request.contextPath}/image/blue.jpg" />
+<meta itemprop="image" content="https://storage.googleapis.com/test_bucket__data/site.PNG" />
 
 <!-- 유용한 링크 -->
 <!-- cdnsj : https://cdnjs.com/ -->
@@ -59,10 +60,9 @@
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/image/favicon.ico">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/home.css" />
 <script src="${pageContext.request.contextPath}/static/home2.js" defer></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 </head>
 
