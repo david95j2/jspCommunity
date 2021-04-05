@@ -96,28 +96,7 @@ EditorViewer__init();
 Editor__init();
 /* 토스트에디터 끝 */
 
-function MobileTopBar__init() {
-	$('.mobile-top-bar__btn-toggle-mobile-side-bar').click(function() {
-		if ( $(this).hasClass('active') ) {
-			MobileTopBar__hide();
-		}
-		else {
-			MobileTopBar__show();
-		}
-	});
-}
 
-function MobileTopBar__show() {
-	$('.mobile-top-bar__btn-toggle-mobile-side-bar').addClass('active');
-	$('html').addClass('mobile-side-bar-actived');
-}
-
-function MobileTopBar__hide() {
-	$('.mobile-top-bar__btn-toggle-mobile-side-bar').removeClass('active');
-	$('html').removeClass('mobile-side-bar-actived');
-}
-
-MobileTopBar__init();
 
 function iOS() {
 	return [ 'iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod' ].includes(navigator.platform)
