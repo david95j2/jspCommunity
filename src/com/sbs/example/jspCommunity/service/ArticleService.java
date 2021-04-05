@@ -78,11 +78,6 @@ public class ArticleService {
 		return articleDao.getArticleById(id);
 	}
 
-	// 조회수 증가
-	public void doIncreaseArticleHitCount(Article article) {
-		articleDao.doIncreaseArticleHitCount(article);
-	}
-
 	// 좋아요 처리 확인
 	public boolean isLikedArticle(int id, int memberId) {
 		return articleDao.isLikedArticle(id, memberId);

@@ -198,18 +198,6 @@ public class ArticleDao {
 		}
 		return article;
 	}
-
-	public void doIncreaseArticleHitCount(Article article) {
-		SecSql sql = new SecSql();
-
-		int hitCount = article.getHitCount();
-
-		sql.append("UPDATE article SET");
-		sql.append("hitCount = ?", hitCount + 1);
-		sql.append("WHERE id = ?", article.getId());
-
-		MysqlUtil.update(sql);
-	}
 	
 	public void doIncreaseArticleHitCount(int articleId, int memberId) {
 		SecSql sql = new SecSql();
