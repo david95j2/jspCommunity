@@ -222,6 +222,20 @@ function writeFormCheck(el) {
 					<th><span>작성날짜</span></th>
 					<td>
 						<div>${article.regDate}</div>
+						<div>
+							<div>
+								<span>조회수</span>
+								<div class="articleDetailHitCount">${article.hitCount}</div>
+							</div>
+							<div>
+								<i class="fas fa-thumbs-up"></i>
+								<div>${article.extra__likeCount}</div>
+							</div>
+							<div>
+								<i class="fas fa-thumbs-down"></i>
+								<div>${article.extra__dislikeCount}</div>
+							</div>
+						</div>						
 					</td>
 				</tr>
 				<tr>
@@ -229,13 +243,7 @@ function writeFormCheck(el) {
 					<td>
 						<div>${article.extra__writer}</div>
 					</td>
-				</tr>
-				<tr>
-					<th><span>조회수</span></th>
-					<td>
-						<div class="articleDetailHitCount">${article.hitCount}</div>
-					</td>
-				</tr>				
+				</tr>			
 				<tr>
 					<td colspan="2">
 						<div class="toast-viewer-css">

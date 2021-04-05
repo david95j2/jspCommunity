@@ -1285,7 +1285,43 @@ body {
   text-align: left;
 }
 
-.detail-box > .con > table > tbody > tr:nth-child(3) {
+.detail-box > .con > table > tbody > tr:nth-child(1) > td {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-box > .con > table > tbody > tr > td > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;  
+}
+
+.detail-box > .con > table > tbody > tr > td > div > div {
+  display: flex;
+  justify-content: space-between;
+  width: 30px;  
+}
+
+.detail-box > .con > table > tbody > tr > td > div > div:nth-child(1) {
+  width: 60px;  
+}
+
+.detail-box > .con > table > tbody > tr > td > div > div > span {
+  font-weight: 700;  
+}
+
+.detail-box > .con > table > tbody > tr > td > div > div > div {
+  display: flex;
+  align-items: center;
+}
+
+.detail-box > .con > table > tbody > tr > td > div > div > i {
+  display: flex;
+  align-items: center;
+}
+
+.detail-box > .con > table > tbody > tr:nth-child(2) {
   border-bottom:3px solid;
 }
 

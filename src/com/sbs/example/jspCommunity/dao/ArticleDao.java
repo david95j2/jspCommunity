@@ -15,7 +15,7 @@ public class ArticleDao {
 
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
-		sql.append(", M.name AS extra__writer");
+		sql.append(", M.nickname AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
 		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)) , 0) AS extra__likeCount");
@@ -63,7 +63,7 @@ public class ArticleDao {
 	public Article getForPrintArticleById(int id) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
-		sql.append(", M.name AS extra__writer");
+		sql.append(", M.nickname AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
 		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)) , 0) AS extra__likeCount");
@@ -178,7 +178,7 @@ public class ArticleDao {
 		Article article = null;
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT A.* , M.name AS extra__writer , B.name AS extra__boardName");
+		sql.append("SELECT A.* , M.nickname AS extra__writer , B.name AS extra__boardName");
 		sql.append(",IFNULL(SUM(IF(L.point > 0 , L.point , 0)) , 0) AS extra__likeCount");
 		sql.append(",IFNULL(SUM(IF(L.point < 0 , L.point * -1 , 0)) , 0) AS extra__dislikeCount");
 		sql.append(" FROM article AS A");
