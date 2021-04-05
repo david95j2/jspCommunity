@@ -798,7 +798,7 @@ body {
 
 .issue-banner-box::before {
   content:"";
-  background-image:url(https://storage.cloud.google.com/test_bucket__data/issue.jfif);
+  background-image:url(../image/issue.jpg);
   background-size:cover;
   background-repeat:no-repeat;
   background-position:center;

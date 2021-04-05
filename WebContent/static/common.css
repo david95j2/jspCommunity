@@ -940,7 +940,7 @@ body {
 
 .issue-banner-box::before {
   content:"";
-  background-image:url(../image/blue.jfif);
+  background-image:url(../image/blue.jpg);
   background-size:cover;
   background-repeat:no-repeat;
   background-position:center;
