@@ -27,12 +27,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Util {	
-
-	public static String getNowDate() {
-		new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-		String currentDate = Util.getNowDateStr().replace(" ", "T");
-		return currentDate;
-	}	
 	
 	public static Map getJsonMapFromFile(InputStream is) {
 		ObjectMapper mapper = new ObjectMapper();

@@ -17,8 +17,8 @@
 <meta name="title" content="chillax blog" />
 <meta name="keywords" content="HTML, CSS, JAVASCRIPT, JAVA, SPRING, MySQL, 리눅스, 리액트" />
 <meta name="copyright" content="chillax blog" />
-<meta name="pubdate" content="${Util.getNowDate()}" />
-<meta name="lastmod" content="${Util.getNowDate()}" />
+<meta name="pubdate" content="${Util.getNowDateStr()}" />
+<meta name="lastmod" content="${Util.getNowDateStr()}" />
 <!-- OPENGRAPH -->
 <meta property="og:site_name" content="chillax blog" />
 <meta property="og:type" content="website" />
@@ -29,8 +29,8 @@
 <meta property="og:image:alt" content="chillax.yadah.kr" />
 <meta property="og:image:width" content="486" />
 <meta property="og:image:height" content="324" />
-<meta property="og:updated_time" content="${Util.getNowDate()}"/>
-<meta property="og:pubdate" content="${Util.getNowDate()}" />
+<meta property="og:updated_time" content="${Util.getNowDateStr()}"/>
+<meta property="og:pubdate" content="${Util.getNowDateStr()}" />
 <meta property="og:url" content="https://chillax.yadah.kr" />
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image" />
