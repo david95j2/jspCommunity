@@ -145,9 +145,6 @@ window.onpageshow =  function(event) { // BFCahe
           <li>
             <a href="${appUrl }/usr/article/list?boardId=5">Spring</a>
           </li>
-          <li>
-            <a href="${appUrl }/usr/article/list?boardId=6">Big Data</a>
-          </li>
         </ul>
       </li>
       <li>
@@ -215,9 +212,6 @@ window.onpageshow =  function(event) { // BFCahe
             </li>
             <li>
               <a href="${appUrl }/usr/article/list?boardId=5">Spring</a>
-            </li>
-            <li>
-              <a href="${appUrl }/usr/article/list?boardId=6">Big Data</a>
             </li>
           </ul>
         </li>

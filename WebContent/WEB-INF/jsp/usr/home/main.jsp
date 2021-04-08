@@ -102,7 +102,6 @@
 						<li><a href="${appUrl }/usr/article/list?boardId=3">JavaScript</a></li>
 						<li><a href="${appUrl }/usr/article/list?boardId=4">VUE</a></li>
 						<li><a href="${appUrl }/usr/article/list?boardId=5">Spring</a></li>
-						<li><a href="${appUrl }/usr/article/list?boardId=6">Big Data</a></li>
 					</ul></li>
 				<li><a>About Me</a>
 					<ul>
@@ -144,7 +143,6 @@
 							<li><a href="${appUrl }/usr/article/list?boardId=3">JavaScript</a></li>
 							<li><a href="${appUrl }/usr/article/list?boardId=4">Vue</a></li>
 							<li><a href="${appUrl }/usr/article/list?boardId=5">Spring</a></li>
-							<li><a href="${appUrl }/usr/article/list?boardId=6">Big Data</a></li>
 						</ul></li>
 					<li><a class="flex flex-ai-c height-100p">About Me</a>
 						<ul>
