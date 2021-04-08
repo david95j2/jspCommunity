@@ -1101,6 +1101,7 @@ body {
     padding:0 7px;
     border-radius:10px;
     align-self:flex-start;
+    margin-top:3px;
   }
 
   .article-list-box__title--mobile {
