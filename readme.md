@@ -17,13 +17,14 @@
 - [x] 한방배포
 - [x] 댓글
 - [x] 댓글, ajax화
+- [x] 대댓글
+- [x] 게시물 블라인드
+
 
 # 당장 할일 리스트
-- [ ] 게시물 블라인드
 - [ ] 내 글에 새 댓글 알림
 - [ ] 내 댓글에 추가 댓글 알림
 - [ ] 댓글멘션
-- [ ] 대댓글
 
 # 추후 할일 리스트
 - [ ] 태그
@@ -47,5 +48,7 @@
 </settings>
 ```
 
-
-
+# 주요 명령어
+- DB export
+    - cmd 접속
+    - c:\xampp\mysql\bin\mysqldump.exe --databases -u sbsst -p jspCommunity > C:\work\sts-4.9.0.RELEASE-workspace\jspCommunity\current.sql
