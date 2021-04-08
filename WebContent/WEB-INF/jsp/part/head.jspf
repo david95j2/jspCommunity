@@ -73,6 +73,9 @@
 <!-- 토스트 UI 끝 -->
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/favicon.ico">
 
+<!-- Vue.js 개발버전, 도움되는 콘솔 경고를 포함. -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/common.css" />
 <script src="${pageContext.request.contextPath}/static/common.js" defer></script>
