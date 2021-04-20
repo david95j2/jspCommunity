@@ -97,7 +97,7 @@ window.onpageshow =  function(event) { // BFCahe
 	<c:if test="${waringPw == null}">
 		<div class="pwWaringBox">
 			<div class="pwWaringBox-context">
-				<span>현재 임시비밀번호를 사용중입니다. 비밀번호를 변경해주세요</span>
+				<span>현재 임시비밀번호를 사용중입니다. <a href="${appUrl }/usr/member/modify" class="pwWaringBox-context__text">비밀번호</a>를 변경해주세요</span>
 			</div>
 		</div>
 	</c:if>

@@ -352,6 +352,17 @@ label[for] {
 }
 
 /* 모바일 탑바 시작 */
+.pwWaringBox-context {
+  background-color: red;
+  text-align: center;
+  font-weight: bold;
+}
+
+.pwWaringBox-context__text:hover {
+  color:white;
+  text-decoration: underline;
+}
+
 .mobile-top-bar {
   position:fixed;
   top:0;

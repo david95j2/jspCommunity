@@ -481,6 +481,17 @@ input {
 .dp-none{
 	display:none !important;
 }
+
+.pwWaringBox-context {
+  background-color: red;
+  text-align: center;
+  font-weight: bold;
+}
+
+.pwWaringBox-context__text:hover {
+  color:white;
+  text-decoration: underline;
+}
 /* 모바일 탑바 시작 */
 .mobile-top-bar {
   position:fixed;
