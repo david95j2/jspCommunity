@@ -281,7 +281,7 @@ public class UsrMemberController extends Controller {
 		memberService.modify(modifyParam);
 
 		if (loginPw != null) {
-			memberService.setIsUsingTempPassword(loginedMemberId, false);
+			Container.attrService.remove("member__"+ loginedMemberId+"__extra__isUsingTempPassword");
 		}
 
 		return msgAndReplace(req, "회원정보가 수정되었습니다.", "../home/main");
