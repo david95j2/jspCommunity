@@ -94,9 +94,66 @@
 		DoModifyForm__submited = true;
 	}
 	</script>
+	<script>
+	function doMailAuth(){
+		const memberId = ${loginedMemberId};
+		const authCode = "${param.authCode}";
+		$.post(
+			"${appUrl}/usr/member/doMailAuth",
+			{
+				memberId,
+				authCode
+			},
+			function(data) {
+				if(data.success){
+					alert("메일이 발송되었습니다.");
+					$('.btn-mail').contents().unwrap().wrap('<span class="examined-text" style="color:red">메일을 확인해주세요.</span>');
+    				$('span').remove('.temp-text');
+				} else {
+					alert("메일 발송이 실패하였습니다.");
+				}
+			},
+			"json"
+		);
+	}
+	
+    $(function () {
+    	const memberId = ${loginedMemberId};
+    	const memberEmail = "${loginedMember.getEmail()}";
+    	
+    	$("#email-input-box").on("change", function () {
+        	msg = "변경된 이메일로 인증메일이 발송됩니다.";
+            if (confirm(msg)!=0) {
+                // Yes click
+                const email = $("#email-input-box").val();
+            	$.post(
+            		"${appUrl}/usr/member/doReissuanceAuthCode",
+            		{
+            			memberId,
+            			email
+            		},
+            		function(data) {
+            			if(data.success){
+            				alert('메일이 발송되었습니다.');
+            				$('.btn-mail').contents().unwrap().wrap('<span class="examined-text" style="color:red">메일을 확인해주세요.</span>');
+            				$('span').remove('.temp-text');
+            			} else {
+            				alert('메일 발송이 실패하였습니다.');
+            			}
+            		},
+            		"json"
+            	);
+            } else {
+                // no click
+            	$("#email-input-box").val(memberEmail);
+    		}
+        });
+    });
+	</script>
 	<form class="con" action="doModify" method="POST"
 		onsubmit="DoModifyForm__submit(this); return false;">
 		<input type="hidden" name="loginPwReal" />
+		<input type="hidden" name="authCode" />
 		<table>
 			<colgroup>
 				<col width="150">
@@ -165,8 +222,15 @@
 					</th>
 					<td>
 						<div>
-							<input name="email" type="email" maxlength="100"
+							<input id="email-input-box" name="email" type="email" maxlength="100"
 								placeholder="이메일을 입력해주세요." value="${loginedMember.email}" />
+							<c:if test="${isExamined == 0}">
+								<button class="btn btn-mail" onclick="doMailAuth()"
+										name="authCode" type="button" value=""><span class="temp-text">이메일 인증</span></button>
+							</c:if>
+							<c:if test="${isExamined == 1}">
+								<span class="examined-text">인증된 메일</span>
+							</c:if>
 						</div>
 					</td>
 				</tr>
@@ -190,9 +254,12 @@
 					<td>
 						<div>
 							<div class="btn-wrap">
-								<input class="btn btn-primary" type="submit" value="수정" />
-								<button class="btn btn-info" type="button"
-									onclick="history.back();">뒤로가기</button>
+								<div style="flex : auto;">
+									<input class="btn btn-primary" type="submit" value="수정" />
+									<button class="btn btn-info" type="button" onclick="history.back();">뒤로가기</button>
+								</div>
+								<a class="btn btn-delete-myAccount" href="${appUrl }/usr/member/showCheckLoginPw?listUrl=${currentUrl}"
+								 onclick="return confirm('계정을 삭제하시겠습니까?');">계정 삭제</a>
 							</div>
 						</div>
 					</td>

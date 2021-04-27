@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.URLDataSource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.ResultData;
+import com.sbs.example.jspCommunity.service.AttrService;
 import com.sbs.example.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
 
@@ -20,7 +22,7 @@ public class UsrMemberController extends Controller {
 	public UsrMemberController() {
 		memberService = Container.memberService;
 	}
-
+	
 	public String showList(HttpServletRequest req, HttpServletResponse resp) {
 		List<Member> members = memberService.getForPrintMembers();
 
@@ -28,7 +30,11 @@ public class UsrMemberController extends Controller {
 
 		return "usr/member/list";
 	}
-
+	
+	public String showMine(HttpServletRequest req, HttpServletResponse resp) {
+		return "usr/member/mypage";
+	}
+	
 	public String showJoin(HttpServletRequest req, HttpServletResponse resp) {
 		return "usr/member/join";
 	}
@@ -234,38 +240,37 @@ public class UsrMemberController extends Controller {
 	}
 
 	public String showModify(HttpServletRequest req, HttpServletResponse resp) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		int isExamined = memberService.getMemberById(loginedMemberId).getAuthStatus();
+		req.setAttribute("isExamined", isExamined);
+		
 		return "usr/member/modify";
 	}
 
 	public String doModify(HttpServletRequest req, HttpServletResponse resp) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-
+		
 		String loginPw = req.getParameter("loginPwReal");
-
 		if (loginPw != null && loginPw.length() == 0) {
 			loginPw = null;
 		}
 
 		String name = req.getParameter("name");
-
 		if (Util.isEmpty(name)) {
 			return msgAndBack(req, "이름을 입력해주세요.");
 		}
 
 		String nickname = req.getParameter("nickname");
-
 		if (Util.isEmpty(nickname)) {
 			return msgAndBack(req, "별명을 입력해주세요.");
 		}
 
 		String email = req.getParameter("email");
-
 		if (Util.isEmpty(email)) {
 			return msgAndBack(req, "이메일을 입력해주세요.");
 		}
 
 		String cellphoneNo = req.getParameter("cellphoneNo");
-
 		if (Util.isEmpty(cellphoneNo)) {
 			return msgAndBack(req, "휴대 전화번호를 입력해주세요.");
 		}
@@ -285,5 +290,99 @@ public class UsrMemberController extends Controller {
 		}
 
 		return msgAndReplace(req, "회원정보가 수정되었습니다.", "../home/main");
+	}
+	
+	public String showCheckLoginPw(HttpServletRequest req, HttpServletResponse resp) {
+		return "usr/member/checkLoginPw";
+	}
+	
+	public String doCheckLoginPw(HttpServletRequest req, HttpServletResponse resp) {
+		String loginPw = req.getParameter("loginPwReal");
+		if (Util.isEmpty(loginPw)) {
+			return msgAndBack(req, "비밀번호를 입력해주세요.");
+		}
+		
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = memberService.getMemberById(loginedMemberId);
+		
+
+		
+		if (loginedMember.getLoginPw().equals(loginPw)) {
+			String url = req.getParameter("url");
+			if (url.contains("/showMine")) {
+				String authCode = memberService.getAuthCode(loginedMemberId);
+				return msgAndReplace(req, "확인되었습니다.", "../member/modify?authCode="+authCode+"");
+			} else if (url.contains("/modify")) {
+				HttpSession session = req.getSession();
+				session.removeAttribute("loginedMemberId");
+				memberService.removeMember(loginedMemberId);
+				return msgAndReplace(req, "계정이 삭제되었습니다.", "../home/main");
+			}
+		}
+		return msgAndBack(req, "비밀번호가 일치하지 않습니다.");
+	}
+	
+	public String doMailAuth(HttpServletRequest req, HttpServletResponse resp) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+		
+		String resultCode = null;
+		Map<String, Object> map = new HashMap<>();
+		
+		String authCode = req.getParameter("authCode");
+		
+		memberService.sendAuthCodeToEmail(member.getId(), authCode, member.getEmail());
+		
+		if(memberService.isValidAuthCode(loginedMemberId,authCode)==true) {
+			resultCode = "S-1";
+			map.put("authCode", authCode);
+		} else {
+			resultCode = "F-1";
+			map.put("authCode", authCode);
+		}
+		return json(req, new ResultData(resultCode, "", map));
+	}
+	
+	public String doCheckByEmail(HttpServletRequest req, HttpServletResponse resp) {
+		String email = req.getParameter("email");
+		String code = req.getParameter("code");
+		int memberId = Util.getInt(req, "memberId");
+		
+		boolean codeConfirm = memberService.isLoginCodeConfirm(memberId,code,email);
+		
+		if (codeConfirm == false) {
+			return msgAndBack(req, "인증에 실패하였습니다.");
+		}
+		
+		return msgAndReplace(req, "인증되었습니다.","../member/modify");
+	}
+	
+	public String doReissuanceAuthCode(HttpServletRequest req, HttpServletResponse resp) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member member = memberService.getMemberById(loginedMemberId);
+		String email = req.getParameter("email");
+		
+		memberService.resetAuthStatus(loginedMemberId);
+		Container.attrService.remove("member__"+loginedMemberId+"__extra__emailAuthed");
+		
+		Map<String, Object> modifyParam = new HashMap<>();
+		modifyParam.put("email", email);
+		modifyParam.put("id", loginedMemberId);
+		
+		memberService.modify(modifyParam);
+		int resultData = memberService.doReissuanceAuthCode(member.getId(), email);
+
+		String resultCode = null;
+		Map<String, Object> map = new HashMap<>();
+		
+		if (resultData == -1) {
+			resultCode = "F-1";
+			map.put("resultCode", resultCode);
+		} else {
+			resultCode = "S-1";
+			map.put("resultCode", resultCode);
+		}
+		
+		return json(req, new ResultData(resultCode, "", map));
 	}
 }

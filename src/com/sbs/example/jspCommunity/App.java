@@ -20,7 +20,7 @@ public class App {
 	}
 
 	public static String getSiteName() {
-		return "Chillax";
+		return "CHILLAX";
 	}
 
 	public static String getContextName() {

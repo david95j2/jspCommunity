@@ -11,18 +11,18 @@ public class AttrService {
 		attrDao = Container.attrDao;
 	}
 
-	public Attr get(String name) {
+	public Attr get(String name, String authCode) {
 		String[] nameBits = name.split("__");
 		String relTypeCode = nameBits[0];
 		int relId = Integer.parseInt(nameBits[1]);
 		String typeCode = nameBits[2];
 		String type2Code = nameBits[3];
 
-		return get(relTypeCode, relId, typeCode, type2Code);
+		return get(relTypeCode, relId, typeCode, type2Code, authCode);
 	}
 
-	public Attr get(String relTypeCode, int relId, String typeCode, String type2Code) {
-		return attrDao.get(relTypeCode, relId, typeCode, type2Code);
+	public Attr get(String relTypeCode, int relId, String typeCode, String type2Code, String authCode) {
+		return attrDao.get(relTypeCode, relId, typeCode, type2Code, authCode);
 	}
 
 	public int setValue(String name, String value, String expireDate) {
@@ -71,7 +71,7 @@ public class AttrService {
 
 	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value, String expireDate) {
 		attrDao.setValue(relTypeCode, relId, typeCode, type2Code, value, expireDate);
-		Attr attr = get(relTypeCode, relId, typeCode, type2Code);
+		Attr attr = get(relTypeCode, relId, typeCode, type2Code, null);
 
 		if (attr != null) {
 			return attr.getId();

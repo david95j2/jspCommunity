@@ -12,6 +12,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -244,5 +245,9 @@ public class Util {
 		}
 
 		return param;
+	}
+	
+	public static int getInt(HttpServletRequest req, String paramName) {
+		return Integer.parseInt(req.getParameter(paramName));
 	}
 }

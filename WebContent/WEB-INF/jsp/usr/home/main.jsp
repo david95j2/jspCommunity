@@ -92,8 +92,10 @@
 				<c:if test="${isLogined}">
 					<li><a>회원정보</a>
 						<ul>
-							<li><a href="${appUrl }/usr/member/modify">회원정보수정</a></li>
-						</ul></li>
+							<li><a href="${appUrl }/usr/member/showMine">회원정보</a></li>
+							<li><a href="${appUrl }/usr/member/modify">회원정보수정</a></li>						
+						</ul>
+					</li>
 				</c:if>
 				<li><a>게시판모아모아</a>
 					<ul>
@@ -174,12 +176,12 @@
 						</c:if>
 						<c:if test="${isLogined}">
 							<li class="modify">
-								<a href="${appUrl }/usr/member/modify">
+								<a href="${appUrl }/usr/member/showMine">
 									<i class="fas fa-user"></i>
 								</a>
 							</li>
 							<li class="status-bar__msg nickname">
-								<a href="${appUrl }/usr/member/modify">
+								<a href="${appUrl }/usr/member/showMine">
 									<span>${loginedMember.getNickname()}님</span>
 								</a>
 							</li>

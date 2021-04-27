@@ -41,6 +41,15 @@ public class MemberDao {
 
 		return MysqlUtil.insert(sql);
 	}
+	
+	public void removeMember(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE FROM `member`");
+		sql.append("WHERE id = ?", id);
+
+		MysqlUtil.delete(sql);
+	}
 
 	public Member getMemberByLoginId(String loginId) {
 		SecSql sql = new SecSql();
@@ -133,6 +142,26 @@ public class MemberDao {
 
 		sql.append("WHERE id = ?", args.get("id"));
 
+		return MysqlUtil.update(sql);
+	}
+
+	public int changeMemberAuthStatus(int actorId) {
+		SecSql sql = new SecSql();
+		sql.append("UPDATE `member`");
+		sql.append("SET updateDate = NOW(),");
+		sql.append("authStatus = 1");
+		sql.append("WHERE id = ?",actorId);
+		
+		return MysqlUtil.update(sql);
+	}
+
+	public int resetAuthStatus(int actorId) {
+		SecSql sql = new SecSql();
+		sql.append("UPDATE `member`");
+		sql.append("SET updateDate = NOW(),");
+		sql.append("authStatus = 0");
+		sql.append("WHERE id = ?",actorId);
+		
 		return MysqlUtil.update(sql);
 	}
 }

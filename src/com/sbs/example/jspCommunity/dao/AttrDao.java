@@ -27,7 +27,7 @@ public class AttrDao {
 		return MysqlUtil.update(sql);
 	}
 
-	public Attr get(String relTypeCode, int relId, String typeCode, String type2Code) {
+	public Attr get(String relTypeCode, int relId, String typeCode, String type2Code, String authCode) {
 		SecSql sql = new SecSql();
 
 		sql.append("SELECT *");
@@ -37,6 +37,9 @@ public class AttrDao {
 		sql.append("AND `relId` = ?", relId);
 		sql.append("AND `typeCode` = ?", typeCode);
 		sql.append("AND `type2Code` = ?", type2Code);
+		if (authCode != null) {
+			sql.append("AND `value` = ?", authCode);
+		}
 		sql.append("AND (expireDate >= NOW() OR expireDate IS NULL)");
 		
 		return new Attr(MysqlUtil.selectRow(sql));

@@ -15,6 +15,7 @@ public class Member {
 	private String nickname;
 	private String email;
 	private String cellphoneNo;
+	private int authStatus;
 	private int authLevel;
 
 	public Member(Map<String, Object> map) {
@@ -28,5 +29,6 @@ public class Member {
 		this.email = (String) map.get("email");
 		this.cellphoneNo = (String) map.get("cellphoneNo");
 		this.authLevel = (int) map.get("authLevel");
+		this.authStatus = (int) map.get("authStatus");
 	}
 }
