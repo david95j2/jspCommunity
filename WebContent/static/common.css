@@ -1011,11 +1011,31 @@ body {
 
 /* 회원 수정 페이지 시작*/
 .examined-text {
+  align-self: center;
+}
+
+.examined-text-temp {
+  align-self: center;
+}
+
+.examined-text::before {
+  content:"인증된 메일";
   letter-spacing: 5px;
   font-size: 1rem;
   padding: 10px 15px 7px 15px;
   font-weight: bolder;
   color: green;
+  font-family: "LotteMartDream", sans-serif;
+  margin-left: 10px;
+}
+
+.examined-text-temp::before {
+  content:"메일을 확인해주세요.";
+  letter-spacing: 5px;
+  font-size: 1rem;
+  padding: 10px 15px 7px 15px;
+  font-weight: bolder;
+  color: red;
   font-family: "LotteMartDream", sans-serif;
   margin-left: 10px;
 }

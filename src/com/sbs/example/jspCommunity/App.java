@@ -39,6 +39,10 @@ public class App {
 		return getAppUrl() + "/usr/member/login";
 	}
 	
+	public static String getCheckByEmailUrl() {
+		return getAppUrl() + "/usr/member/doCheckByEmail";
+	}	
+	
 	public static String getAppUrl() {
 		String appUrl = getSiteProtocol() + "://" + getSiteDomain();
 

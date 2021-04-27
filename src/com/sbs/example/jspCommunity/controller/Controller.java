@@ -23,4 +23,9 @@ public class Controller {
 		req.setAttribute("data", resultData);
 		return "common/json";
 	}
+	
+	protected String pure(HttpServletRequest req,String resultData) {
+		req.setAttribute("data", resultData);
+		return "common/pure";
+	}	
 }

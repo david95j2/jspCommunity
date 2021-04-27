@@ -107,8 +107,11 @@
 			function(data) {
 				if(data.success){
 					alert("메일이 발송되었습니다.");
-					$('.btn-mail').contents().unwrap().wrap('<span class="examined-text" style="color:red">메일을 확인해주세요.</span>');
+					$('.btn-mail').contents().unwrap().wrap('<span class="examined-text-temp"></span>');
     				$('span').remove('.temp-text');
+    				setTimeout(function() {
+    					location.reload();
+    				}, 30000); // 30000밀리초 = 30초
 				} else {
 					alert("메일 발송이 실패하였습니다.");
 				}
@@ -135,8 +138,12 @@
             		function(data) {
             			if(data.success){
             				alert('메일이 발송되었습니다.');
-            				$('.btn-mail').contents().unwrap().wrap('<span class="examined-text" style="color:red">메일을 확인해주세요.</span>');
+            				$('.btn-mail').contents().unwrap().wrap('<span class="examined-text-temp"></span>');
             				$('span').remove('.temp-text');
+            				$('.examined-text').contents().unwrap().wrap('<span class="examined-text-temp"></span>');       				
+            				setTimeout(function() {
+            					location.reload();
+            				}, 30000); // 30000밀리초 = 30초
             			} else {
             				alert('메일 발송이 실패하였습니다.');
             			}
@@ -229,7 +236,10 @@
 										name="authCode" type="button" value=""><span class="temp-text">이메일 인증</span></button>
 							</c:if>
 							<c:if test="${isExamined == 1}">
-								<span class="examined-text">인증된 메일</span>
+								<span class="examined-text"></span>
+							</c:if>
+							<c:if test="${isExamined == 2}">
+								<span class="examined-text-temp"></span>
 							</c:if>
 						</div>
 					</td>

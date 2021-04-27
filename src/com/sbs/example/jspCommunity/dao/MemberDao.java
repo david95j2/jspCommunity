@@ -145,7 +145,7 @@ public class MemberDao {
 		return MysqlUtil.update(sql);
 	}
 
-	public int changeMemberAuthStatus(int actorId) {
+	public int setAuthStatusOn (int actorId) {
 		SecSql sql = new SecSql();
 		sql.append("UPDATE `member`");
 		sql.append("SET updateDate = NOW(),");
@@ -155,11 +155,21 @@ public class MemberDao {
 		return MysqlUtil.update(sql);
 	}
 
-	public int resetAuthStatus(int actorId) {
+	public int setAuthStatusOff (int actorId) {
 		SecSql sql = new SecSql();
 		sql.append("UPDATE `member`");
 		sql.append("SET updateDate = NOW(),");
 		sql.append("authStatus = 0");
+		sql.append("WHERE id = ?",actorId);
+		
+		return MysqlUtil.update(sql);
+	}
+
+	public int setAuthStatusTemp(int actorId) {
+		SecSql sql = new SecSql();
+		sql.append("UPDATE `member`");
+		sql.append("SET updateDate = NOW(),");
+		sql.append("authStatus = 2");
 		sql.append("WHERE id = ?",actorId);
 		
 		return MysqlUtil.update(sql);

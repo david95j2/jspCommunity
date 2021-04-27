@@ -158,7 +158,7 @@ public class MemberService {
 		String siteName = App.getSiteName();
 		String title = "[" + siteName + "] 메일 인증 확인";
 		String body = "<h1 style=\"font-weight: bold\">CHILLAX 메일 인증</h1>";
-		body += "</br><a href=\"http://localhost:8083/jspCommunity/usr/member/doCheckByEmail?email="+email
+		body += "</br><a href=\""+App.getCheckByEmailUrl()+"?email="+email
 				+"&code="+authCode+"&memberId="+actorId+"\" target=\"_blank\">인증하기</a>";
 		
 		Map<String, Object> rs = new HashMap<>();
@@ -182,7 +182,7 @@ public class MemberService {
 		}
 		
 		attrService.setValue("member__"+actorId+"__extra__emailAuthed", email, null);
-		memberDao.changeMemberAuthStatus(actorId);
+		memberDao.setAuthStatusOn(actorId);
 		
 		return true;
 	}
@@ -194,7 +194,11 @@ public class MemberService {
 		return attrService.setValue("member__"+actorId+"__extra__examineAuthCode", authCode, null);
 	}
 
-	public void resetAuthStatus(int actorId) {
-		memberDao.resetAuthStatus(actorId);
+	public void setAuthStatusOff (int actorId) {
+		memberDao.setAuthStatusOff(actorId);
+	}
+
+	public void setAuthStatusTemp(int actorId) {
+		memberDao.setAuthStatusTemp(actorId);
 	}
 }

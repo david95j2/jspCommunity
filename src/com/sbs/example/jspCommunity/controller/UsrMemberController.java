@@ -334,6 +334,7 @@ public class UsrMemberController extends Controller {
 		memberService.sendAuthCodeToEmail(member.getId(), authCode, member.getEmail());
 		
 		if(memberService.isValidAuthCode(loginedMemberId,authCode)==true) {
+			memberService.setAuthStatusTemp(loginedMemberId);
 			resultCode = "S-1";
 			map.put("authCode", authCode);
 		} else {
@@ -351,10 +352,10 @@ public class UsrMemberController extends Controller {
 		boolean codeConfirm = memberService.isLoginCodeConfirm(memberId,code,email);
 		
 		if (codeConfirm == false) {
-			return msgAndBack(req, "인증에 실패하였습니다.");
+			return pure(req, "html:<script> alert('인증에 실패하였습니다.'); self.close(); </script>");
 		}
 		
-		return msgAndReplace(req, "인증되었습니다.","../member/modify");
+		return pure(req, "html:<script> alert('인증이 완료되었습니다.'); self.close(); </script>");
 	}
 	
 	public String doReissuanceAuthCode(HttpServletRequest req, HttpServletResponse resp) {
@@ -362,7 +363,7 @@ public class UsrMemberController extends Controller {
 		Member member = memberService.getMemberById(loginedMemberId);
 		String email = req.getParameter("email");
 		
-		memberService.resetAuthStatus(loginedMemberId);
+		memberService.setAuthStatusTemp(loginedMemberId);
 		Container.attrService.remove("member__"+loginedMemberId+"__extra__emailAuthed");
 		
 		Map<String, Object> modifyParam = new HashMap<>();
