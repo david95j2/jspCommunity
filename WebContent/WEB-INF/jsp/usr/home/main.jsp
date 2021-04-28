@@ -92,8 +92,7 @@
 				<c:if test="${isLogined}">
 					<li><a>회원정보</a>
 						<ul>
-							<li><a href="${appUrl }/usr/member/showMine">회원정보</a></li>
-							<li><a href="${appUrl }/usr/member/modify">회원정보수정</a></li>						
+							<li><a href="${appUrl }/usr/member/showMine">회원 정보</a></li>					
 						</ul>
 					</li>
 				</c:if>

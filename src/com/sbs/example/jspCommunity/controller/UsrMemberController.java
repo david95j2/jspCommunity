@@ -241,6 +241,12 @@ public class UsrMemberController extends Controller {
 
 	public String showModify(HttpServletRequest req, HttpServletResponse resp) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		String authCode = req.getParameter("authCode");
+		
+		if (memberService.isValidAuthCode(loginedMemberId, authCode)==false) {
+			return msgAndReplace(req, "비밀번호 확인이 필요합니다.", "../member/showMine");
+		}
+		
 		int isExamined = memberService.getMemberById(loginedMemberId).getAuthStatus();
 		req.setAttribute("isExamined", isExamined);
 		
@@ -292,7 +298,7 @@ public class UsrMemberController extends Controller {
 		return msgAndReplace(req, "회원정보가 수정되었습니다.", "../home/main");
 	}
 	
-	public String showCheckLoginPw(HttpServletRequest req, HttpServletResponse resp) {
+	public String showCheckLoginPw(HttpServletRequest req, HttpServletResponse resp) {		
 		return "usr/member/checkLoginPw";
 	}
 	
