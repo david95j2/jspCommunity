@@ -176,8 +176,7 @@ public class MemberService {
 
 	public boolean isLoginCodeConfirm(int actorId, String authCode, String email) {
 		Attr attr = attrService.get("member__"+actorId+"__extra__examineAuthCode",authCode);
-		
-		if (!attr.getValue().equals(authCode)) {
+		if (attr==null) {
 			return false;
 		}
 		

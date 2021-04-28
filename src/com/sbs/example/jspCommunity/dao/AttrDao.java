@@ -1,5 +1,7 @@
 package com.sbs.example.jspCommunity.dao;
 
+import java.util.Map;
+
 import com.sbs.example.jspCommunity.dto.Attr;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
@@ -42,7 +44,12 @@ public class AttrDao {
 		}
 		sql.append("AND (expireDate >= NOW() OR expireDate IS NULL)");
 		
-		return new Attr(MysqlUtil.selectRow(sql));
+		Map<String, Object> resultMap = MysqlUtil.selectRow(sql);
+		if (resultMap.isEmpty()) {
+			return null;
+		}
+		
+		return new Attr(resultMap);
 	}
 
 	public String getValue(String relTypeCode, int relId, String typeCode, String type2Code) {
