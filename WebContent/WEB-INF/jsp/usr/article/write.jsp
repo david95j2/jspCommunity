@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="pageTitle" value="${board.name} 게시물 작성" />
+<c:set var="pageTitle" value="게시물 작성" />
 <%@ include file="../../part/head.jspf"%>
 
 <div class="title-bar padding-0-10 con-min-width">
@@ -43,7 +43,7 @@
 			
 			return;
 		}
-		
+
 		form.body.value = body;
 		
 		form.submit();
@@ -52,14 +52,31 @@
 	</script>
 	<form class="con" action="doWrite" method="POST"
 		onsubmit="DoWriteForm__submit(this); return false;">
-		<input type="hidden" name="boardId" value="${board.id}" />
 		<input type="hidden" name="body" />
-
+		
 		<table>
 			<colgroup>
 				<col width="150">
 			</colgroup>
 			<tbody>
+				<tr>
+					<th>
+						<span>게시판</span>
+					</th>
+					<td>
+						<div>
+							<select name="boardId" id="boardId">
+								<option>-- Select --</option>
+								<option value="1">[게시판] MySQL</option>
+								<option value="2">[게시판] JAVA</option>
+								<option value="3">[게시판] JavaScript</option>
+								<option value="4">[게시판] Vue</option>
+								<option value="5">[게시판] Spring</option>
+							</select>
+						</div>
+					</td>
+				</tr>			
+			
 				<tr>
 					<th>
 						<span>제목</span>

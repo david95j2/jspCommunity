@@ -120,20 +120,6 @@ public class UsrArticleController extends Controller{
 	}
 
 	public String showWrite(HttpServletRequest req, HttpServletResponse resp) {
-		int boardId = Util.getAsInt(req.getParameter("boardId"), 0);
-
-		if (boardId == 0) {
-			return msgAndBack(req, "게시판 번호를 입력해주세요.");
-		}
-
-		Board board = articleService.getBoardById(boardId);
-
-		if (board == null) {
-			return msgAndBack(req, boardId + "번 게시판은 존재하지 않습니다.");
-		}
-
-		req.setAttribute("board", board);
-
 		return "usr/article/write";
 	}
 
@@ -143,7 +129,7 @@ public class UsrArticleController extends Controller{
 		int boardId = Util.getAsInt(req.getParameter("boardId"), 0);
 
 		if (boardId == 0) {
-			return msgAndBack(req, "게시판 번호를 입력해주세요.");
+			return msgAndBack(req, "게시판을 선택해주세요.");
 		}
 
 		Board board = articleService.getBoardById(boardId);
@@ -172,7 +158,7 @@ public class UsrArticleController extends Controller{
 
 		int newArticleId = articleService.write(writeArgs);
 
-		return msgAndReplace(req, newArticleId + "번 게시물이 생성되었습니다.", String.format("detail?id=%d", newArticleId));
+		return msgAndReplace(req, newArticleId + "번 게시물이 생성되었습니다.", String.format("detail?id=%d&listUrl=/jspCommunity/usr/article/list?boardId=%d", newArticleId,boardId));
 	}
 
 	public String doDelete(HttpServletRequest req, HttpServletResponse resp) {

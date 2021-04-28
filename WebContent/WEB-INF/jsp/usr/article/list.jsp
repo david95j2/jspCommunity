@@ -34,12 +34,6 @@
 	
 		form.searchKeyword.value = form.searchKeyword.value.trim();
 		
-		if ( form.searchKeyword.value.length == 0 ) {
-			alert('검색어를 입력해주세요.');
-			form.searchKeyword.focus();
-			return;
-		}
-		
 		form.submit();
 		DoSearchForm__submited = true;
 	}
