@@ -108,6 +108,7 @@
 					<ul>
 						<li><a href="https://github.com/david95j2">Github</a></li>
 						<li><a href="https://david95j2.tistory.com">Tistory</a></li>
+						<li><a href="https://ssg.yadah.kr/">정적사이트(포폴)</a></li>
 					</ul></li>
 				<li><a>이슈</a>
 					<ul>
@@ -149,6 +150,7 @@
 						<ul>
 							<li><a href="https://github.com/david95j2">Github</a></li>
 							<li><a href="https://david95j2.tistory.com/">Tistory</a></li>
+							<li><a href="https://ssg.yadah.kr/">정적사이트(포폴)</a></li>
 						</ul></li>
 					<li><a class="flex flex-ai-c height-100p">IT Issue</a>
 						<ul>

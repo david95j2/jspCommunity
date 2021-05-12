@@ -726,7 +726,7 @@ function doDisLikeReplyBtn(el,id){
 							alert('처리중입니다.');
 							return false;
 						}
-											
+								
 						const editor = $(el).find('.toast-ui-editor').data('data-toast-editor');
 						const body = editor.getMarkdown().trim();
 									
@@ -736,11 +736,11 @@ function doDisLikeReplyBtn(el,id){
 										
 							return false;
 						}
-									
+							
 						$(el).closest('form').get(0).body.value = body;
-
-						$.get(
-							"${appUrl}/usr/reply/doModifyArticleReply",
+						
+						$.get (
+							"${appUrl}/usr/reply/doModify",
 							{
 								body,
 								replyId : $(el).closest('form').get(0).replyId.value,
@@ -749,7 +749,7 @@ function doDisLikeReplyBtn(el,id){
 								afterWriteReplyUrl : $(el).closest('form').get(0).afterWriteReplyUrl.value
 							},  function(data) {
 								loadRepliesList();
-							},
+							} ,
 							"json"
 						);					
 						
