@@ -1,3 +1,17 @@
+# JSP를 이용한 MVC Model 2 방식의 개발자 게시판 개발하기.
+ 
+ JSP와 Servlet 동시에 사용하는 MVC모델(View는 JSP, Controller는 Servlet을 사용)
+ 
+ Java Servlet + JSP 방식
+ 
+ Gradle이 아닌 Maven으로 빌드하기
+ 
+ <br>
+ 
+   <img src="https://mblogthumb-phinf.pstatic.net/MjAxNzEwMzBfMjkw/MDAxNTA5MzQ1NDM0ODM2.40qv0x-SJdITWEUFVSw0qzCGM1ZISOxkaC5ClBYxOMIg.TrKmJH-Y7_IX0gwqNEQYqn9WS_GEh9Bk20jMEwSJzGgg.PNG.acornedu/jsp.png?type=w800" width="400" height="300" text-align="center"/>
+   
+---
+
 # 완료리스트
 - [x] 프레임워크 기초
 - [x] 로그인/로그아웃
